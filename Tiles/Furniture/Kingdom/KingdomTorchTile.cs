@@ -66,7 +66,7 @@ namespace Redemption.Tiles.Furniture.Kingdom
 
 		/*public override float GetTorchLuck(Player player) // TODO: Ruined Kingdom biome torch
 		{
-			bool inKingdomBiome = Main.LocalPlayer.InModBiome(ModContent.GetInstance<RuinedKingdomBiome>());
+			bool inKingdomBiome = Main.LocalPlayer.InModBiome<RuinedKingdomBiome>();
 			return inKingdomBiome ? 1f : 0;
 		}*/
 

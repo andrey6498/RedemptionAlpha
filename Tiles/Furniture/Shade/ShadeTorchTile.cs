@@ -67,7 +67,7 @@ namespace Redemption.Tiles.Furniture.Shade
 
 		public override float GetTorchLuck(Player player)
 		{
-			bool inSoullessBiome = Main.LocalPlayer.InModBiome(ModContent.GetInstance<SoullessBiome>());
+			bool inSoullessBiome = Main.LocalPlayer.InModBiome<SoullessBiome>();
 			return inSoullessBiome ? 1f : 0;
 		}
 

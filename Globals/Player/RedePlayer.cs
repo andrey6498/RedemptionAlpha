@@ -84,7 +84,7 @@ namespace Redemption.Globals.Player
                 return;
 
             float soullessEffectPitch = 0f;
-            if (SubworldSystem.IsActive<SoullessSub>() && Player.InModBiome(ModContent.GetInstance<SoullessBiome>()))
+            if (SubworldSystem.IsActive<SoullessSub>() && Player.InModBiome<SoullessBiome>())
             {
                 if (stalkerSilence)
                 {
@@ -107,7 +107,7 @@ namespace Redemption.Globals.Player
                 if (Player.InModBiome<LabBiome>() && Terraria.NPC.downedMechBoss1 && Terraria.NPC.downedMechBoss2 && Terraria.NPC.downedMechBoss3)
                     itemDrop = ModContent.ItemType<LabCrate>();
             }
-            if (Player.InModBiome(ModContent.GetInstance<SoullessBiome>()))
+            if (Player.InModBiome<SoullessBiome>())
             {
                 if (Main.rand.Next(100) < (10 + (Player.cratePotion ? 10 : 0)))
                     itemDrop = ModContent.ItemType<ShadestoneCrate>();

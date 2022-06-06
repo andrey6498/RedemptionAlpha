@@ -554,7 +554,7 @@ namespace Redemption.Globals.NPC
                     pool.Add(NPCID.HellArmoredBonesSword, 0.2f);
                 }
             }
-            if (SubworldSystem.IsActive<SoullessSub>() && spawnInfo.Player.InModBiome(ModContent.GetInstance<SoullessBiome>()))
+            if (SubworldSystem.IsActive<SoullessSub>() && spawnInfo.Player.InModBiome<SoullessBiome>())
             {
                 pool.Clear();
                 //if (NPC.AnyNPCs(ModContent.NPCType<WardenIdle>()) || NPC.AnyNPCs(ModContent.NPCType<WardenSaved>()))

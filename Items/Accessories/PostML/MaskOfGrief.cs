@@ -27,7 +27,7 @@ namespace Redemption.Items.Accessories.PostML
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            if (player.InModBiome(ModContent.GetInstance<SoullessBiome>()))
+            if (player.InModBiome<SoullessBiome>())
             {
                 player.aggro -= 30;
                 player.GetDamage(DamageClass.Generic) += 0.2f;
