@@ -24,8 +24,8 @@ namespace Redemption.Biomes
         public override void SpecialVisuals(Player player)
         {
             Terraria.Graphics.Effects.Filters.Scene["MoR:FogOverlay"]?.GetShader().UseOpacity(1f).UseIntensity(0.9f).UseColor(Color.Black).UseImage(ModContent.Request<Texture2D>("Redemption/Effects/Vignette", AssetRequestMode.ImmediateLoad).Value);
-            player.ManageSpecialBiomeVisuals("MoR:FogOverlay", player.InModBiome(ModContent.GetInstance<SoullessBiome>()));
-            player.ManageSpecialBiomeVisuals("MoR:SoullessSky", player.InModBiome(ModContent.GetInstance<SoullessBiome>()) && !player.RedemptionPlayerBuff().dreamsong, player.Center);
+            player.ManageSpecialBiomeVisuals("MoR:FogOverlay", player.InModBiome<SoullessBiome>());
+            player.ManageSpecialBiomeVisuals("MoR:SoullessSky", player.InModBiome<SoullessBiome>(), player.Center);
         }
         public override void OnLeave(Player player)
         {
