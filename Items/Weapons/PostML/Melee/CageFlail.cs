@@ -23,6 +23,7 @@ namespace Redemption.Items.Weapons.PostML.Melee
             DisplayName.SetDefault("Cage Crusher");
             Tooltip.SetDefault("Hitting an enemy once per use will cause echos to appear and fight for you" +
                 "\nThe cage deals increased damage to enemies with less knockback resistance");
+            ItemID.Sets.ToolTipDamageMultiplier[Type] = 2f;
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
@@ -44,23 +45,6 @@ namespace Redemption.Items.Weapons.PostML.Melee
             Item.DamageType = DamageClass.Melee;
             Item.autoReuse = false;
             Item.channel = true;
-        }
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-            foreach (TooltipLine line in tooltips)
-            {
-                if (line.Mod == "Terraria" && line.Name == "Damage")
-                {
-                    string[] strings = line.Text.Split(' ');
-                    int dmg = int.Parse(strings[0]);
-                    dmg *= 2;
-                    line.Text = dmg + "";
-                    for (int i = 1; i < strings.Length; i++)
-                    {
-                        line.Text += " " + strings[i];
-                    }
-                }
-            }
         }
     }
     public class CageFlail_Ball : Flail
