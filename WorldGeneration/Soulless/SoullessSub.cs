@@ -580,7 +580,7 @@ namespace Redemption.WorldGeneration.Soulless
         protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
         {
             progress.Message = "Here, Have a Fungus";
-            #region Let it Grow  
+            #region Let it Grow
             //WorldGen.AddTrees();
             for (int num = 0; num < 1800; num++)
             {
