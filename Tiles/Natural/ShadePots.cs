@@ -93,7 +93,7 @@ namespace Redemption.Tiles.Natural
                     {
                         case 0:
                             Item.NewItem(source, i * 16, j * 16, 32, 16, ItemID.Heart);
-                            if (Main.rand.Next(2) == 0)
+                            if (Main.rand.NextBool(2))
                                 Item.NewItem(source, i * 16, j * 16, 32, 16, ItemID.Heart);
                             break;
                         case 1:
@@ -107,7 +107,7 @@ namespace Redemption.Tiles.Natural
                             break;
                         case 3:
                             Item.NewItem(source, i * 16, j * 16, 32, 16, ItemID.SuperHealingPotion);
-                            if (Main.rand.Next(3) == 0) { Item.NewItem(source, i * 16, j * 16, 32, 16, ItemID.SuperHealingPotion); }
+                            if (Main.rand.NextBool(3)) { Item.NewItem(source, i * 16, j * 16, 32, 16, ItemID.SuperHealingPotion); }
                             break;
                         case 4:
                             Item.NewItem(source, i * 16, j * 16, 32, 16, ItemID.Bomb, Main.rand.Next(1, Main.expertMode ? 7 : 4));
@@ -115,15 +115,15 @@ namespace Redemption.Tiles.Natural
                         case 5:
                             for (int k = 0; k < Main.rand.Next(1, 4); k++)
                             {
-                                if (Main.rand.Next(2) == 0) { Item.NewItem(source, i * 16, j * 16, 32, 16, ItemID.CopperCoin, Main.rand.Next(1, 99)); }
+                                if (Main.rand.NextBool(2)) { Item.NewItem(source, i * 16, j * 16, 32, 16, ItemID.CopperCoin, Main.rand.Next(1, 99)); }
                             }
                             for (int k = 0; k < Main.rand.Next(1, 4); k++)
                             {
-                                if (Main.rand.Next(2) == 0) { Item.NewItem(source, i * 16, j * 16, 32, 16, ItemID.SilverCoin, Main.rand.Next(1, 50)); }
+                                if (Main.rand.NextBool(2)) { Item.NewItem(source, i * 16, j * 16, 32, 16, ItemID.SilverCoin, Main.rand.Next(1, 50)); }
                             }
                             for (int k = 0; k < Main.rand.Next(1, 3); k++)
                             {
-                                if (Main.rand.Next(4) == 0) { Item.NewItem(source, i * 16, j * 16, 32, 16, ItemID.GoldCoin, Main.rand.Next(1, 3)); }
+                                if (Main.rand.NextBool(4)) { Item.NewItem(source, i * 16, j * 16, 32, 16, ItemID.GoldCoin, Main.rand.Next(1, 3)); }
                             }
                             break;
                         case 6:

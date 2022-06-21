@@ -17,7 +17,6 @@ namespace Redemption.NPCs.Friendly
         {
             DisplayName.SetDefault("Shadesoul Gateway");
             NPCID.Sets.ActsLikeTownNPC[Type] = true;
-            NPCID.Sets.SavesAndLoads[Type] = true;
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new(0) { Hide = true };
             NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
         }
@@ -38,6 +37,7 @@ namespace Redemption.NPCs.Friendly
             NPC.alpha = 255;
             NPC.npcSlots = 0;
         }
+        public override bool NeedSaving() => false;
         public override bool UsesPartyHat() => false;
         public override bool CheckActive() => false;
         public override bool CanChat() => true;
