@@ -29,6 +29,7 @@ using Redemption.Items.Weapons.PostML.Melee;
 using Redemption.Items.Placeable.Furniture.Misc;
 using Redemption.Globals;
 using Redemption.Items.Usable.Potions;
+using Terraria.GameInput;
 
 namespace Redemption.WorldGeneration.Soulless
 {
@@ -72,6 +73,8 @@ namespace Redemption.WorldGeneration.Soulless
         /*private double animationTimer = 0;
         public override void DrawMenu(GameTime gameTime)
         {
+            PlayerInput.SetZoom_Unscaled();
+            Main.instance.GraphicsDevice.Clear(Color.Black);
             Texture2D soullessBackground = ModContent.Request<Texture2D>("Redemption/WorldGeneration/Soulless/SoullessSubworldTex").Value;
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, Main.UIScaleMatrix);
             Main.spriteBatch.Draw
@@ -82,7 +85,7 @@ namespace Redemption.WorldGeneration.Soulless
                 Color.White * (float)(animationTimer / 5) * 0.8f
             );
             Main.spriteBatch.End();
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Main.UIScaleMatrix);
+            //Main.spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Main.UIScaleMatrix);
 
             animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
             if (animationTimer > 5)

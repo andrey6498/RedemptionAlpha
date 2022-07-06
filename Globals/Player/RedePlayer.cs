@@ -33,6 +33,7 @@ namespace Redemption.Globals.Player
         public bool medKit;
         public bool stalkerSilence;
         public float musicVolume;
+        public int slayerStarRating;
         public override void ResetEffects()
         {
             hitTarget = -1;
