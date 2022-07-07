@@ -294,7 +294,7 @@ namespace Redemption.CrossMod
                 bossChecklist.Call("AddBoss", 11.5f, ModContent.NPCType<OmegaCleaver>(), mod,
                     "1st Omega Prototype",
                     (Func<bool>)(() => RedeBossDowned.downedVlitch1),
-                    ModContent.ItemType<CleaverSword>(),
+                    ModContent.ItemType<OmegaTransmitter>(),
                     new List<int>
                     {
                         ModContent.ItemType<OmegaTrophy>(),
@@ -309,7 +309,7 @@ namespace Redemption.CrossMod
                         ModContent.ItemType<BrokenBlade>(),
                         ModContent.ItemType<OmegaBattery>()
                     },
-                    "Use a [i:" + ModContent.ItemType<CleaverSword>() + "] at night.",
+                    "Use a [i:" + ModContent.ItemType<OmegaTransmitter>() + "] at night.",
                     null,
                     "Redemption/CrossMod/BossChecklist/OmegaCleaver",
                     "Redemption/NPCs/Bosses/Cleaver/OmegaCleaver_Head_Boss",
@@ -320,7 +320,7 @@ namespace Redemption.CrossMod
                 bossChecklist.Call("AddBoss", 11.9f, ModContent.NPCType<Gigapora>(), mod,
                     "2nd Omega Prototype",
                     (Func<bool>)(() => RedeBossDowned.downedVlitch2),
-                    ModContent.ItemType<OmegaPowerdrill>(),
+                    ModContent.ItemType<OmegaTransmitter>(),
                     new List<int>
                     {
                         ModContent.ItemType<OmegaTrophy>(),
@@ -329,7 +329,7 @@ namespace Redemption.CrossMod
                     new List<int>
                     {
                     },
-                    "Use a [i:" + ModContent.ItemType<OmegaPowerdrill>() + "] at night.",
+                    "Use a [i:" + ModContent.ItemType<OmegaTransmitter>() + "] at night.",
                     null,
                     "Redemption/CrossMod/BossChecklist/OmegaGigapora",
                     "Redemption/NPCs/Bosses/Gigapora/Gigapora_Head_Boss",
