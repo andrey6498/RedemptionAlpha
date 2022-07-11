@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Redemption.Items.Placeable.Tiles;
 using Redemption.Dusts.Tiles;
+using Redemption.Items.Tools.PostML;
 
 namespace Redemption.Tiles.Tiles
 {
@@ -25,7 +26,12 @@ namespace Redemption.Tiles.Tiles
         {
             num = fail ? 1 : 3;
         }
-        public override bool CanKillTile(int i, int j, ref bool blockDamaged) => false;
+        public override bool CanKillTile(int i, int j, ref bool blockDamaged)
+        {
+            if (Main.LocalPlayer.HeldItem.type == ModContent.ItemType<NanoAxe2>())
+                return true;
+            return false;
+        }
         public override bool CanExplode(int i, int j) => false;
     }
 }

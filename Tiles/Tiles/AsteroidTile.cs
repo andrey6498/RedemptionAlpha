@@ -25,5 +25,11 @@ namespace Redemption.Tiles.Tiles
             MineResist = 2.5f;
             AddMapEntry(new Color(84, 76, 79));
         }
+        public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+        {
+            r = 0.05f;
+            g = 0.05f;
+            b = 0.05f;
+        }
     }
 }
