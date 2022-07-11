@@ -30,6 +30,7 @@ using Redemption.Items.Weapons.HM.Magic;
 using Redemption.Items.Donator.Megaswave;
 using Redemption.Items.Usable.Potions;
 using Redemption.Items.Weapons.PreHM.Ritualist;
+using Redemption.WorldGeneration.Space;
 
 namespace Redemption.Globals.NPC
 {
@@ -580,6 +581,9 @@ namespace Redemption.Globals.NPC
                 pool.Add(ModContent.NPCType<SpookyEyes>(), .02f);
                 pool.Add(ModContent.NPCType<Echo>(), .02f);
             }
+            if (SubworldSystem.IsActive<SpaceSub>() && spawnInfo.Player.InModBiome<SpaceBiome>())
+                pool.Clear();
+
             if (spawnInfo.Player.RedemptionScreen().cutscene)
                 pool.Clear();
         }

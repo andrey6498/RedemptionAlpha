@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Redemption.Backgrounds.Skies;
+using Redemption.Biomes;
 using Redemption.CrossMod;
 using Redemption.Effects.PrimitiveTrails;
 using Redemption.Effects.RenderTargets;
@@ -15,6 +16,7 @@ using Redemption.Items.Donator.Uncon;
 using Redemption.Items.Usable;
 using Redemption.UI;
 using ReLogic.Content;
+using SubworldLibrary;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -383,6 +385,22 @@ namespace Redemption
                 sunR -= (int)(200 * Strength * (backgroundColor.R / 255f));
                 sunB -= (int)(200f * Strength * (backgroundColor.B / 255f));
                 sunG -= (int)(170f * Strength * (backgroundColor.G / 255f));
+                sunR = Utils.Clamp(sunR, 15, 255);
+                sunG = Utils.Clamp(sunG, 15, 255);
+                sunB = Utils.Clamp(sunB, 15, 255);
+                backgroundColor.R = (byte)sunR;
+                backgroundColor.G = (byte)sunG;
+                backgroundColor.B = (byte)sunB;
+            }
+            if (Main.LocalPlayer.InModBiome<SpaceBiome>())
+            {
+                int sunR = backgroundColor.R;
+                int sunG = backgroundColor.G;
+                int sunB = backgroundColor.B;
+                // Remove all colors
+                sunR -= (int)(255f * 3f * (backgroundColor.R / 255f));
+                sunG -= (int)(255f * 3f * (backgroundColor.G / 255f));
+                sunB -= (int)(200f * 2f * (backgroundColor.B / 255f));
                 sunR = Utils.Clamp(sunR, 15, 255);
                 sunG = Utils.Clamp(sunG, 15, 255);
                 sunB = Utils.Clamp(sunB, 15, 255);

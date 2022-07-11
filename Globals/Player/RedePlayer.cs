@@ -50,6 +50,9 @@ namespace Redemption.Globals.Player
         public override void UpdateDead()
         {
             slayerStarRating = 0;
+
+            if (Player.InModBiome<SpaceBiome>())
+                SubworldSystem.Exit();
         }
         public override void OnHitNPC(Item item, Terraria.NPC target, int damage, float knockback, bool crit)
         {
@@ -78,6 +81,19 @@ namespace Redemption.Globals.Player
                 "You are using the Spoiler branch, which as you can guess, contains spoilers we don't yet want to reveal to public.\n" +
                 "Keep your findings in this branch to yourself please.\n" +
                 "===============", 244, 71, 255);
+        }
+
+        public override void PreUpdate()
+        {
+            if (Player.position.Y >= 18486 && Player.InModBiome<SpaceBiome>())
+                SubworldSystem.Exit();
+
+            if (Player.InModBiome<SpaceBiome>())
+            {
+                Player.gravity /= 5;
+                Player.accDepthMeter = 0;
+                Player.accWatch = 0;
+            }
         }
 
         public static readonly SoundStyle SoullessLoopSound = new("Redemption/Sounds/Custom/SoullessAmbient");
