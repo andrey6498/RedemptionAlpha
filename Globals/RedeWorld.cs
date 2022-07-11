@@ -7,6 +7,7 @@ using Redemption.NPCs.Bosses.Keeper;
 using Redemption.NPCs.Friendly;
 using Redemption.Projectiles.Misc;
 using Redemption.WorldGeneration.Soulless;
+using Redemption.WorldGeneration.Space;
 using SubworldLibrary;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace Redemption.Globals
         #region Soulless Subworld
         public override void PreUpdateWorld()
         {
-            if (SubworldSystem.IsActive<SoullessSub>())
+            if (SubworldSystem.AnyActive<Redemption>())
             {
                 Wiring.UpdateMech();
                 Liquid.skipCount++;
@@ -48,6 +49,9 @@ namespace Redemption.Globals
                         tile.RandomUpdate(i, j);
                 }
             }
+            if (SubworldSystem.IsActive<SpaceSub>())
+                Main.time += Main.dayRate;
+
         }
         #endregion
 
