@@ -45,14 +45,14 @@ namespace Redemption.WorldGeneration.Space
         {
             progress.Message = "Loading";
             WorldGen.noTileActions = true;
-            Main.spawnTileY = 1000;
+            Main.spawnTileY = 612;
             Main.spawnTileX = Main.maxTilesX / 2;
             Main.worldSurface = Main.maxTilesY - 42;
             Main.rockLayer = Main.maxTilesY + 42;
             for (int i = 0; i < 100; i++)
             {
                 int X = WorldGen.genRand.Next(100, Main.maxTilesX - 100);
-                int Y = WorldGen.genRand.Next(100, 1100);
+                int Y = WorldGen.genRand.Next(100, 612);
                 MakeMeteor(X, Y);
             }
             Mod mod = Redemption.Instance;
@@ -64,7 +64,7 @@ namespace Redemption.WorldGeneration.Space
                 [Color.Black] = -1 //don't touch when genning
             };
             Texture2D tex = ModContent.Request<Texture2D>("Redemption/WorldGeneration/Space/AstGen1", AssetRequestMode.ImmediateLoad).Value;
-            Point16 origin = new((Main.maxTilesX / 2) - 14, 1000);
+            Point16 origin = new((Main.maxTilesX / 2) - 14, 612);
             GenUtils.InvokeOnMainThread(() =>
             {
                 TexGen gen = BaseWorldGenTex.GetTexGenerator(tex, colorToTile);
@@ -73,8 +73,20 @@ namespace Redemption.WorldGeneration.Space
         }
         public static void MakeMeteor(int X, int Y)
         {
-            WorldGen.TileRunner(X, Y, WorldGen.genRand.Next(20, 40), WorldGen.genRand.Next(3, 21), ModContent.TileType<AsteroidTile>(), true, 0f, 0f, false, true);
-            WorldGen.KillWall(X, Y);
+            Mod mod = Redemption.Instance;
+            Dictionary<Color, int> colorToTile = new()
+            {
+                [new Color(255, 0, 0)] = ModContent.TileType<AsteroidTile>(),
+                [new Color(150, 150, 150)] = -2, //turn into air
+                [Color.Black] = -1 //don't touch when genning
+            };
+            Texture2D tex = ModContent.Request<Texture2D>("Redemption/WorldGeneration/Space/AstGen" + (WorldGen.genRand.Next(24) + 2), AssetRequestMode.ImmediateLoad).Value;
+            Point16 origin = new(X, Y);
+            GenUtils.InvokeOnMainThread(() =>
+            {
+                TexGen gen = BaseWorldGenTex.GetTexGenerator(tex, colorToTile);
+                gen.Generate(origin.X, origin.Y, true, true);
+            });
         }
         public SpacePass1(string name, float loadWeight) : base(name, loadWeight)
         {

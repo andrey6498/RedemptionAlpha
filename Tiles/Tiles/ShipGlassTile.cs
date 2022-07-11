@@ -15,7 +15,7 @@ namespace Redemption.Tiles.Tiles
             Main.tileMergeDirt[Type] = true;
             Main.tileBlockLight[Type] = true;
             DustType = DustID.Glass;
-            MinPick = 500;
+            MinPick = 1000;
             MineResist = 7f;
             HitSound = SoundID.Tink;
             AddMapEntry(new Color(193, 255, 219));
@@ -30,6 +30,7 @@ namespace Redemption.Tiles.Tiles
                 return true;
             return RedeBossDowned.downedSlayer;
         }
+        public override bool Slope(int i, int j) => true;
         public override bool CanExplode(int i, int j) => false;
     }
 }

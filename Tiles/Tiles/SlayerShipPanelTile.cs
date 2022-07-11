@@ -5,6 +5,7 @@ using Terraria.ID;
 using Redemption.Items.Placeable.Tiles;
 using Redemption.Dusts.Tiles;
 using Redemption.Items.Tools.PostML;
+using Redemption.Globals;
 
 namespace Redemption.Tiles.Tiles
 {
@@ -30,8 +31,9 @@ namespace Redemption.Tiles.Tiles
         {
             if (Main.LocalPlayer.HeldItem.type == ModContent.ItemType<NanoAxe2>())
                 return true;
-            return false;
+            return RedeBossDowned.downedVlitch3 || RedeBossDowned.downedNebuleus;
         }
+        public override bool Slope(int i, int j) => true;
         public override bool CanExplode(int i, int j) => false;
     }
 }

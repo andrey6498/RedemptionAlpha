@@ -18,6 +18,7 @@ using SubworldLibrary;
 using Redemption.WorldGeneration.Soulless;
 using Terraria.Audio;
 using ReLogic.Utilities;
+using Terraria.ID;
 
 namespace Redemption.Globals.Player
 {
@@ -85,7 +86,9 @@ namespace Redemption.Globals.Player
 
         public override void PreUpdate()
         {
-            if (Player.position.Y >= 18486 && Player.InModBiome<SpaceBiome>())
+            if (Player.position.Y >= 11200 && Player.InModBiome<SpaceBiome>())
+                Player.AddBuff(BuffID.Obstructed, 3);
+            if (Player.position.Y >= 13486 && Player.InModBiome<SpaceBiome>())
                 SubworldSystem.Exit();
 
             if (Player.InModBiome<SpaceBiome>())

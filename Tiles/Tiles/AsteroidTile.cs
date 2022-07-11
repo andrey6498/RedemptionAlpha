@@ -14,6 +14,7 @@ namespace Redemption.Tiles.Tiles
             Main.tileSolid[Type] = true;
             Main.tileMergeDirt[Type] = false;
             Main.tileBlockLight[Type] = true;
+            Main.tileLighted[Type] = true;
             Main.tileMerge[Type][TileID.Meteorite] = true;
             Main.tileMerge[TileID.Meteorite][Type] = true;
             Main.tileMerge[Type][TileID.MeteoriteBrick] = true;

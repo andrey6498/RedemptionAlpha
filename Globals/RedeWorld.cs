@@ -50,7 +50,13 @@ namespace Redemption.Globals
                 }
             }
             if (SubworldSystem.IsActive<SpaceSub>())
+            {
+                Main.numClouds = 0;
+                Main.raining = false;
+                Main.maxRaining = 0f;
+                Main.slimeRain = false;
                 Main.time += Main.dayRate;
+            }
 
         }
         #endregion

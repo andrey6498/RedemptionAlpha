@@ -23,6 +23,7 @@ namespace Redemption.Items
         {
             Item.useAnimation = 5;
             Item.useTime = 5;
+            Item.UseSound = CustomSounds.Choir;
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.consumable = false;
             Item.width = 16;
@@ -32,7 +33,6 @@ namespace Redemption.Items
         }
         public override bool? UseItem(Player player)
         {
-            SoundEngine.PlaySound(CustomSounds.Choir, player.position);
             if (SubworldSystem.IsActive<SpaceSub>())
             {
                 SubworldSystem.Exit();
