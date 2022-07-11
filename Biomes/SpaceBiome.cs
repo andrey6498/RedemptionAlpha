@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Redemption.WorldGeneration.Space;
 using SubworldLibrary;
 using Terraria;
+using Terraria.Graphics.Effects;
 using Terraria.ID;
 using Terraria.ModLoader;
 namespace Redemption.Biomes
@@ -17,6 +18,15 @@ namespace Redemption.Biomes
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Upper Atmosphere");
+        }
+        public override void SpecialVisuals(Player player, bool isActive)
+        {
+            if (isActive)
+                SkyManager.Instance.Activate("MoR:SpaceSky");
+        }
+        public override void OnLeave(Player player)
+        {
+            SkyManager.Instance.Deactivate("MoR:SpaceSky");
         }
         public override bool IsBiomeActive(Player player)
         {

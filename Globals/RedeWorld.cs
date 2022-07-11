@@ -52,6 +52,8 @@ namespace Redemption.Globals
             if (SubworldSystem.IsActive<SpaceSub>())
             {
                 Main.numClouds = 0;
+                Main.cloudAlpha = 0;
+                Main.cloudBGAlpha = 0;
                 Main.raining = false;
                 Main.maxRaining = 0f;
                 Main.slimeRain = false;

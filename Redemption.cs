@@ -119,6 +119,8 @@ namespace Redemption
                     PremultiplyTexture(ref ruinedKingdomSurfaceFar_MenuTex);
                     Texture2D ruinedKingdomSurfaceMid_MenuTex = ModContent.Request<Texture2D>("Redemption/Backgrounds/RuinedKingdomSurfaceMid_Menu", AssetRequestMode.ImmediateLoad).Value;
                     PremultiplyTexture(ref ruinedKingdomSurfaceMid_MenuTex);
+                    Texture2D SpaceBG1Tex = ModContent.Request<Texture2D>("Redemption/Backgrounds/SpaceBG1", AssetRequestMode.ImmediateLoad).Value;
+                    PremultiplyTexture(ref SpaceBG1Tex);
                 });
             }
 
@@ -126,6 +128,7 @@ namespace Redemption
             Filters.Scene["MoR:SpiritSky"] = new Filter(new ScreenShaderData("FilterMiniTower").UseColor(0.4f, 0.8f, 0.8f), EffectPriority.VeryHigh);
             Filters.Scene["MoR:IslandEffect"] = new Filter(new ScreenShaderData("FilterMiniTower").UseColor(0.4f, 0.4f, 0.4f).UseOpacity(0.5f), EffectPriority.VeryHigh);
             SkyManager.Instance["MoR:RuinedKingdomSky"] = new RuinedKingdomSky();
+            SkyManager.Instance["MoR:SpaceSky"] = new SpaceSky();
             Filters.Scene["MoR:SoullessSky"] = new Filter(new ScreenShaderData("FilterMiniTower").UseColor(0f, 0f, 0f).UseOpacity(0.4f), EffectPriority.High);
 
             RedeSpecialAbility = KeybindLoader.RegisterKeybind(this, "Special Ability Key", Keys.R);

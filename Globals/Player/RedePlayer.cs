@@ -86,10 +86,8 @@ namespace Redemption.Globals.Player
 
         public override void PreUpdate()
         {
-            if (Player.position.Y >= 11200 && Player.InModBiome<SpaceBiome>())
-                Player.AddBuff(BuffID.Obstructed, 3);
-            if (Player.position.Y >= 13486 && Player.InModBiome<SpaceBiome>())
-                SubworldSystem.Exit();
+            //if (Player.position.Y >= 14210 && Player.InModBiome<SpaceBiome>())
+            //    SubworldSystem.Exit();
 
             if (Player.InModBiome<SpaceBiome>())
             {
