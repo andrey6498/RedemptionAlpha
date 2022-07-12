@@ -24,7 +24,7 @@
       <HintPath>..\Mod Libraries\ParticleLibrary.dll</HintPath>
     </Reference>
     <Reference Include="SubworldLibrary">
-      <HintPath>..\..\ModReader\SubworldLibrary\SubworldLibrary.dll</HintPath>
+      <HintPath>..\Mod Libraries\SubworldLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

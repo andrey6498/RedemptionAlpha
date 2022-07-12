@@ -118,25 +118,13 @@ namespace Redemption.WorldGeneration.Space
                         Wiring.ActuateForced(i, j);
                 }
             }
-            for (int k = origin.X + 97; k < origin.X + 103; k++)
+            for (int i = origin.X + 97; i < origin.X + 103; i++)
             {
-                for (int l = origin.Y + 23; l < origin.Y + 24; l++)
-                    Wiring.ActuateForced(k, l);
-            }
-            for (int k = origin.X + 97; k < origin.X + 98; k++)
-            {
-                for (int l = origin.Y + 24; l < origin.Y + 31; l++)
-                    Wiring.ActuateForced(k, l);
-            }
-            for (int k = origin.X + 102; k < origin.X + 103; k++)
-            {
-                for (int l = origin.Y + 24; l < origin.Y + 31; l++)
-                    Wiring.ActuateForced(k, l);
-            }
-            for (int k = origin.X + 97; k < origin.X + 103; k++)
-            {
-                for (int l = origin.Y + 31; l < origin.Y + 32; l++)
-                    Wiring.ActuateForced(k, l);
+                for (int j = origin.Y + 23; j < origin.Y + 32; j++)
+                {
+                    if (Framing.GetTileSafely(i, j).TileType == ModContent.TileType<SlayerShipPanelTile>() && WorldGen.InWorld(i, j))
+                        Wiring.ActuateForced(i, j);
+                }
             }
 
             GenUtils.ObjectPlace(origin.X + 24, origin.Y + 103, TileID.Teleporter);

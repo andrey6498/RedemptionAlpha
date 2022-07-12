@@ -31,7 +31,7 @@ namespace Redemption.Tiles.Tiles
         {
             if (Main.LocalPlayer.HeldItem.type == ModContent.ItemType<NanoAxe2>())
                 return true;
-            return RedeBossDowned.downedVlitch3 || RedeBossDowned.downedNebuleus;
+            return WorldGen.gen || RedeBossDowned.downedVlitch3 || RedeBossDowned.downedNebuleus;
         }
         public override bool Slope(int i, int j) => true;
         public override bool CanExplode(int i, int j) => false;
