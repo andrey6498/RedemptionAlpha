@@ -16,6 +16,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.Chat;
 using Terraria.DataStructures;
+using Terraria.GameContent.Creative;
 using Terraria.GameContent.Events;
 using Terraria.ID;
 using Terraria.Localization;
@@ -57,7 +58,13 @@ namespace Redemption.Globals
                 Main.raining = false;
                 Main.maxRaining = 0f;
                 Main.slimeRain = false;
-                Main.time += Main.dayRate;
+                if (!CreativePowerManager.Instance.GetPower<CreativePowers.FreezeTime>().Enabled)
+                    Main.time += Main.dayRate + (CreativePowerManager.Instance.GetPower<CreativePowers.ModifyTimeRate>().TargetTimeRate - 1);
+                if (Main.time >= 54000)
+                {
+                    Main.dayTime = !Main.dayTime;
+                    Main.time = 0;
+                }
             }
 
         }
@@ -105,7 +112,7 @@ namespace Redemption.Globals
                 DayNightCount++;
 
             #region Skeleton Invasion
-            if (DayNightCount >= 10 && !Main.hardMode && !Main.fastForwardTime)
+            if (!SubworldSystem.AnyActive<Redemption>() && DayNightCount >= 10 && !Main.hardMode && !Main.fastForwardTime)
             {
                 if (Main.dayTime && Main.time == 1 && !WorldGen.spawnEye)
                 {

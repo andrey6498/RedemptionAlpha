@@ -5,6 +5,8 @@ using Terraria;
 using Terraria.Graphics.Effects;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Redemption.Globals;
+
 namespace Redemption.Biomes
 {
     public class SpaceBiome : ModBiome
@@ -23,6 +25,10 @@ namespace Redemption.Biomes
         {
             if (isActive)
                 SkyManager.Instance.Activate("MoR:SpaceSky");
+        }
+        public override void OnInBiome(Player player)
+        {
+            SpaceArea.Active = true;
         }
         public override void OnLeave(Player player)
         {

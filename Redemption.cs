@@ -24,6 +24,7 @@ using System.Linq;
 using Terraria;
 using Terraria.Chat;
 using Terraria.GameContent;
+using Terraria.GameContent.Creative;
 using Terraria.GameContent.UI;
 using Terraria.Graphics;
 using Terraria.Graphics.Effects;

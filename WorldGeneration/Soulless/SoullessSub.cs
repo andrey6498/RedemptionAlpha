@@ -30,6 +30,8 @@ using Redemption.Items.Placeable.Furniture.Misc;
 using Redemption.Globals;
 using Redemption.Items.Usable.Potions;
 using Terraria.GameInput;
+using Terraria.UI.Chat;
+using Terraria.GameContent;
 
 namespace Redemption.WorldGeneration.Soulless
 {
@@ -70,11 +72,15 @@ namespace Redemption.WorldGeneration.Soulless
             Main.dayTime = true;
             Main.time = 40000;
         }
-        /*private double animationTimer = 0;
-        public override void DrawMenu(GameTime gameTime)
+        private double animationTimer = 0;
+        public override void DrawSetup(GameTime gameTime)
         {
             PlayerInput.SetZoom_Unscaled();
             Main.instance.GraphicsDevice.Clear(Color.Black);
+            DrawMenu(gameTime);
+        }
+        public override void DrawMenu(GameTime gameTime)
+        {
             Texture2D soullessBackground = ModContent.Request<Texture2D>("Redemption/WorldGeneration/Soulless/SoullessSubworldTex").Value;
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, Main.UIScaleMatrix);
             Main.spriteBatch.Draw
@@ -84,13 +90,23 @@ namespace Redemption.WorldGeneration.Soulless
                 null,
                 Color.White * (float)(animationTimer / 5) * 0.8f
             );
-            Main.spriteBatch.End();
-            //Main.spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Main.UIScaleMatrix);
 
-            animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
+            ChatManager.DrawColorCodedStringWithShadow(Main.spriteBatch, FontAssets.DeathText.Value, Main.statusText, new Vector2(Main.screenWidth, (float)Main.screenHeight) / 2f - FontAssets.DeathText.Value.MeasureString(Main.statusText) / 2f, Color.White, 0f, Vector2.Zero, Vector2.One);
+
+            Main.spriteBatch.End();
+
+            animationTimer += 0.125;
             if (animationTimer > 5)
                 animationTimer = 5;
-        }*/
+        }
+        public override void OnExit()
+        {
+            animationTimer = 0;
+        }
+        public override void OnEnter()
+        {
+            animationTimer = 0;
+        }
         public override void OnUnload()
         {
         }
