@@ -16,6 +16,8 @@ using Redemption.Base;
 using Redemption.Tiles.Furniture.Lab;
 using Redemption.Tiles.MusicBoxes;
 using System.Linq;
+using Redemption.Tiles.Furniture.SlayerShip;
+using Redemption.Globals;
 
 namespace Redemption.WorldGeneration.Space
 {
@@ -29,7 +31,8 @@ namespace Redemption.WorldGeneration.Space
         public override List<GenPass> Tasks => new()
         {
             new SpacePass1("Loading", 1),
-            new SpacePass2("Smoothing Asteroids", 0.3f),
+            new SpacePass2("Asteroid Ores", 0.5f),
+            new SpacePass3("Smoothing Asteroids", 0.3f),
         };
         public override void OnLoad()
         {
@@ -85,6 +88,7 @@ namespace Redemption.WorldGeneration.Space
             Dictionary<Color, int> colorToWall = new()
             {
                 [new Color(255, 0, 0)] = ModContent.WallType<SlayerShipPanelWallTile>(),
+                [new Color(0, 0, 255)] = ModContent.WallType<AsteroidWallTile>(),
                 [new Color(0, 255, 255)] = WallID.Glass,
                 [new Color(255, 255, 0)] = WallID.MartianConduit,
                 [Color.Black] = -1
@@ -112,11 +116,8 @@ namespace Redemption.WorldGeneration.Space
 
             for (int i = origin.X + 114; i < origin.X + 127; i++)
             {
-                for (int j = origin.Y + 31; j < origin.Y + 32; j++)
-                {
-                    if (Framing.GetTileSafely(i, j).TileType == ModContent.TileType<SlayerShipPanelTile>() && WorldGen.InWorld(i, j))
-                        Wiring.ActuateForced(i, j);
-                }
+                if (Framing.GetTileSafely(i, origin.Y + 31).TileType == ModContent.TileType<SlayerShipPanelTile>() && WorldGen.InWorld(i, origin.Y + 31))
+                    Wiring.ActuateForced(i, origin.Y + 31);
             }
             for (int i = origin.X + 97; i < origin.X + 103; i++)
             {
@@ -157,6 +158,28 @@ namespace Redemption.WorldGeneration.Space
             for (int i = 62; i < 77; i++)
                 GenUtils.ObjectPlace(origin.X + i, origin.Y + 32, ModContent.TileType<LabRailTile_Mid>());
             GenUtils.ObjectPlace(origin.X + 77, origin.Y + 32, ModContent.TileType<LabRailTile_R>(), 0, 1);
+            GenUtils.ObjectPlace(origin.X + 29, origin.Y + 90, TileID.PottedPlants1);
+            GenUtils.ObjectPlace(origin.X + 93, origin.Y + 70, TileID.PottedPlants1, 3);
+            GenUtils.ObjectPlace(origin.X + 131, origin.Y + 23, TileID.PottedPlants2, 1);
+            GenUtils.ObjectPlace(origin.X + 105, origin.Y + 30, TileID.ClayPot);
+            GenUtils.ObjectPlace(origin.X + 105, origin.Y + 29, TileID.MatureHerbs);
+            GenUtils.ObjectPlace(origin.X + 82, origin.Y + 24, TileID.LavaLamp);
+            GenUtils.ObjectPlace(origin.X + 51, origin.Y + 27, TileID.PotsSuspended, 3);
+            GenUtils.ObjectPlace(origin.X + 47, origin.Y + 16, ModContent.TileType<LabCeilingLampTile>());
+            GenUtils.ObjectPlace(origin.X + 56, origin.Y + 16, ModContent.TileType<LabCeilingLampTile>());
+            GenUtils.ObjectPlace(origin.X + 36, origin.Y + 16, ModContent.TileType<LabCeilingLampTile>());
+            GenUtils.ObjectPlace(origin.X + 51, origin.Y + 16, ModContent.TileType<LabReceptionMonitorsTile>());
+            GenUtils.ObjectPlace(origin.X + 48, origin.Y + 24, ModContent.TileType<ServerCabinetTile>());
+            GenUtils.ObjectPlace(origin.X + 54, origin.Y + 24, ModContent.TileType<ServerCabinetTile>(), 0, 1);
+            GenUtils.ObjectPlace(origin.X + 51, origin.Y + 24, ModContent.TileType<LabReceptionDeskTile>());
+            GenUtils.ObjectPlace(origin.X + 42, origin.Y + 32, TileID.PottedPlants1);
+            GenUtils.ObjectPlace(origin.X + 34, origin.Y + 32, ModContent.TileType<ServerCabinetTile>());
+            GenUtils.ObjectPlace(origin.X + 36, origin.Y + 32, ModContent.TileType<ServerCabinetTile>(), 0, 1);
+            GenUtils.ObjectPlace(origin.X + 38, origin.Y + 32, ModContent.TileType<ServerCabinetTile>());
+            GenUtils.ObjectPlace(origin.X + 44, origin.Y + 44, ModContent.TileType<LabCeilingMonitorTile>(), 0, 1);
+            GenUtils.ObjectPlace(origin.X + 59, origin.Y + 44, ModContent.TileType<LabCeilingMonitorTile>());
+            GenUtils.ObjectPlace(origin.X + 59, origin.Y + 53, ModContent.TileType<LabWorkbenchTile>());
+            GenUtils.ObjectPlace(origin.X + 59, origin.Y + 52, ModContent.TileType<SlayerWiringKitTile>());
 
             for (int i = origin.X; i < origin.X + WIDTH; i++)
             {
@@ -184,21 +207,15 @@ namespace Redemption.WorldGeneration.Space
                         Framing.GetTileSafely(i, j).TileColor = PaintID.BlackPaint;
                 }
             }
-            for (int i = origin.X + 98; i < origin.X + 99; i++)
+            for (int j = origin.Y + 33; j < origin.Y + 98; j++)
             {
-                for (int j = origin.Y + 33; j < origin.Y + 98; j++)
-                {
-                    if (Framing.GetTileSafely(i, j).WallType == WallID.MartianConduit && WorldGen.InWorld(i, j))
-                        Framing.GetTileSafely(i, j).WallColor = PaintID.BlackPaint;
-                }
+                if (Framing.GetTileSafely(origin.X + 98, j).WallType == WallID.MartianConduit && WorldGen.InWorld(origin.X + 98, j))
+                    Framing.GetTileSafely(origin.X + 98, j).WallColor = PaintID.BlackPaint;
             }
-            for (int i = origin.X + 101; i < origin.X + 102; i++)
+            for (int j = origin.Y + 33; j < origin.Y + 98; j++)
             {
-                for (int j = origin.Y + 33; j < origin.Y + 98; j++)
-                {
-                    if (Framing.GetTileSafely(i, j).WallType == WallID.MartianConduit && WorldGen.InWorld(i, j))
-                        Framing.GetTileSafely(i, j).WallColor = PaintID.BlackPaint;
-                }
+                if (Framing.GetTileSafely(origin.X + 101, j).WallType == WallID.MartianConduit && WorldGen.InWorld(origin.X + 101, j))
+                    Framing.GetTileSafely(origin.X + 101, j).WallColor = PaintID.BlackPaint;
             }
         }
         public static void MakeMeteor(int X, int Y)
@@ -210,7 +227,7 @@ namespace Redemption.WorldGeneration.Space
                 [new Color(150, 150, 150)] = -2, //turn into air
                 [Color.Black] = -1 //don't touch when genning
             };
-            Texture2D tex = ModContent.Request<Texture2D>("Redemption/WorldGeneration/Space/AstGen" + (WorldGen.genRand.Next(24) + 2), AssetRequestMode.ImmediateLoad).Value;
+            Texture2D tex = ModContent.Request<Texture2D>("Redemption/WorldGeneration/Space/AstGen" + (WorldGen.genRand.Next(24) + 1), AssetRequestMode.ImmediateLoad).Value;
             Point16 origin = new(X, Y);
             GenUtils.InvokeOnMainThread(() =>
             {
@@ -226,6 +243,56 @@ namespace Redemption.WorldGeneration.Space
     {
         protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
         {
+            progress.Message = "Asteroid Materials";
+
+            for (int i = 0; i < 2400; i++)
+            {
+                for (int j = 0; j < 1200; j++)
+                {
+                    bool air = false;
+                    bool tileUp = Framing.GetTileSafely(i, j - 1).TileType != ModContent.TileType<AsteroidTile>();
+                    bool tileDown = Framing.GetTileSafely(i, j + 1).TileType != ModContent.TileType<AsteroidTile>();
+                    bool tileLeft = Framing.GetTileSafely(i - 1, j).TileType != ModContent.TileType<AsteroidTile>();
+                    bool tileRight = Framing.GetTileSafely(i + 1, j).TileType != ModContent.TileType<AsteroidTile>();
+                    if (tileUp)
+                        air = true;
+                    else if (tileDown)
+                        air = true;
+                    else if (tileLeft)
+                        air = true;
+                    else if (tileRight)
+                        air = true;
+
+                    if (!air && Framing.GetTileSafely(i, j).TileType == ModContent.TileType<AsteroidTile>() && WorldGen.InWorld(i, j))
+                        WorldGen.PlaceWall(i, j, ModContent.WallType<AsteroidWallTile>(), true);
+                }
+            }
+
+            int[] OreArray = { TileID.BreakableIce,
+                 TileID.Cobalt,
+                 TileID.Iron,
+                 TileID.Gold,
+                 TileID.Platinum,
+                 TileID.LunarOre };
+            for (int k = 0; k < (int)(2400 * 1000 * 15E-04); k++)
+            {
+                int gemType = Utils.Next(WorldGen.genRand, OreArray);
+                int tilesX = WorldGen.genRand.Next(0, 2400);
+                int tilesY = WorldGen.genRand.Next(0, 612);
+                if (Main.tile[tilesX, tilesY].TileType == ModContent.TileType<AsteroidTile>())
+                {
+                    new AsteroidOreGen(new Vector2(tilesX, tilesY), Vector2.Zero, new Point16(-7, 7), new Point16(-3, 3), WorldGen.genRand.Next(2, 12), WorldGen.genRand.Next(4, 14), (ushort)gemType, false, true).Start();
+                }
+            }
+        }
+        public SpacePass2(string name, float loadWeight) : base(name, loadWeight)
+        {
+        }
+    }
+    public class SpacePass3 : GenPass
+    {
+        protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
+        {
             progress.Message = "Smoothing Tiles";
             int[] TileArray = { ModContent.TileType<AsteroidTile>() };
             for (int i = 0; i < 2400; i++)
@@ -234,11 +301,37 @@ namespace Redemption.WorldGeneration.Space
                 {
                     if (TileArray.Contains(Framing.GetTileSafely(i, j).TileType) && WorldGen.InWorld(i, j))
                         BaseWorldGen.SmoothTiles(i, j, i, j);
+
+                    if (Framing.GetTileSafely(i, j).TileType == ModContent.TileType<LabPlatformTile>() && WorldGen.InWorld(i, j))
+                        WorldGen.KillTile(i, j, true);
                 }
             }
         }
-        public SpacePass2(string name, float loadWeight) : base(name, loadWeight)
+        public SpacePass3(string name, float loadWeight) : base(name, loadWeight)
         {
+        }
+    }
+    public class AsteroidOreGen : TileRunner
+    {
+        public AsteroidOreGen(Vector2 pos, Vector2 speed, Point16 hRange, Point16 vRange, double strength, int steps, ushort type, bool addTile, bool overRide) : base(pos, speed, hRange, vRange, strength, steps, type, addTile, overRide)
+        {
+        }
+        public override bool ValidTile(Tile tile, int x, int y)
+        {
+            bool tileUp = !Framing.GetTileSafely(x, y - 1).HasTile || !Framing.GetTileSafely(x, y - 2).HasTile;
+            bool tileDown = !Framing.GetTileSafely(x, y + 1).HasTile || !Framing.GetTileSafely(x, y + 2).HasTile;
+            bool tileLeft = !Framing.GetTileSafely(x - 1, y).HasTile || !Framing.GetTileSafely(x - 2, y).HasTile;
+            bool tileRight = !Framing.GetTileSafely(x + 1, y).HasTile || !Framing.GetTileSafely(x + 2, y).HasTile;
+            if (tileUp)
+                return false;
+            else if (tileDown)
+                return false;
+            else if (tileLeft)
+                return false;
+            else if (tileRight)
+                return false;
+
+            return tile.TileType == ModContent.TileType<AsteroidTile>();
         }
     }
 }

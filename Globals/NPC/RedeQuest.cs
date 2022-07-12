@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using SubworldLibrary;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
@@ -17,7 +18,7 @@ namespace Redemption.Globals
         public override void PostUpdateWorld()
         {
             #region Wayfarer Event
-            if (wayfarerVars[0] == 0 && Main.dayTime && RedeWorld.DayNightCount >= 1 && !RedeHelper.WayfarerActive())
+            if (!SubworldSystem.AnyActive<Redemption>() && wayfarerVars[0] == 0 && Main.dayTime && RedeWorld.DayNightCount >= 1 && !RedeHelper.WayfarerActive())
             {
                 wayfarerVars[0] = 1;
 

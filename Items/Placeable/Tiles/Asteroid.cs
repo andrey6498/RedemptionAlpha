@@ -26,6 +26,9 @@ namespace Redemption.Items.Placeable.Tiles
                 .AddIngredient(ItemID.Meteorite)
                 .AddCondition(Recipe.Condition.NearWater)
                 .Register();
+            CreateRecipe()
+                .AddIngredient(ModContent.ItemType<AsteroidWall>(), 4)
+                .Register();
         }
     }
 }

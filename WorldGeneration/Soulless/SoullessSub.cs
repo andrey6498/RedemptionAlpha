@@ -642,6 +642,9 @@ namespace Redemption.WorldGeneration.Soulless
                 {
                     if (TileArray.Contains(Framing.GetTileSafely(i, j).TileType) && WorldGen.InWorld(i, j))
                         BaseWorldGen.SmoothTiles(i, j, i + 1, j + 1);
+
+                    if (Framing.GetTileSafely(i, j).TileType == ModContent.TileType<ShadestonePlatformTile>() && WorldGen.InWorld(i, j))
+                        WorldGen.KillTile(i, j, true);
                 }
             }
             WorldGen.noTileActions = false;

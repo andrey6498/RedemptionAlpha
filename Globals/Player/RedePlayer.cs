@@ -51,9 +51,6 @@ namespace Redemption.Globals.Player
         public override void UpdateDead()
         {
             slayerStarRating = 0;
-
-            if (Player.InModBiome<SpaceBiome>())
-                SubworldSystem.Exit();
         }
         public override void OnHitNPC(Item item, Terraria.NPC target, int damage, float knockback, bool crit)
         {
@@ -86,15 +83,26 @@ namespace Redemption.Globals.Player
 
         public override void PreUpdate()
         {
-            if (Player.position.Y >= 14210 && Player.InModBiome<SpaceBiome>())
-                SubworldSystem.Exit();
+            if (Player.position.Y >= 16210 && Player.InModBiome<SpaceBiome>())
+            {
+                int damage = 8;
+                Player.AddBuff(BuffID.Obstructed, 3);
+                Player.statLife -= damage;
+                NetMessage.SendData(MessageID.SpiritHeal, -1, -1, null, Player.whoAmI, -damage, 0f, 0f, 0, 0, 0);
+                if (Player.statLife <= 0)
+                    Player.KillMe(PlayerDeathReason.ByCustomReason(Player.name + " fell into deep space..."), 10, 0, false);
+            }
 
             if (Player.InModBiome<SpaceBiome>())
             {
                 Player.gravity /= 5;
                 Player.accDepthMeter = 0;
-                Player.accWatch = 0;
             }
+        }
+        public override void OnRespawn(Terraria.Player player)
+        {
+            if (Player.InModBiome<SpaceBiome>())
+                SubworldSystem.Exit();
         }
 
         public static readonly SoundStyle SoullessLoopSound = new("Redemption/Sounds/Custom/SoullessAmbient");

@@ -19,6 +19,16 @@ namespace Redemption.Tiles.Tiles
             Main.tileMerge[TileID.Meteorite][Type] = true;
             Main.tileMerge[Type][TileID.MeteoriteBrick] = true;
             Main.tileMerge[TileID.MeteoriteBrick][Type] = true;
+            Main.tileMerge[Type][TileID.Iron] = true;
+            Main.tileMerge[TileID.Iron][Type] = true;
+            Main.tileMerge[Type][TileID.Cobalt] = true;
+            Main.tileMerge[TileID.Cobalt][Type] = true;
+            Main.tileMerge[Type][TileID.Gold] = true;
+            Main.tileMerge[TileID.Gold][Type] = true;
+            Main.tileMerge[Type][TileID.Platinum] = true;
+            Main.tileMerge[TileID.Platinum][Type] = true;
+            Main.tileMerge[Type][TileID.BreakableIce] = true;
+            Main.tileMerge[TileID.BreakableIce][Type] = true;
             ItemDrop = ModContent.ItemType<Asteroid>();
             DustType = ModContent.DustType<SlateDust>();
             HitSound = SoundID.Tink;

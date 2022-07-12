@@ -122,6 +122,8 @@ namespace Redemption
                     PremultiplyTexture(ref ruinedKingdomSurfaceMid_MenuTex);
                     Texture2D SpaceBG1Tex = ModContent.Request<Texture2D>("Redemption/Backgrounds/SpaceBG1", AssetRequestMode.ImmediateLoad).Value;
                     PremultiplyTexture(ref SpaceBG1Tex);
+                    Texture2D EpidotraPlanetTex = ModContent.Request<Texture2D>("Redemption/Backgrounds/EpidotraPlanet", AssetRequestMode.ImmediateLoad).Value;
+                    PremultiplyTexture(ref EpidotraPlanetTex);
                 });
             }
 
