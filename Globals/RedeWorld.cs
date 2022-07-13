@@ -61,7 +61,7 @@ namespace Redemption.Globals
                 Main.maxRaining = 0f;
                 Main.slimeRain = false;
                 if (!CreativePowerManager.Instance.GetPower<CreativePowers.FreezeTime>().Enabled)
-                    Main.time += Main.dayRate + 4f + (CreativePowerManager.Instance.GetPower<CreativePowers.ModifyTimeRate>().TargetTimeRate - 1);
+                    Main.time += Main.dayRate + 3f + (CreativePowerManager.Instance.GetPower<CreativePowers.ModifyTimeRate>().TargetTimeRate - 1);
                 if (Main.time >= (Main.dayTime ? 54000 : 32400))
                 {
                     Main.dayTime = !Main.dayTime;

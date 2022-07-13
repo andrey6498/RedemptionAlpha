@@ -18,6 +18,7 @@ using Redemption.Tiles.MusicBoxes;
 using System.Linq;
 using Redemption.Tiles.Furniture.SlayerShip;
 using Redemption.Globals;
+using Redemption.NPCs.Space;
 
 namespace Redemption.WorldGeneration.Space
 {
@@ -36,6 +37,12 @@ namespace Redemption.WorldGeneration.Space
         };
         public override void OnLoad()
         {
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                NPC.NewNPC(new EntitySource_WorldGen(), ((2400 / 2) - 24 + 46) * 16, (510 + 50) * 16, ModContent.NPCType<WallDatalog>());
+                NPC.NewNPC(new EntitySource_WorldGen(), ((2400 / 2) - 24 + 58) * 16, (510 + 50) * 16, ModContent.NPCType<WallDatalog>(), 0, 1);
+            }
+
             Main.cloudAlpha = 0;
             Main.cloudBGAlpha = 0;
             Main.numClouds = 0;
@@ -182,6 +189,11 @@ namespace Redemption.WorldGeneration.Space
             GenUtils.ObjectPlace(origin.X + 59, origin.Y + 44, ModContent.TileType<LabCeilingMonitorTile>());
             GenUtils.ObjectPlace(origin.X + 59, origin.Y + 53, ModContent.TileType<LabWorkbenchTile>());
             GenUtils.ObjectPlace(origin.X + 59, origin.Y + 52, ModContent.TileType<SlayerWiringKitTile>());
+            GenUtils.ObjectPlace(origin.X + 148, origin.Y + 31, ModContent.TileType<SlayerChairTile>(), 0, 1);
+            GenUtils.ObjectPlace(origin.X + 19, origin.Y + 31, ModContent.TileType<SlayerChairTile>());
+            GenUtils.ObjectPlace(origin.X + 43, origin.Y + 53, ModContent.TileType<AndroidInactiveTile>());
+            GenUtils.ObjectPlace(origin.X + 46, origin.Y + 54, ModContent.TileType<AndroidInactiveTile>(), 0, 1);
+            GenUtils.ObjectPlace(origin.X + 56, origin.Y + 54, ModContent.TileType<AndroidInactiveTile>());
 
             for (int i = origin.X; i < origin.X + WIDTH; i++)
             {

@@ -418,7 +418,7 @@ namespace Redemption
 
                 float centerDist = 0;
                 float bgParallax2 = 0.37f + 0.2f - 0.1f;
-                int bgStart2 = (int)(-Math.IEEERemainder(Main.screenPosition.X / 40 * bgParallax2, 818) - (818 / 3));
+                int bgStart2 = (int)(-Math.IEEERemainder(Main.screenPosition.X / 40 * bgParallax2, 818) - (818 * 1.3f));
                 if (bgStart2 > 0)
                     bgStart2 = -680;
 
@@ -426,17 +426,19 @@ namespace Redemption
                 {
                     if (Main.dayTime)
                     {
-                        if (Main.time > 40000 + (bgStart2 * 30))
+                        if (Main.time < 65000 + (bgStart2 * 30))
                         {
-                            centerDist = MathHelper.Distance((float)Main.time, 40000 + (bgStart2 * 30));
-                            centerDist /= 2000;
+                            centerDist = MathHelper.Distance((float)Main.time, 65000 + (bgStart2 * 30));
+                            centerDist /= 3000;
                         }
+                        else if (Main.time < 62000 + (bgStart2 * 30))
+                            centerDist = 1;
                     }
                     else
                     {
-                        if (Main.time < 4000)
+                        if (Main.time > 28400)
                         {
-                            centerDist = MathHelper.Distance((float)Main.time, 4000);
+                            centerDist = MathHelper.Distance((float)Main.time, 28400);
                             centerDist /= 4000;
                         }
                     }

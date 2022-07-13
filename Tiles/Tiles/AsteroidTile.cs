@@ -29,6 +29,8 @@ namespace Redemption.Tiles.Tiles
             Main.tileMerge[TileID.Platinum][Type] = true;
             Main.tileMerge[Type][TileID.BreakableIce] = true;
             Main.tileMerge[TileID.BreakableIce][Type] = true;
+            Main.tileMerge[Type][TileID.LunarOre] = true;
+            Main.tileMerge[TileID.LunarOre][Type] = true;
             ItemDrop = ModContent.ItemType<Asteroid>();
             DustType = ModContent.DustType<SlateDust>();
             HitSound = SoundID.Tink;

@@ -1,26 +1,27 @@
 using Microsoft.Xna.Framework;
-using Redemption.Globals;
-using Redemption.Items.Placeable.Furniture.SlayerShip;
+using Redemption.Dusts.Tiles;
+using Redemption.Items.Placeable.Furniture.Lab;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Enums;
-using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using Terraria.ID;
+using Redemption.Items.Materials.HM;
 
 namespace Redemption.Tiles.Furniture.SlayerShip
 {
-    public class SlayerChairTile : ModTile
+    public class AndroidInactiveTile : ModTile
     {
         public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[Type] = true;
             Main.tileLavaDeath[Type] = false;
             Main.tileNoAttach[Type] = true;
-            TileObjectData.newTile.Width = 4;
-            TileObjectData.newTile.Height = 5;
-            TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16, 16, 16, 16 };
-            TileObjectData.newTile.Origin = new Point16(1, 4);
+            TileObjectData.newTile.Width = 2;
+            TileObjectData.newTile.Height = 3;
+            TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16, 16 };
+            TileObjectData.newTile.Origin = new Point16(0, 2);
             TileObjectData.newTile.UsesCustomCanPlace = true;
             TileObjectData.newTile.StyleHorizontal = true;
             TileObjectData.newTile.Direction = TileObjectDirection.PlaceLeft;
@@ -32,16 +33,23 @@ namespace Redemption.Tiles.Furniture.SlayerShip
             TileObjectData.addAlternate(1);
             TileObjectData.addTile(Type);
             DustType = DustID.Electric;
-            MinPick = 500;
-            MineResist = 10f;
+            HitSound = SoundID.Tink;
+            MinPick = 200;
+            MineResist = 6f;
             ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Slayer's Gaming Chair");
-            AddMapEntry(new Color(107, 111, 127), name);
+            name.SetDefault("Inactive Android Mk.I");
+            AddMapEntry(new Color(189, 191, 200), name);
         }
-        public override bool CanKillTile(int i, int j, ref bool blockDamaged) => RedeBossDowned.downedVlitch3;
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 32, 32, ModContent.ItemType<SlayerChair>());
+            if (Main.rand.NextBool(2))
+                Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 32, 48, ModContent.ItemType<CarbonMyofibre>(), Main.rand.Next(2, 5));
+            if (Main.rand.NextBool(4))
+                Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 32, 48, ModContent.ItemType<Plating>(), Main.rand.Next(1, 3));
+            if (Main.rand.NextBool(4))
+                Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 32, 48, ModContent.ItemType<Capacitator>());
+            if (Main.rand.NextBool(8))
+                Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 32, 48, ModContent.ItemType<AIChip>());
         }
         public override bool CanExplode(int i, int j) => false;
     }

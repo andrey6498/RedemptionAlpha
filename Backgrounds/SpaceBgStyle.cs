@@ -68,7 +68,7 @@ namespace Redemption.Backgrounds
             float screenOff2 = typeof(Main).GetFieldValue<float>("screenOff", Main.instance);
             int bgW2 = (int)(Main.backgroundWidth[textureSlot2] * bgScale2);
             SkyManager.Instance.DrawToDepth(spriteBatch, 1f / bgParallax2);
-            int bgStart2 = (int)(-Math.IEEERemainder(Main.screenPosition.X / 40 * bgParallax2, bgW2) - (bgW2 / 3));
+            int bgStart2 = (int)(-Math.IEEERemainder(Main.screenPosition.X / 40 * bgParallax2, bgW2) - (bgW2 * 1.3f));
             int bgTop2 = (int)((-Main.screenPosition.Y + screenOff2 / 2f) / (Main.worldSurface * 16.0) * c + d);
             if (Main.gameMenu)
             {
