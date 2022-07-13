@@ -53,13 +53,15 @@ namespace Redemption.Globals
             if (SubworldSystem.IsActive<SpaceSub>())
             {
                 Main.numClouds = 0;
+                Main.windSpeedCurrent = 0;
+                Main.windSpeedTarget = 0;
                 Main.cloudAlpha = 0;
                 Main.cloudBGAlpha = 0;
                 Main.raining = false;
                 Main.maxRaining = 0f;
                 Main.slimeRain = false;
                 if (!CreativePowerManager.Instance.GetPower<CreativePowers.FreezeTime>().Enabled)
-                    Main.time += Main.dayRate + 0.5f + (CreativePowerManager.Instance.GetPower<CreativePowers.ModifyTimeRate>().TargetTimeRate - 1);
+                    Main.time += Main.dayRate + 4f + (CreativePowerManager.Instance.GetPower<CreativePowers.ModifyTimeRate>().TargetTimeRate - 1);
                 if (Main.time >= (Main.dayTime ? 54000 : 32400))
                 {
                     Main.dayTime = !Main.dayTime;

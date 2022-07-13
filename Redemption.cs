@@ -307,7 +307,7 @@ namespace Redemption
 
         public UserInterface DialogueUILayer;
         public MoRDialogueUI DialogueUIElement;
-		
+
         public UserInterface ChaliceUILayer;
         public ChaliceAlignmentUI ChaliceUIElement;
 
@@ -352,11 +352,11 @@ namespace Redemption
                 AMemoryUILayer = new UserInterface();
                 AMemoryUIElement = new AMemoryUIState();
                 AMemoryUILayer.SetState(AMemoryUIElement);
-				
-				TextBubbleUILayer = new UserInterface();
-				TextBubbleUIElement = new TextBubbleUI();
+
+                TextBubbleUILayer = new UserInterface();
+                TextBubbleUIElement = new TextBubbleUI();
                 TextBubbleUILayer.SetState(TextBubbleUIElement);
-			}
+            }
         }
         private void LoadTrailManager(On.Terraria.Main.orig_Update orig, Main self, GameTime gameTime)
         {
@@ -415,6 +415,46 @@ namespace Redemption
                 backgroundColor.R = (byte)sunR;
                 backgroundColor.G = (byte)sunG;
                 backgroundColor.B = (byte)sunB;
+
+                float centerDist = 0;
+                float bgParallax2 = 0.37f + 0.2f - 0.1f;
+                int bgStart2 = (int)(-Math.IEEERemainder(Main.screenPosition.X / 40 * bgParallax2, 818) - (818 / 3));
+                if (bgStart2 > 0)
+                    bgStart2 = -680;
+
+                if (Main.LocalPlayer.InModBiome<SpaceBiome>())
+                {
+                    if (Main.dayTime)
+                    {
+                        if (Main.time > 40000 + (bgStart2 * 30))
+                        {
+                            centerDist = MathHelper.Distance((float)Main.time, 40000 + (bgStart2 * 30));
+                            centerDist /= 2000;
+                        }
+                    }
+                    else
+                    {
+                        if (Main.time < 4000)
+                        {
+                            centerDist = MathHelper.Distance((float)Main.time, 4000);
+                            centerDist /= 4000;
+                        }
+                    }
+                }
+                centerDist = MathHelper.Clamp(centerDist, 0f, 1f);
+
+                int sunR2 = tileColor.R;
+                int sunG2 = tileColor.G;
+                int sunB2 = tileColor.B;
+                sunR2 -= (int)(255f * centerDist * (tileColor.R / 255f));
+                sunB2 -= (int)(255f * centerDist * (tileColor.B / 255f));
+                sunG2 -= (int)(255f * centerDist * (tileColor.G / 255f));
+                sunR2 = Utils.Clamp(sunR2, 15, 255);
+                sunG2 = Utils.Clamp(sunG2, 15, 255);
+                sunB2 = Utils.Clamp(sunB2, 15, 255);
+                tileColor.R = (byte)sunR2;
+                tileColor.G = (byte)sunG2;
+                tileColor.B = (byte)sunB2;
             }
         }
         public override void ModifyTransformMatrix(ref SpriteViewMatrix Transform)
@@ -448,7 +488,7 @@ namespace Redemption
                 int index = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Inventory"));
                 if (index >= 0)
                 {
-                    LegacyGameInterfaceLayer SkeleUI = new ("Redemption: SkeleInvasion",
+                    LegacyGameInterfaceLayer SkeleUI = new("Redemption: SkeleInvasion",
                         delegate
                         {
                             DrawSkeletonInvasionUI(Main.spriteBatch);
@@ -471,8 +511,8 @@ namespace Redemption
                 AddInterfaceLayer(layers, DialogueUILayer, DialogueUIElement, MouseTextIndex + 2, MoRDialogueUI.Visible, "Dialogue");
                 AddInterfaceLayer(layers, TitleUILayer, TitleCardUIElement, MouseTextIndex + 3, TitleCard.Showing, "Title Card");
                 AddInterfaceLayer(layers, NukeUILayer, NukeUIElement, MouseTextIndex + 4, NukeDetonationUI.Visible, "Nuke UI");
-				AddInterfaceLayer(layers, TextBubbleUILayer, TextBubbleUIElement, MouseTextIndex + 5, TextBubbleUI.Visible, "Text Bubble");
-			}
+                AddInterfaceLayer(layers, TextBubbleUILayer, TextBubbleUIElement, MouseTextIndex + 5, TextBubbleUI.Visible, "Text Bubble");
+            }
         }
 
         public static void AddInterfaceLayer(List<GameInterfaceLayer> layers, UserInterface userInterface, UIState state, int index, bool visible, string customName = null) //Code created by Scalie
@@ -508,8 +548,8 @@ namespace Redemption
                 Texture2D progressColor = TextureAssets.ColorBar.Value;
                 Texture2D InvIcon = ModContent.Request<Texture2D>("Redemption/Items/Armor/Vanity/EpidotrianSkull").Value;
                 float scmp = 0.5f + 0.75f * 0.5f;
-                Color descColor = new (77, 39, 135);
-                Color waveColor = new (255, 241, 51);
+                Color descColor = new(77, 39, 135);
+                Color waveColor = new(255, 241, 51);
                 const int offsetX = 20;
                 const int offsetY = 20;
                 int width = (int)(200f * scmp);
@@ -520,8 +560,8 @@ namespace Redemption
                 string waveText = "Cleared " + Math.Round(100 * cleared) + "%";
                 Utils.DrawBorderString(spriteBatch, waveText, new Vector2(waveBackground.X + waveBackground.Width / 2, waveBackground.Y + 5), Color.White, scmp * 0.8f, 0.5f, -0.1f);
                 Rectangle waveProgressBar = Utils.CenteredRectangle(new Vector2(waveBackground.X + waveBackground.Width * 0.5f, waveBackground.Y + waveBackground.Height * 0.75f), new Vector2(progressColor.Width, progressColor.Height));
-                Rectangle waveProgressAmount = new (0, 0, (int)(progressColor.Width * MathHelper.Clamp(cleared, 0f, 1f)), progressColor.Height);
-                Vector2 offset = new ((waveProgressBar.Width - (int)(waveProgressBar.Width * scmp)) *0.5f, (waveProgressBar.Height - (int)(waveProgressBar.Height * scmp)) * 0.5f);
+                Rectangle waveProgressAmount = new(0, 0, (int)(progressColor.Width * MathHelper.Clamp(cleared, 0f, 1f)), progressColor.Height);
+                Vector2 offset = new((waveProgressBar.Width - (int)(waveProgressBar.Width * scmp)) * 0.5f, (waveProgressBar.Height - (int)(waveProgressBar.Height * scmp)) * 0.5f);
                 spriteBatch.Draw(backGround1, waveProgressBar.Location.ToVector2() + offset, null, Color.White * alpha, 0f, new Vector2(0f), scmp, SpriteEffects.None, 0f);
                 spriteBatch.Draw(backGround1, waveProgressBar.Location.ToVector2() + offset, waveProgressAmount, waveColor, 0f, new Vector2(0f), scmp, SpriteEffects.None, 0f);
                 const int internalOffset = 6;
@@ -530,7 +570,7 @@ namespace Redemption
                 Rectangle descBackground = Utils.CenteredRectangle(new Vector2(barrierBackground.X + barrierBackground.Width * 0.5f, barrierBackground.Y - internalOffset - descSize.Y * 0.5f), descSize * .8f);
                 Utils.DrawInvBG(spriteBatch, descBackground, descColor * alpha);
                 int descOffset = (descBackground.Height - (int)(32f * scmp)) / 2;
-                Rectangle icon = new (descBackground.X + descOffset + 7, descBackground.Y + descOffset, (int)(32 * scmp), (int)(32 * scmp));
+                Rectangle icon = new(descBackground.X + descOffset + 7, descBackground.Y + descOffset, (int)(32 * scmp), (int)(32 * scmp));
                 spriteBatch.Draw(InvIcon, icon, Color.White);
                 Utils.DrawBorderString(spriteBatch, "Raveyard", new Vector2(barrierBackground.X + barrierBackground.Width * 0.5f, barrierBackground.Y - internalOffset - descSize.Y * 0.5f), Color.White, 0.8f, 0.3f, 0.4f);
             }

@@ -46,6 +46,8 @@ namespace Redemption.WorldGeneration.Space
         }
         public override void OnUnload()
         {
+            Main.sunModY = 0;
+            Main.moonModY = 0;
         }
     }
     public class SpacePass1 : GenPass

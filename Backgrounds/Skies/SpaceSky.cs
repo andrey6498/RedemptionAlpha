@@ -6,6 +6,8 @@ using Terraria.Graphics.Effects;
 using Terraria.Utilities;
 using Terraria.ModLoader;
 using Terraria.GameContent;
+using Redemption.WorldGeneration.Space;
+using SubworldLibrary;
 
 namespace Redemption.Backgrounds.Skies
 {
@@ -32,46 +34,51 @@ namespace Redemption.Backgrounds.Skies
         private float sunAlpha = 0;
         public override void Draw(SpriteBatch spriteBatch, float minDepth, float maxDepth)
         {
-			if (maxDepth >= 3E+38f && minDepth < 3E+38f)
-			{
-				if (!Main.dayTime)
-					sunAlpha = 0;
-				if (Main.dayTime)
-				{
-					if (sunAlpha < 1f)
-						sunAlpha += 0.05f;
-					else if (sunAlpha > 1f)
-						sunAlpha = 1f;
-
-					float cloudAlpha = 1f;
-                    cloudAlpha -= Main.cloudAlpha * 1.5f;
-					if (cloudAlpha < 0f)
-                        cloudAlpha = 0f;
-
-					int x = (int)(Main.time / 54000.0 * (Main.screenWidth + TextureAssets.Sun.Value.Width * 2)) - TextureAssets.Sun.Value.Width;
-                    float rotation = (float)(Main.time / 54000.0) * 2f - 7.3f;
-					double bgTop = (-Main.screenPosition.Y) / (Main.worldSurface * 16.0 - 600.0) * 200.0;
-					double y2;
-                    int y;
-                    if (Main.time < 27000.0)
+            if (SubworldSystem.IsActive<SpaceSub>())
+            {
+                Main.sunModY = 300;
+                Main.moonModY = 300;
+                if (maxDepth >= 3E+38f && minDepth < 3E+38f)
+                {
+                    if (!Main.dayTime)
+                        sunAlpha = 0;
+                    if (Main.dayTime)
                     {
-                        y2 = Math.Pow(1.0 - Main.time / 54000.0 * 2.0, 2.0);
-                        y = (int)(bgTop + y2 * 250.0 + 180.0);
-                    }
-                    else
-                    {
-                        y2 = Math.Pow((Main.time / 54000.0 - 0.5) * 2.0, 2.0);
-                        y = (int)(bgTop + y2 * 250.0 + 180.0);
-                    }
-                    float scale = (float)(1.2 - y2 * 0.4);
-                    Color color = new((byte)(255f * cloudAlpha), (byte)(Color.White.G * cloudAlpha), (byte)(Color.White.B * cloudAlpha), (byte)(255f * cloudAlpha));
+                        if (sunAlpha < 1f)
+                            sunAlpha += 0.05f;
+                        else if (sunAlpha > 1f)
+                            sunAlpha = 1f;
 
-					Texture2D sunTexture = ModContent.Request<Texture2D>("Redemption/Textures/Sun3").Value;
-					spriteBatch.Draw(sunTexture, new Vector2(x, y + Main.sunModY), new Rectangle?(new Rectangle(0, 0, sunTexture.Width, sunTexture.Height)), color * sunAlpha, rotation, new Vector2(sunTexture.Width / 2, sunTexture.Height / 2), scale + 0.5f, SpriteEffects.None, 0f);
-					Texture2D sun2Texture = ModContent.Request<Texture2D>("Redemption/Textures/Sun2").Value;
-					spriteBatch.Draw(sun2Texture, new Vector2(x, y + Main.sunModY) + new Vector2(60, 10), new Rectangle?(new Rectangle(0, 0, sunTexture.Width, sunTexture.Height)), color * sunAlpha, rotation, new Vector2(sunTexture.Width / 2, sunTexture.Height / 2), scale - 0.25f, SpriteEffects.None, 0f);
-				}
-			}
+                        float cloudAlpha = 1f;
+                        cloudAlpha -= Main.cloudAlpha * 1.5f;
+                        if (cloudAlpha < 0f)
+                            cloudAlpha = 0f;
+
+                        int x = (int)(Main.time / 54000.0 * (Main.screenWidth + TextureAssets.Sun.Value.Width * 2)) - TextureAssets.Sun.Value.Width;
+                        float rotation = (float)(Main.time / 54000.0) * 2f - 7.3f;
+                        double bgTop = (-Main.screenPosition.Y) / (Main.worldSurface * 16.0 - 600.0) * 200.0;
+                        double y2;
+                        int y;
+                        if (Main.time < 27000.0)
+                        {
+                            y2 = Math.Pow(1.0 - Main.time / 54000.0 * 2.0, 2.0);
+                            y = (int)(bgTop + y2 * 250.0 + 180.0);
+                        }
+                        else
+                        {
+                            y2 = Math.Pow((Main.time / 54000.0 - 0.5) * 2.0, 2.0);
+                            y = (int)(bgTop + y2 * 250.0 + 180.0);
+                        }
+                        float scale = (float)(1.2 - y2 * 0.4);
+                        Color color = new((byte)(255f * cloudAlpha), (byte)(Color.White.G * cloudAlpha), (byte)(Color.White.B * cloudAlpha), (byte)(255f * cloudAlpha));
+
+                        Texture2D sunTexture = ModContent.Request<Texture2D>("Redemption/Textures/Sun3").Value;
+                        spriteBatch.Draw(sunTexture, new Vector2(x, y + Main.sunModY), new Rectangle?(new Rectangle(0, 0, sunTexture.Width, sunTexture.Height)), color * sunAlpha, rotation, new Vector2(sunTexture.Width / 2, sunTexture.Height / 2), scale + 0.5f, SpriteEffects.None, 0f);
+                        Texture2D sun2Texture = ModContent.Request<Texture2D>("Redemption/Textures/Sun2").Value;
+                        spriteBatch.Draw(sun2Texture, new Vector2(x, y + Main.sunModY) + new Vector2(60, 10), new Rectangle?(new Rectangle(0, 0, sunTexture.Width, sunTexture.Height)), color * sunAlpha, rotation, new Vector2(sunTexture.Width / 2, sunTexture.Height / 2), scale - 0.25f, SpriteEffects.None, 0f);
+                    }
+                }
+            }
 		}
 		public override float GetCloudAlpha()
         {
