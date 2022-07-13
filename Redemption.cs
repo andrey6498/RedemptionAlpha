@@ -124,6 +124,8 @@ namespace Redemption
                     PremultiplyTexture(ref SpaceBG1Tex);
                     Texture2D EpidotraPlanetTex = ModContent.Request<Texture2D>("Redemption/Backgrounds/EpidotraPlanet", AssetRequestMode.ImmediateLoad).Value;
                     PremultiplyTexture(ref EpidotraPlanetTex);
+                    Texture2D EpidotraPlanet_BrighterTex = ModContent.Request<Texture2D>("Redemption/Backgrounds/EpidotraPlanet_Brighter", AssetRequestMode.ImmediateLoad).Value;
+                    PremultiplyTexture(ref EpidotraPlanet_BrighterTex);
                 });
             }
 

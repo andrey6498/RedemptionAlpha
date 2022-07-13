@@ -47,6 +47,47 @@ namespace Redemption.Backgrounds
         }
         public override bool PreDrawCloseBackground(SpriteBatch spriteBatch)
         {
+            float centerDist = 0;
+            if (!Main.dayTime)
+            {
+                if (Main.time < 16200)
+                    centerDist = MathHelper.Distance((float)Main.time, 0) * 6;
+                else
+                    centerDist = MathHelper.Distance((float)Main.time, 32400) * 6;
+                centerDist /= 16200;
+            }
+
+            float c = 450f;
+            float d = 100f;
+            float bgParallax2 = 0.37f + 0.2f - 0.1f;
+            int textureSlot2 = BackgroundTextureLoader.GetBackgroundSlot("Redemption/Backgrounds/EpidotraPlanet");
+            int textureSlot2_Brighter = BackgroundTextureLoader.GetBackgroundSlot("Redemption/Backgrounds/EpidotraPlanet_Brighter");
+            Main.instance.LoadBackground(textureSlot2);
+            Main.instance.LoadBackground(textureSlot2_Brighter);
+            float bgScale2 = 2f;
+            float screenOff2 = typeof(Main).GetFieldValue<float>("screenOff", Main.instance);
+            int bgW2 = (int)(Main.backgroundWidth[textureSlot2] * bgScale2);
+            SkyManager.Instance.DrawToDepth(spriteBatch, 1f / bgParallax2);
+            int bgStart2 = (int)(-Math.IEEERemainder(Main.screenPosition.X / 40 * bgParallax2, bgW2) - (bgW2 / 3));
+            int bgTop2 = (int)((-Main.screenPosition.Y + screenOff2 / 2f) / (Main.worldSurface * 16.0) * c + d);
+            if (Main.gameMenu)
+            {
+                bgTop2 = 320;
+            }
+            Color backColor2 = typeof(Main).GetFieldValue<Color>("ColorOfSurfaceBackgroundsModified", Main.instance);
+            if (Main.screenPosition.Y < Main.worldSurface * 16.0 + 16.0)
+            {
+                spriteBatch.Draw(TextureAssets.Background[textureSlot2].Value,
+                    new Vector2(bgStart2 + bgW2, bgTop2),
+                    new Rectangle(0, 0, Main.backgroundWidth[textureSlot2], Main.backgroundHeight[textureSlot2]),
+                    backColor2 * (centerDist + 1), 0f, default, bgScale2, SpriteEffects.None, 0f);
+
+                spriteBatch.Draw(TextureAssets.Background[textureSlot2_Brighter].Value,
+                    new Vector2(bgStart2 + bgW2, bgTop2),
+                    new Rectangle(0, 0, Main.backgroundWidth[textureSlot2], Main.backgroundHeight[textureSlot2]),
+                    backColor2 * (centerDist + 1) * 1.1f, 0f, default, bgScale2, SpriteEffects.None, 0f);
+            }
+
             float a = 4000f;
             float b = 3000f;
             int[] textureSlots = new int[] {
@@ -81,30 +122,6 @@ namespace Redemption.Backgrounds
                             backColor, 0f, default, bgScale, SpriteEffects.None, 0f);
                     }
                 }
-            }
-            float c = 150f;
-            float d = 100f;
-            float bgParallax2 = 0.37f + 0.2f - 0.1f;
-            int textureSlot2 = BackgroundTextureLoader.GetBackgroundSlot("Redemption/Backgrounds/EpidotraPlanet");
-            Main.instance.LoadBackground(textureSlot2);
-            float bgScale2 = 2f;
-            float screenOff2 = typeof(Main).GetFieldValue<float>("screenOff", Main.instance);
-            float scAdj2 = typeof(Main).GetFieldValue<float>("scAdj", Main.instance);
-            int bgW2 = (int)(Main.backgroundWidth[textureSlot2] * bgScale2);
-            SkyManager.Instance.DrawToDepth(spriteBatch, 1f / bgParallax2);
-            int bgStart2 = (int)(-Math.IEEERemainder(Main.screenPosition.X / 40 * bgParallax2, bgW2) - (bgW2 / 2));
-            int bgTop2 = (int)((-Main.screenPosition.Y + screenOff2 / 2f) / (Main.worldSurface * 16.0) * c + d);
-            if (Main.gameMenu)
-            {
-                bgTop2 = 320;
-            }
-            Color backColor2 = typeof(Main).GetFieldValue<Color>("ColorOfSurfaceBackgroundsModified", Main.instance);
-            if (Main.screenPosition.Y < Main.worldSurface * 16.0 + 16.0)
-            {
-                spriteBatch.Draw(TextureAssets.Background[textureSlot2].Value,
-                    new Vector2(bgStart2 + bgW2, bgTop2),
-                    new Rectangle(0, 0, Main.backgroundWidth[textureSlot2], Main.backgroundHeight[textureSlot2]),
-                    backColor2 * 4f, 0f, default, bgScale2, SpriteEffects.None, 0f);
             }
             return false;
         }

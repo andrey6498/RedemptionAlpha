@@ -1,6 +1,9 @@
+using Microsoft.Xna.Framework;
+using Redemption.Buffs;
 using Redemption.Items.Materials.PostML;
 using Redemption.Rarities;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -12,25 +15,22 @@ namespace Redemption.Items.Usable.Potions
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Deep Dwell Dish");
-            Tooltip.SetDefault("Major improvements to all stats" +
+            Tooltip.SetDefault("Massive improvements to all stats" +
                 "\n'Tastes like [REDACTED]'");
+            Main.RegisterItemAnimation(Type, new DrawAnimationVertical(int.MaxValue, 3));
+            ItemID.Sets.FoodParticleColors[Item.type] = new Color[3] {
+                new Color(229, 124, 206),
+                new Color(103, 84, 119),
+                new Color(120, 146, 19)
+            };
+            ItemID.Sets.IsFood[Type] = true;
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 5;
         }
         public override void SetDefaults()
         {
-            Item.UseSound = SoundID.Item2;
-            Item.useStyle = ItemUseStyleID.EatFood;
-            Item.useTurn = true;
-            Item.useAnimation = 30;
-            Item.useTime = 30;
-            Item.maxStack = 30;
-            Item.consumable = true;
-            Item.width = 32;
-            Item.height = 20;
-            Item.value = Item.sellPrice(0, 0, 25, 0);
+            Item.DefaultToFood(36, 22, ModContent.BuffType<WellFed4>(), 6000);
+            Item.value = 55;
             Item.rare = ModContent.RarityType<SoullessRarity>();
-            Item.buffType = BuffID.WellFed3;
-            Item.buffTime = 24400;
         }
         public override void AddRecipes()
         {

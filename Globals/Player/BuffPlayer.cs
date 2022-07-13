@@ -616,7 +616,6 @@ namespace Redemption.Globals.Player
             if (MetalSet)
                 SoundEngine.PlaySound(SoundID.NPCHit4, Player.position);
         }
-
         public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
             if (infested && infestedTime >= 60)

@@ -19,6 +19,9 @@ using Redemption.WorldGeneration.Soulless;
 using Terraria.Audio;
 using ReLogic.Utilities;
 using Terraria.ID;
+using Redemption.Walls;
+using Redemption.Base;
+using Redemption.Items.Accessories.HM;
 
 namespace Redemption.Globals.Player
 {
@@ -35,6 +38,7 @@ namespace Redemption.Globals.Player
         public bool stalkerSilence;
         public float musicVolume;
         public int slayerStarRating;
+        public int SpaceBreathTimer = 0;
         public override void ResetEffects()
         {
             hitTarget = -1;
@@ -81,9 +85,27 @@ namespace Redemption.Globals.Player
                 "===============", 244, 71, 255);
         }
 
+        public string GetSpaceDeathQuote()
+        {
+            string[] SpaceDeathQuotes = new string[]
+            {
+                " was eaten by space",
+                " burned while freezing",
+                " forgot they needed to breathe",
+                " was trapped in orbit",
+                " took the wrong step for mankind",
+                " wanted to be a satellite",
+                " boldly went where no man has gone before",
+                " thought the sky was the limit",
+                " needed some space"
+            };
+            int randomQuote = Main.rand.Next(SpaceDeathQuotes.Length);
+
+            return Player.name + SpaceDeathQuotes[randomQuote];
+        }
         public override void PreUpdate()
         {
-            if (Player.position.Y >= 16210 && Player.InModBiome<SpaceBiome>())
+            if (Player.position.Y >= 16210 && Player.InModBiome<SpaceBiome>() && Player.whoAmI == Main.myPlayer)
             {
                 int damage = 8;
                 Player.AddBuff(BuffID.Obstructed, 3);
@@ -93,9 +115,37 @@ namespace Redemption.Globals.Player
                     Player.KillMe(PlayerDeathReason.ByCustomReason(Player.name + " fell into deep space..."), 10, 0, false);
             }
 
-            if (Player.InModBiome<SpaceBiome>())
+            if (Player.InModBiome<SpaceBiome>() && Player.whoAmI == Main.myPlayer)
             {
-                Player.gravity /= 5;
+                Point point = Player.Center.ToTileCoordinates();
+                ushort wallType = Framing.GetTileSafely(point.X, point.Y).WallType;
+                if (wallType != ModContent.WallType<SlayerShipPanelWallTile>() && wallType != WallID.MartianConduit && wallType != WallID.Glass)
+                {
+                    Player.gravity /= 20;
+                    Player.breath -= 3;
+                    int airCD = 1;
+                    if (Player.accDivingHelm || BasePlayer.HasAccessory(Player, ModContent.ItemType<GasMask>(), true, true) || Player.RedemptionPlayerBuff().hazmatSuit || Player.RedemptionPlayerBuff().HEVSuit)
+                        airCD = 2;
+                    if (++SpaceBreathTimer % airCD == 0)
+                    {
+                        SpaceBreathTimer = 0;
+                        Player.breath--;
+                    }
+                    if (Player.breath < -5)
+                    {
+                        Player.lifeRegen = 0;
+                        Player.lifeRegenTime = 0;
+                        Player.breath = -5;
+                        Player.statLife -= 2;
+                        NetMessage.SendData(MessageID.SpiritHeal, -1, -1, null, Player.whoAmI, -2, 0f, 0f, 0, 0, 0);
+                        if (Player.statLife <= 0)
+                        {
+                            Player.statLife = 0;
+                            PlayerDeathReason damageSource = PlayerDeathReason.ByCustomReason(GetSpaceDeathQuote());
+                            Player.KillMe(damageSource, 10.0, 0);
+                        }
+                    }
+                }
                 Player.accDepthMeter = 0;
             }
         }
