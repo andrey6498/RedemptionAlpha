@@ -31,6 +31,7 @@ using Redemption.Items.Donator.Megaswave;
 using Redemption.Items.Usable.Potions;
 using Redemption.Items.Weapons.PreHM.Ritualist;
 using Redemption.WorldGeneration.Space;
+using Redemption.NPCs.HM;
 
 namespace Redemption.Globals.NPC
 {
@@ -582,7 +583,12 @@ namespace Redemption.Globals.NPC
                 pool.Add(ModContent.NPCType<Echo>(), .02f);
             }
             if (SubworldSystem.IsActive<SpaceSub>() && spawnInfo.Player.InModBiome<SpaceBiome>())
+            {
                 pool.Clear();
+                bool tileCheck = spawnInfo.SpawnTileType == ModContent.TileType<SlayerShipPanelTile>();
+                bool tileWall = Framing.GetTileSafely(spawnInfo.SpawnTileX, spawnInfo.SpawnTileY - 2).WallType != WallID.None;
+                pool.Add(ModContent.NPCType<Android>(), tileCheck && tileWall ? .01f : 0);
+            }
 
             if (spawnInfo.Player.RedemptionScreen().cutscene)
                 pool.Clear();

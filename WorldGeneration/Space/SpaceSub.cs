@@ -32,8 +32,9 @@ namespace Redemption.WorldGeneration.Space
         public override List<GenPass> Tasks => new()
         {
             new SpacePass1("Loading", 1),
-            new SpacePass2("Asteroid Ores", 0.5f),
-            new SpacePass3("Smoothing Asteroids", 0.3f),
+            new SpacePass2("Asteroid Bases", 0.5f),
+            new SpacePass3("Asteroid Ores", 0.5f),
+            new SpacePass4("Smoothing Asteroids", 0.3f),
         };
         public override void OnLoad()
         {
@@ -107,21 +108,11 @@ namespace Redemption.WorldGeneration.Space
             Texture2D texSlopes = ModContent.Request<Texture2D>("Redemption/WorldGeneration/Space/SlayerBase1_Slopes", AssetRequestMode.ImmediateLoad).Value;
 
             Point16 origin = new((2400 / 2) - 24, 510);
-            bool placed = false;
-            bool genned = false;
-            while (!genned)
+            GenUtils.InvokeOnMainThread(() =>
             {
-                if (placed)
-                    continue;
-
-                GenUtils.InvokeOnMainThread(() =>
-                {
-                    TexGen gen = BaseWorldGenTex.GetTexGenerator(tex, colorToTile, texWalls, colorToWall, null, texSlopes);
-                    gen.Generate(origin.X, origin.Y, true, true);
-                    genned = true;
-                });
-                placed = true;
-            }
+                TexGen gen = BaseWorldGenTex.GetTexGenerator(tex, colorToTile, texWalls, colorToWall, null, texSlopes);
+                gen.Generate(origin.X, origin.Y, true, true);
+            });
 
             for (int i = origin.X + 114; i < origin.X + 127; i++)
             {
@@ -166,7 +157,7 @@ namespace Redemption.WorldGeneration.Space
             GenUtils.ObjectPlace(origin.X + 61, origin.Y + 32, ModContent.TileType<LabRailTile_L>());
             for (int i = 62; i < 77; i++)
                 GenUtils.ObjectPlace(origin.X + i, origin.Y + 32, ModContent.TileType<LabRailTile_Mid>());
-            GenUtils.ObjectPlace(origin.X + 77, origin.Y + 32, ModContent.TileType<LabRailTile_R>(), 0, 1);
+            GenUtils.ObjectPlace(origin.X + 77, origin.Y + 32, ModContent.TileType<LabRailTile_R>());
             GenUtils.ObjectPlace(origin.X + 29, origin.Y + 90, TileID.PottedPlants1);
             GenUtils.ObjectPlace(origin.X + 93, origin.Y + 70, TileID.PottedPlants1, 3);
             GenUtils.ObjectPlace(origin.X + 131, origin.Y + 23, TileID.PottedPlants2, 1);
@@ -257,6 +248,82 @@ namespace Redemption.WorldGeneration.Space
     {
         protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
         {
+            progress.Message = "Asteroid Bases";
+            AstBase1();
+        }
+        private readonly int WIDTH = 119;
+        private readonly int HEIGHT = 75;
+        public void AstBase1()
+        {
+            Mod mod = Redemption.Instance;
+            Dictionary<Color, int> colorToTile = new()
+            {
+                [new Color(255, 0, 0)] = ModContent.TileType<AsteroidTile>(),
+                [new Color(0, 255, 0)] = ModContent.TileType<SlayerShipPanelTile>(),
+                [new Color(255, 255, 0)] = ModContent.TileType<HalogenLampTile>(),
+                [new Color(0, 0, 255)] = ModContent.TileType<MetalSupportBeamTile>(),
+                [new Color(255, 0, 150)] = TileID.TeamBlockPink,
+                [new Color(150, 0, 255)] = TileID.TeamBlockGreen,
+                [new Color(255, 0, 255)] = TileID.TeamBlockBlue,
+                [new Color(150, 150, 150)] = -2, //turn into air
+                [Color.Black] = -1 //don't touch when genning
+            };
+            Dictionary<Color, int> colorToWall = new()
+            {
+                [new Color(255, 0, 0)] = ModContent.WallType<SlayerShipPanelWallTile>(),
+                [new Color(0, 0, 255)] = ModContent.WallType<AsteroidWallTile>(),
+                [new Color(0, 255, 255)] = WallID.Glass,
+                [Color.Black] = -1
+            };
+            Texture2D tex = ModContent.Request<Texture2D>("Redemption/WorldGeneration/Space/SlayerBase2", AssetRequestMode.ImmediateLoad).Value;
+            Texture2D texWalls = ModContent.Request<Texture2D>("Redemption/WorldGeneration/Space/SlayerBase2_Walls", AssetRequestMode.ImmediateLoad).Value;
+            Texture2D texSlopes = ModContent.Request<Texture2D>("Redemption/WorldGeneration/Space/SlayerBase2_Slopes", AssetRequestMode.ImmediateLoad).Value;
+
+            Point16 origin = new(WorldGen.genRand.Next(2400 / 4, 2400 / 3), WorldGen.genRand.Next(100, 537));
+            GenUtils.InvokeOnMainThread(() =>
+            {
+                TexGen gen = BaseWorldGenTex.GetTexGenerator(tex, colorToTile, texWalls, colorToWall, null, texSlopes);
+                gen.Generate(origin.X, origin.Y, true, true);
+            });
+
+            GenUtils.ObjectPlace(origin.X + 14, origin.Y + 41, ModContent.TileType<LabRailTile_L>());
+            for (int i = 15; i < 37; i++)
+                GenUtils.ObjectPlace(origin.X + i, origin.Y + 41, ModContent.TileType<LabRailTile_Mid>());
+            GenUtils.ObjectPlace(origin.X + 37, origin.Y + 41, ModContent.TileType<LabRailTile_R>());
+
+            for (int i = origin.X; i < origin.X + WIDTH; i++)
+            {
+                for (int j = origin.Y; j < origin.Y + HEIGHT; j++)
+                {
+                    switch (Framing.GetTileSafely(i, j).TileType)
+                    {
+                        case TileID.TeamBlockPink:
+                            Framing.GetTileSafely(i, j).ClearTile();
+                            WorldGen.PlaceTile(i, j, ModContent.TileType<LabPlatformTile>(), true);
+                            WorldGen.SlopeTile(i, j, 1);
+                            break;
+                        case TileID.TeamBlockGreen:
+                            Framing.GetTileSafely(i, j).ClearTile();
+                            WorldGen.PlaceTile(i, j, ModContent.TileType<LabPlatformTile>(), true);
+                            WorldGen.SlopeTile(i, j, 2);
+                            break;
+                    }
+                    if (Framing.GetTileSafely(i, j).TileType == TileID.TeamBlockBlue)
+                    {
+                        Framing.GetTileSafely(i, j).ClearTile();
+                        WorldGen.PlaceTile(i, j, ModContent.TileType<LabPlatformTile>(), true);
+                    }
+                }
+            }
+        }
+        public SpacePass2(string name, float loadWeight) : base(name, loadWeight)
+        {
+        }
+    }
+    public class SpacePass3 : GenPass
+    {
+        protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
+        {
             progress.Message = "Asteroid Materials";
 
             for (int i = 0; i < 2400; i++)
@@ -299,11 +366,11 @@ namespace Redemption.WorldGeneration.Space
                 }
             }
         }
-        public SpacePass2(string name, float loadWeight) : base(name, loadWeight)
+        public SpacePass3(string name, float loadWeight) : base(name, loadWeight)
         {
         }
     }
-    public class SpacePass3 : GenPass
+    public class SpacePass4 : GenPass
     {
         protected override void ApplyPass(GenerationProgress progress, GameConfiguration configuration)
         {
@@ -321,7 +388,7 @@ namespace Redemption.WorldGeneration.Space
                 }
             }
         }
-        public SpacePass3(string name, float loadWeight) : base(name, loadWeight)
+        public SpacePass4(string name, float loadWeight) : base(name, loadWeight)
         {
         }
     }
