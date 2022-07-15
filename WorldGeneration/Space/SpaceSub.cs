@@ -44,6 +44,7 @@ namespace Redemption.WorldGeneration.Space
                 NPC.NewNPC(new EntitySource_WorldGen(), ((2400 / 2) - 24 + 58) * 16, (510 + 50) * 16, ModContent.NPCType<WallDatalog>(), 0, 1);
             }
 
+            SubworldSystem.hideUnderworld = true;
             Main.cloudAlpha = 0;
             Main.cloudBGAlpha = 0;
             Main.numClouds = 0;
