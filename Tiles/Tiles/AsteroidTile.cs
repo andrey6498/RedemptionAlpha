@@ -36,7 +36,7 @@ namespace Redemption.Tiles.Tiles
             HitSound = SoundID.Tink;
             MinPick = 50;
             MineResist = 2.5f;
-            AddMapEntry(new Color(84, 76, 79));
+            AddMapEntry(new Color(87, 79, 69));
         }
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
         {
