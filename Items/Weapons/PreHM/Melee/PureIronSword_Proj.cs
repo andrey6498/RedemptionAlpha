@@ -139,7 +139,6 @@ namespace Redemption.Items.Weapons.PreHM.Melee
                             }
                             SoundEngine.PlaySound(SoundID.Item1, Projectile.position);
                             Timer = 0;
-                            resetImmunity = false;
                             Projectile.netUpdate = true;
                         }
                         break;
@@ -184,7 +183,6 @@ namespace Redemption.Items.Weapons.PreHM.Melee
 
                             SoundEngine.PlaySound(SoundID.Item1, Projectile.position);
                             Timer = 0;
-                            resetImmunity = false;
                             Projectile.netUpdate = true;
                         }
                         break;
