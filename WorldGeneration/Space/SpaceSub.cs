@@ -129,32 +129,32 @@ namespace Redemption.WorldGeneration.Space
                 }
             }
 
-            GenUtils.ObjectPlace(origin.X + 24, origin.Y + 103, TileID.Teleporter);
+            GenUtils.ObjectPlace(origin.X + 24, origin.Y + 102, ModContent.TileType<CyberTeleporterTile>());
             GenUtils.ObjectPlace(origin.X + 20, origin.Y + 90, ModContent.TileType<LabWorkbenchTile>());
             GenUtils.ObjectPlace(origin.X + 20, origin.Y + 89, ModContent.TileType<KSBoxTile>());
             GenUtils.ObjectPlace(origin.X + 24, origin.Y + 79, ModContent.TileType<LabCeilingLampTile>());
-            GenUtils.ObjectPlace(origin.X + 106, origin.Y + 32, ModContent.TileType<LabTableTile>());
+            GenUtils.ObjectPlace(origin.X + 106, origin.Y + 32, ModContent.TileType<CyberTableTile>());
             GenUtils.ObjectPlace(origin.X + 106, origin.Y + 30, ModContent.TileType<LabComputerTile>());
-            GenUtils.ObjectPlace(origin.X + 108, origin.Y + 32, ModContent.TileType<LabChairTile>());
+            GenUtils.ObjectPlace(origin.X + 108, origin.Y + 32, ModContent.TileType<CyberChairTile>());
             GenUtils.ObjectPlace(origin.X + 113, origin.Y + 26, ModContent.TileType<LabCeilingMonitorTile>());
             GenUtils.ObjectPlace(origin.X + 127, origin.Y + 26, ModContent.TileType<LabCeilingMonitorTile>(), 0, 1);
             GenUtils.ObjectPlace(origin.X + 134, origin.Y + 16, ModContent.TileType<LabCeilingLampTile>());
             GenUtils.ObjectPlace(origin.X + 132, origin.Y + 32, ModContent.TileType<LabWorkbenchTile>());
             GenUtils.ObjectPlace(origin.X + 132, origin.Y + 31, ModContent.TileType<LabComputerTile>());
-            GenUtils.ObjectPlace(origin.X + 131, origin.Y + 32, ModContent.TileType<LabChairTile>(), 0, 1);
+            GenUtils.ObjectPlace(origin.X + 131, origin.Y + 32, ModContent.TileType<CyberChairTile>(), 0, 1);
             GenUtils.ObjectPlace(origin.X + 89, origin.Y + 32, ModContent.TileType<ServerCabinetTile>(), 0, 1);
             GenUtils.ObjectPlace(origin.X + 91, origin.Y + 32, ModContent.TileType<ServerCabinetTile>());
             GenUtils.ObjectPlace(origin.X + 83, origin.Y + 32, ModContent.TileType<ServerCabinetTile>(), 0, 1);
             GenUtils.ObjectPlace(origin.X + 81, origin.Y + 32, ModContent.TileType<ServerCabinetTile>());
-            GenUtils.ObjectPlace(origin.X + 92, origin.Y + 26, ModContent.TileType<LabChairTile>());
-            GenUtils.ObjectPlace(origin.X + 92, origin.Y + 26, ModContent.TileType<LabChairTile>());
-            GenUtils.ObjectPlace(origin.X + 90, origin.Y + 26, ModContent.TileType<LabTableTile>());
+            GenUtils.ObjectPlace(origin.X + 92, origin.Y + 26, ModContent.TileType<CyberChairTile>());
+            GenUtils.ObjectPlace(origin.X + 92, origin.Y + 26, ModContent.TileType<CyberChairTile>());
+            GenUtils.ObjectPlace(origin.X + 90, origin.Y + 26, ModContent.TileType<CyberTableTile>());
             GenUtils.ObjectPlace(origin.X + 90, origin.Y + 24, ModContent.TileType<LabComputerTile>());
-            GenUtils.ObjectPlace(origin.X + 88, origin.Y + 26, ModContent.TileType<LabChairTile>(), 0, 1);
-            GenUtils.ObjectPlace(origin.X + 85, origin.Y + 26, ModContent.TileType<LabChairTile>());
-            GenUtils.ObjectPlace(origin.X + 83, origin.Y + 26, ModContent.TileType<LabTableTile>());
+            GenUtils.ObjectPlace(origin.X + 88, origin.Y + 26, ModContent.TileType<CyberChairTile>(), 0, 1);
+            GenUtils.ObjectPlace(origin.X + 85, origin.Y + 26, ModContent.TileType<CyberChairTile>());
+            GenUtils.ObjectPlace(origin.X + 83, origin.Y + 26, ModContent.TileType<CyberTableTile>());
             GenUtils.ObjectPlace(origin.X + 83, origin.Y + 24, ModContent.TileType<LabComputerTile>());
-            GenUtils.ObjectPlace(origin.X + 81, origin.Y + 26, ModContent.TileType<LabChairTile>(), 0, 1);
+            GenUtils.ObjectPlace(origin.X + 81, origin.Y + 26, ModContent.TileType<CyberChairTile>(), 0, 1);
             GenUtils.ObjectPlace(origin.X + 61, origin.Y + 32, ModContent.TileType<LabRailTile_L>());
             for (int i = 62; i < 77; i++)
                 GenUtils.ObjectPlace(origin.X + i, origin.Y + 32, ModContent.TileType<LabRailTile_Mid>());
@@ -166,6 +166,8 @@ namespace Redemption.WorldGeneration.Space
             GenUtils.ObjectPlace(origin.X + 105, origin.Y + 29, TileID.MatureHerbs);
             GenUtils.ObjectPlace(origin.X + 82, origin.Y + 24, TileID.LavaLamp);
             GenUtils.ObjectPlace(origin.X + 51, origin.Y + 27, TileID.PotsSuspended, 3);
+            GenUtils.ObjectPlace(origin.X + 50, origin.Y + 32, ModContent.TileType<DroneShelfTile>());
+            GenUtils.ObjectPlace(origin.X + 53, origin.Y + 32, ModContent.TileType<DroneShelfTile>());
             GenUtils.ObjectPlace(origin.X + 47, origin.Y + 16, ModContent.TileType<LabCeilingLampTile>());
             GenUtils.ObjectPlace(origin.X + 56, origin.Y + 16, ModContent.TileType<LabCeilingLampTile>());
             GenUtils.ObjectPlace(origin.X + 36, origin.Y + 16, ModContent.TileType<LabCeilingLampTile>());
@@ -181,11 +183,18 @@ namespace Redemption.WorldGeneration.Space
             GenUtils.ObjectPlace(origin.X + 59, origin.Y + 44, ModContent.TileType<LabCeilingMonitorTile>());
             GenUtils.ObjectPlace(origin.X + 59, origin.Y + 53, ModContent.TileType<LabWorkbenchTile>());
             GenUtils.ObjectPlace(origin.X + 59, origin.Y + 52, ModContent.TileType<SlayerWiringKitTile>());
-            GenUtils.ObjectPlace(origin.X + 148, origin.Y + 31, ModContent.TileType<SlayerChairTile>(), 0, 1);
-            GenUtils.ObjectPlace(origin.X + 19, origin.Y + 31, ModContent.TileType<SlayerChairTile>());
+            GenUtils.ObjectPlace(origin.X + 148, origin.Y + 31, ModContent.TileType<KSBattlestationTile>());
+            GenUtils.ObjectPlace(origin.X + 19, origin.Y + 31, ModContent.TileType<KSBattlestationTile>());
             GenUtils.ObjectPlace(origin.X + 43, origin.Y + 53, ModContent.TileType<AndroidInactiveTile>());
             GenUtils.ObjectPlace(origin.X + 46, origin.Y + 54, ModContent.TileType<AndroidInactiveTile>(), 0, 1);
             GenUtils.ObjectPlace(origin.X + 56, origin.Y + 54, ModContent.TileType<AndroidInactiveTile>());
+            GenUtils.ObjectPlace(origin.X + 23, origin.Y + 76, ModContent.TileType<SolarPanelTile>());
+            GenUtils.ObjectPlace(origin.X + 28, origin.Y + 76, ModContent.TileType<SolarPanelTile>());
+            GenUtils.ObjectPlace(origin.X + 50, origin.Y + 13, ModContent.TileType<SolarPanelTile>());
+            GenUtils.ObjectPlace(origin.X + 131, origin.Y + 13, ModContent.TileType<SolarPanelTile>());
+            GenUtils.ObjectPlace(origin.X + 136, origin.Y + 13, ModContent.TileType<SolarPanelTile>());
+            GenUtils.ObjectPlace(origin.X + 45, origin.Y + 48, ModContent.TileType<WallDatalogTile>());
+            GenUtils.ObjectPlace(origin.X + 57, origin.Y + 48, ModContent.TileType<WallDatalogTile>());
 
             for (int i = origin.X; i < origin.X + WIDTH; i++)
             {
@@ -286,6 +295,34 @@ namespace Redemption.WorldGeneration.Space
                 TexGen gen = BaseWorldGenTex.GetTexGenerator(tex, colorToTile, texWalls, colorToWall, null, texSlopes);
                 gen.Generate(origin.X, origin.Y, true, true);
             });
+
+            GenUtils.ObjectPlace(origin.X + 49, origin.Y + 11, ModContent.TileType<SolarPanelTile>());
+            GenUtils.ObjectPlace(origin.X + 54, origin.Y + 11, ModContent.TileType<SolarPanelTile>());
+            GenUtils.ObjectPlace(origin.X + 59, origin.Y + 11, ModContent.TileType<SolarPanelTile>());
+            GenUtils.ObjectPlace(origin.X + 64, origin.Y + 11, ModContent.TileType<SolarPanelTile>());
+            GenUtils.ObjectPlace(origin.X + 96, origin.Y + 41, ModContent.TileType<LabReceptionCouchTile>());
+            GenUtils.ObjectPlace(origin.X + 99, origin.Y + 41, ModContent.TileType<LabReceptionCouchTile>());
+            GenUtils.ObjectPlace(origin.X + 79, origin.Y + 36, ModContent.TileType<LabWallFanTile>());
+            GenUtils.ObjectPlace(origin.X + 79, origin.Y + 39, ModContent.TileType<LabWallFanTile>());
+            GenUtils.ObjectPlace(origin.X + 89, origin.Y + 36, ModContent.TileType<LabWallFanTile>());
+            GenUtils.ObjectPlace(origin.X + 89, origin.Y + 39, ModContent.TileType<LabWallFanTile>());
+            GenUtils.ObjectPlace(origin.X + 69, origin.Y + 36, TileID.PotsSuspended, 5);
+            GenUtils.ObjectPlace(origin.X + 68, origin.Y + 41, ModContent.TileType<DroneShelfTile>());
+            GenUtils.ObjectPlace(origin.X + 71, origin.Y + 41, ModContent.TileType<DroneShelfTile>());
+            GenUtils.ObjectPlace(origin.X + 77, origin.Y + 33, TileID.PottedPlants1, 3);
+            GenUtils.ObjectPlace(origin.X + 69, origin.Y + 33, ModContent.TileType<KSBattlestationTile>());
+            GenUtils.ObjectPlace(origin.X + 11, origin.Y + 40, ModContent.TileType<AndroidInactiveTile>(), 0, 1);
+            GenUtils.ObjectPlace(origin.X + 39, origin.Y + 40, ModContent.TileType<AndroidInactiveTile>());
+            GenUtils.ObjectPlace(origin.X + 17, origin.Y + 47, ModContent.TileType<AndroidInactiveTile>());
+            GenUtils.ObjectPlace(origin.X + 33, origin.Y + 47, ModContent.TileType<AndroidInactiveTile>(), 0, 1);
+            GenUtils.ObjectPlace(origin.X + 21, origin.Y + 47, ModContent.TileType<DroneShelfTile>());
+            GenUtils.ObjectPlace(origin.X + 24, origin.Y + 47, ModContent.TileType<DroneShelfTile>());
+            GenUtils.ObjectPlace(origin.X + 27, origin.Y + 47, ModContent.TileType<DroneShelfTile>());
+            GenUtils.ObjectPlace(origin.X + 30, origin.Y + 47, ModContent.TileType<DroneShelfTile>());
+            GenUtils.ObjectPlace(origin.X + 21, origin.Y + 41, ModContent.TileType<DroneShelfTile>());
+            GenUtils.ObjectPlace(origin.X + 24, origin.Y + 41, ModContent.TileType<DroneShelfTile>());
+            GenUtils.ObjectPlace(origin.X + 27, origin.Y + 41, ModContent.TileType<DroneShelfTile>());
+            GenUtils.ObjectPlace(origin.X + 30, origin.Y + 41, ModContent.TileType<DroneShelfTile>());
 
             GenUtils.ObjectPlace(origin.X + 14, origin.Y + 41, ModContent.TileType<LabRailTile_L>());
             for (int i = 15; i < 37; i++)

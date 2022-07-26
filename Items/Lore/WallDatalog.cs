@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Redemption.Tiles.Furniture.SlayerShip;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
@@ -13,13 +14,13 @@ namespace Redemption.Items.Lore
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Data Log #466110");
-            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 2));
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
         {
-            Item.width = 40;
-            Item.height = 30;
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>());
+            Item.width = 32;
+            Item.height = 28;
             Item.maxStack = 1;
             Item.value = 0;
             Item.rare = ItemRarityID.Cyan;
@@ -51,7 +52,7 @@ namespace Redemption.Items.Lore
             }
         }
     }
-    public class WallDatalog2 : Datalog
+    public class WallDatalog2 : WallDatalog
     {
         public override string Texture => "Redemption/Items/Lore/WallDatalog";
 
@@ -89,7 +90,7 @@ namespace Redemption.Items.Lore
         }
     }
 
-    public class WallDatalog3 : Datalog
+    public class WallDatalog3 : WallDatalog
     {
         public override string Texture => "Redemption/Items/Lore/WallDatalog";
 
@@ -128,7 +129,7 @@ namespace Redemption.Items.Lore
         }
     }
 
-    public class WallDatalog4 : Datalog
+    public class WallDatalog4 : WallDatalog
     {
         public override string Texture => "Redemption/Items/Lore/WallDatalog";
 
@@ -164,7 +165,7 @@ namespace Redemption.Items.Lore
         }
     }
 
-    public class WallDatalog5 : Datalog
+    public class WallDatalog5 : WallDatalog
     {
         public override string Texture => "Redemption/Items/Lore/WallDatalog";
 
@@ -199,7 +200,7 @@ namespace Redemption.Items.Lore
         }
     }
 
-    public class WallDatalog6 : Datalog
+    public class WallDatalog6 : WallDatalog
     {
         public override string Texture => "Redemption/Items/Lore/WallDatalog";
 
@@ -234,7 +235,7 @@ namespace Redemption.Items.Lore
         }
     }
 
-    public class WallDatalog7 : Datalog
+    public class WallDatalog7 : WallDatalog
     {
         public override string Texture => "Redemption/Items/Lore/WallDatalog";
 
@@ -269,7 +270,7 @@ namespace Redemption.Items.Lore
         }
     }
 
-    public class WallDatalog8 : Datalog
+    public class WallDatalog8 : WallDatalog
     {
         public override string Texture => "Redemption/Items/Lore/WallDatalog";
 
@@ -306,7 +307,7 @@ namespace Redemption.Items.Lore
         }
     }
 
-    public class WallDatalog9 : Datalog
+    public class WallDatalog9 : WallDatalog
     {
         public override string Texture => "Redemption/Items/Lore/WallDatalog";
 
@@ -340,7 +341,7 @@ namespace Redemption.Items.Lore
         }
     }
 
-    public class WallDatalog10 : Datalog
+    public class WallDatalog10 : WallDatalog
     {
         public override string Texture => "Redemption/Items/Lore/WallDatalog";
 
@@ -376,7 +377,7 @@ namespace Redemption.Items.Lore
         }
     }
 
-    public class WallDatalog11 : Datalog
+    public class WallDatalog11 : WallDatalog
     {
         public override string Texture => "Redemption/Items/Lore/WallDatalog";
 
@@ -414,7 +415,7 @@ namespace Redemption.Items.Lore
         }
     }
 
-    public class WallDatalog12 : Datalog
+    public class WallDatalog12 : WallDatalog
     {
         public override string Texture => "Redemption/Items/Lore/WallDatalog";
 
@@ -451,7 +452,7 @@ namespace Redemption.Items.Lore
         }
     }
 
-    public class WallDatalog13 : Datalog
+    public class WallDatalog13 : WallDatalog
     {
         public override string Texture => "Redemption/Items/Lore/WallDatalog";
 
@@ -488,7 +489,7 @@ namespace Redemption.Items.Lore
         }
     }
 
-    public class WallDatalog14 : Datalog
+    public class WallDatalog14 : WallDatalog
     {
         public override string Texture => "Redemption/Items/Lore/WallDatalog";
 
@@ -525,7 +526,7 @@ namespace Redemption.Items.Lore
         }
     }
 
-    public class WallDatalog15 : Datalog
+    public class WallDatalog15 : WallDatalog
     {
         public override string Texture => "Redemption/Items/Lore/WallDatalog";
 
@@ -560,7 +561,7 @@ namespace Redemption.Items.Lore
         }
     }
 
-    public class WallDatalog16 : Datalog
+    public class WallDatalog16 : WallDatalog
     {
         public override string Texture => "Redemption/Items/Lore/WallDatalog";
 

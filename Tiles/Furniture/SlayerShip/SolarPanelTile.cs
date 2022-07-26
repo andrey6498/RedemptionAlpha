@@ -14,7 +14,6 @@ namespace Redemption.Tiles.Furniture.SlayerShip
 	{
 		public override void SetStaticDefaults()
 		{
-            Main.tileSolidTop[Type] = true;
             Main.tileFrameImportant[Type] = true;
             Main.tileNoAttach[Type] = true;
             Main.tileLavaDeath[Type] = true;
