@@ -18,7 +18,7 @@ namespace Redemption.Items.Lore
         }
         public override void SetDefaults()
         {
-            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>());
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>(), 0);
             Item.width = 32;
             Item.height = 28;
             Item.maxStack = 1;
@@ -61,8 +61,11 @@ namespace Redemption.Items.Lore
             base.SetStaticDefaults();
             DisplayName.SetDefault("Data Log #466111");
         }
-        public override void SetDefaults() => base.SetDefaults();
-
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>(), 1);
+        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             if (Main.keyState.PressingShift())
@@ -99,8 +102,11 @@ namespace Redemption.Items.Lore
             base.SetStaticDefaults();
             DisplayName.SetDefault("Data Log #933");
         }
-        public override void SetDefaults() => base.SetDefaults();
-
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>(), 2);
+        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             if (Main.keyState.PressingShift())
@@ -138,8 +144,11 @@ namespace Redemption.Items.Lore
             base.SetStaticDefaults();
             DisplayName.SetDefault("Data Log #184999");
         }
-        public override void SetDefaults() => base.SetDefaults();
-
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>(), 3);
+        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             if (Main.keyState.PressingShift())
@@ -174,8 +183,11 @@ namespace Redemption.Items.Lore
             base.SetStaticDefaults();
             DisplayName.SetDefault("Data Log #18500");
         }
-        public override void SetDefaults() => base.SetDefaults();
-
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>(), 4);
+        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             if (Main.keyState.PressingShift())
@@ -209,8 +221,11 @@ namespace Redemption.Items.Lore
             base.SetStaticDefaults();
             DisplayName.SetDefault("Data Log #2042280");
         }
-        public override void SetDefaults() => base.SetDefaults();
-
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>(), 5);
+        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             if (Main.keyState.PressingShift())
@@ -244,8 +259,11 @@ namespace Redemption.Items.Lore
             base.SetStaticDefaults();
             DisplayName.SetDefault("Data Log #2042281");
         }
-        public override void SetDefaults() => base.SetDefaults();
-
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>(), 6);
+        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             if (Main.keyState.PressingShift())
@@ -279,8 +297,11 @@ namespace Redemption.Items.Lore
             base.SetStaticDefaults();
             DisplayName.SetDefault("Data Log #5385431");
         }
-        public override void SetDefaults() => base.SetDefaults();
-
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>(), 7);
+        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             if (Main.keyState.PressingShift())
@@ -316,8 +337,11 @@ namespace Redemption.Items.Lore
             base.SetStaticDefaults();
             DisplayName.SetDefault("Data Log #8022208");
         }
-        public override void SetDefaults() => base.SetDefaults();
-
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>(), 8);
+        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             if (Main.keyState.PressingShift())
@@ -350,8 +374,11 @@ namespace Redemption.Items.Lore
             base.SetStaticDefaults();
             DisplayName.SetDefault("Data Log #9145620");
         }
-        public override void SetDefaults() => base.SetDefaults();
-
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>(), 9);
+        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             if (Main.keyState.PressingShift())
@@ -386,8 +413,11 @@ namespace Redemption.Items.Lore
             base.SetStaticDefaults();
             DisplayName.SetDefault("Data Log #9145621");
         }
-        public override void SetDefaults() => base.SetDefaults();
-
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>(), 10);
+        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             if (Main.keyState.PressingShift())
@@ -424,8 +454,11 @@ namespace Redemption.Items.Lore
             base.SetStaticDefaults();
             DisplayName.SetDefault("Data Log #9145622");
         }
-        public override void SetDefaults() => base.SetDefaults();
-
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>(), 11);
+        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             if (Main.keyState.PressingShift())
@@ -461,8 +494,11 @@ namespace Redemption.Items.Lore
             base.SetStaticDefaults();
             DisplayName.SetDefault("Data Log #9145629");
         }
-        public override void SetDefaults() => base.SetDefaults();
-
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>(), 12);
+        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             if (Main.keyState.PressingShift())
@@ -498,8 +534,11 @@ namespace Redemption.Items.Lore
             base.SetStaticDefaults();
             DisplayName.SetDefault("Data Log #9145630");
         }
-        public override void SetDefaults() => base.SetDefaults();
-
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>(), 13);
+        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             if (Main.keyState.PressingShift())
@@ -535,8 +574,11 @@ namespace Redemption.Items.Lore
             base.SetStaticDefaults();
             DisplayName.SetDefault("Data Log #170001202");
         }
-        public override void SetDefaults() => base.SetDefaults();
-
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>(), 14);
+        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             if (Main.keyState.PressingShift())
@@ -570,8 +612,11 @@ namespace Redemption.Items.Lore
             base.SetStaticDefaults();
             DisplayName.SetDefault("Data Log #365000663");
         }
-        public override void SetDefaults() => base.SetDefaults();
-
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            Item.DefaultToPlaceableTile(ModContent.TileType<WallDatalogTile>(), 15);
+        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             if (Main.keyState.PressingShift())

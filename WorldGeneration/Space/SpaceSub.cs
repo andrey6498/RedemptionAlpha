@@ -38,12 +38,6 @@ namespace Redemption.WorldGeneration.Space
         };
         public override void OnLoad()
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
-            {
-                NPC.NewNPC(new EntitySource_WorldGen(), ((2400 / 2) - 24 + 46) * 16, (510 + 50) * 16, ModContent.NPCType<WallDatalog>());
-                NPC.NewNPC(new EntitySource_WorldGen(), ((2400 / 2) - 24 + 58) * 16, (510 + 50) * 16, ModContent.NPCType<WallDatalog>(), 0, 1);
-            }
-
             SubworldSystem.hideUnderworld = true;
             Main.cloudAlpha = 0;
             Main.cloudBGAlpha = 0;
@@ -194,7 +188,7 @@ namespace Redemption.WorldGeneration.Space
             GenUtils.ObjectPlace(origin.X + 131, origin.Y + 13, ModContent.TileType<SolarPanelTile>());
             GenUtils.ObjectPlace(origin.X + 136, origin.Y + 13, ModContent.TileType<SolarPanelTile>());
             GenUtils.ObjectPlace(origin.X + 45, origin.Y + 48, ModContent.TileType<WallDatalogTile>());
-            GenUtils.ObjectPlace(origin.X + 57, origin.Y + 48, ModContent.TileType<WallDatalogTile>());
+            GenUtils.ObjectPlace(origin.X + 57, origin.Y + 48, ModContent.TileType<WallDatalogTile>(), 1);
 
             for (int i = origin.X; i < origin.X + WIDTH; i++)
             {
@@ -319,15 +313,18 @@ namespace Redemption.WorldGeneration.Space
             GenUtils.ObjectPlace(origin.X + 24, origin.Y + 47, ModContent.TileType<DroneShelfTile>());
             GenUtils.ObjectPlace(origin.X + 27, origin.Y + 47, ModContent.TileType<DroneShelfTile>());
             GenUtils.ObjectPlace(origin.X + 30, origin.Y + 47, ModContent.TileType<DroneShelfTile>());
-            GenUtils.ObjectPlace(origin.X + 21, origin.Y + 41, ModContent.TileType<DroneShelfTile>());
-            GenUtils.ObjectPlace(origin.X + 24, origin.Y + 41, ModContent.TileType<DroneShelfTile>());
-            GenUtils.ObjectPlace(origin.X + 27, origin.Y + 41, ModContent.TileType<DroneShelfTile>());
-            GenUtils.ObjectPlace(origin.X + 30, origin.Y + 41, ModContent.TileType<DroneShelfTile>());
+            GenUtils.ObjectPlace(origin.X + 22, origin.Y + 41, ModContent.TileType<DroneShelfTile>());
+            GenUtils.ObjectPlace(origin.X + 29, origin.Y + 41, ModContent.TileType<DroneShelfTile>());
+            GenUtils.ObjectPlace(origin.X + 12, origin.Y + 47, ModContent.TileType<PrototypeSilverInactiveTile>(), 0, 1);
+            GenUtils.ObjectPlace(origin.X + 39, origin.Y + 47, ModContent.TileType<PrototypeSilverInactiveTile>());
+            GenUtils.ObjectPlace(origin.X + 36, origin.Y + 41, ModContent.TileType<PrototypeSilverInactiveTile>(), 0, 1);
+            GenUtils.ObjectPlace(origin.X + 15, origin.Y + 41, ModContent.TileType<PrototypeSilverInactiveTile>());
+            GenUtils.ObjectPlace(origin.X + 25, origin.Y + 38, ModContent.TileType<WallDatalogTile>(), 2);
 
-            GenUtils.ObjectPlace(origin.X + 14, origin.Y + 41, ModContent.TileType<LabRailTile_L>());
-            for (int i = 15; i < 37; i++)
+            GenUtils.ObjectPlace(origin.X + 17, origin.Y + 41, ModContent.TileType<LabRailTile_L>());
+            for (int i = 18; i < 34; i++)
                 GenUtils.ObjectPlace(origin.X + i, origin.Y + 41, ModContent.TileType<LabRailTile_Mid>());
-            GenUtils.ObjectPlace(origin.X + 37, origin.Y + 41, ModContent.TileType<LabRailTile_R>());
+            GenUtils.ObjectPlace(origin.X + 34, origin.Y + 41, ModContent.TileType<LabRailTile_R>());
 
             for (int i = origin.X; i < origin.X + WIDTH; i++)
             {

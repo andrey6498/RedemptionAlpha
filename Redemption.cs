@@ -323,6 +323,9 @@ namespace Redemption
         public UserInterface TextBubbleUILayer;
         public TextBubbleUI TextBubbleUIElement;
 
+        public UserInterface DatalogUILayer;
+        public DatalogUIState DatalogUIElement;
+
         public static TrailManager TrailManager;
         public bool Initialized;
 
@@ -356,6 +359,10 @@ namespace Redemption
                 TextBubbleUILayer = new UserInterface();
                 TextBubbleUIElement = new TextBubbleUI();
                 TextBubbleUILayer.SetState(TextBubbleUIElement);
+
+                DatalogUILayer = new UserInterface();
+                DatalogUIElement = new DatalogUIState();
+                DatalogUILayer.SetState(DatalogUIElement);
             }
         }
         private void LoadTrailManager(On.Terraria.Main.orig_Update orig, Main self, GameTime gameTime)
@@ -509,6 +516,7 @@ namespace Redemption
             if (MouseTextIndex != -1)
             {
                 AddInterfaceLayer(layers, AMemoryUILayer, AMemoryUIElement, MouseTextIndex, AMemoryUIState.Visible, "Lab Photo");
+                AddInterfaceLayer(layers, DatalogUILayer, DatalogUIElement, MouseTextIndex, DatalogUIState.Visible, "Datalog UI");
                 AddInterfaceLayer(layers, ChaliceUILayer, ChaliceUIElement, MouseTextIndex + 1, ChaliceAlignmentUI.Visible, "Chalice");
                 AddInterfaceLayer(layers, DialogueUILayer, DialogueUIElement, MouseTextIndex + 2, MoRDialogueUI.Visible, "Dialogue");
                 AddInterfaceLayer(layers, TitleUILayer, TitleCardUIElement, MouseTextIndex + 3, TitleCard.Showing, "Title Card");
