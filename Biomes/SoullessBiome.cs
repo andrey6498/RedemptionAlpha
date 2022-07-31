@@ -26,7 +26,7 @@ namespace Redemption.Biomes
         {
             Terraria.Graphics.Effects.Filters.Scene["MoR:FogOverlay"]?.GetShader().UseOpacity(1f).UseIntensity(0.9f).UseColor(Color.Black).UseImage(ModContent.Request<Texture2D>("Redemption/Effects/Vignette", AssetRequestMode.ImmediateLoad).Value);
             player.ManageSpecialBiomeVisuals("MoR:FogOverlay", isActive);
-            player.ManageSpecialBiomeVisuals("MoR:SoullessSky", isActive, player.Center);
+            player.ManageSpecialBiomeVisuals("MoR:SoullessSky", isActive && !player.RedemptionPlayerBuff().dreamsong, player.Center);
         }
         public override void OnLeave(Player player)
         {
@@ -41,6 +41,7 @@ namespace Redemption.Biomes
         public override void OnInBiome(Player player)
         {
             SoullessArea.Active = true;
+            player.RedemptionAbility().SpiritwalkerActive = false;
             Lighting.AddLight(player.Center, 1.5f, 1.5f, 1.5f);
             player.maxFallSpeed += 4;
         }

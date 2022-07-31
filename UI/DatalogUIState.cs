@@ -7,6 +7,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader;
 using Terraria.UI;
+using Terraria.UI.Chat;
 
 namespace Redemption.UI
 {
@@ -77,7 +78,7 @@ namespace Redemption.UI
             int textLength = (int)FontAssets.MouseText.Value.MeasureString(Text).X;
             int textHeight = (int)FontAssets.MouseText.Value.MeasureString(Text).Y;
             Vector2 textpos = new(centerX - (textLength / 2f), centerY - (textHeight / 2f));
-            spriteBatch.DrawString(FontAssets.MouseText.Value, Text, textpos, Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
+            ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.MouseText.Value, Text, textpos, Color.LightCyan, 0, Vector2.Zero, Vector2.One);
         }
     }
 }

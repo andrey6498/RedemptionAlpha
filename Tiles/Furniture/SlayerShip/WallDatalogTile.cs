@@ -100,25 +100,25 @@ namespace Redemption.Tiles.Furniture.SlayerShip
                 {
                     case 0:
                         RedeSystem.Instance.DatalogUIElement.DisplayDatalogText("Data Log #466110\n" +
-                            "'I have successfully created a memory chip to store all data my mind currently" +
-                            "\ncontains - not counting the data stored in the memory database of the SoS. I have experimented\n" +
-                            "by injecting it into an empty Android. The idea of these chips is to allow me to construct new vessels\n" +
-                            "for myself to occupy. When the Android was powered on, it screamed and flailed until I turned it back off.\n" +
+                            "'I have successfully created a memory chip to store all data my mind currently contains - not\n" +
+                            "counting the data stored in the memory database of the SoS. I have experimented by injecting it\n" +
+                            "into an empty Android. The idea of these chips is to allow me to construct new vessels for myself to occupy.\n" +
+                            "When the Android was powered on, it screamed and flailed until I turned it back off.\n" +
                             "Very interesting, this suggests the cause of the phantom pain is within my mind directly.\n" +
                             "I will modify the chip and proceed with this experiment.'");
                         break;
                     case 1:
                         RedeSystem.Instance.DatalogUIElement.DisplayDatalogText("Data Log #466111\n" +
-                            "'Continuing with this memory chip experiment, I have removed chunks of memories from the chips\n" +
+                            "'Continuing with the memory chip experiment, I have removed chunks of memories from the chips\n" +
                             "and tested it on the Androids. All had the same effect, except one. The Android did not scream\n" +
-                            "nor show signs of discomfort. Peculiar, for the only memories that I removed from the chip were the ones of me being human.\n" +
-                            "Perhaps it's just a coincidence, but after numerous repeats of the experiment, the Android's pain\n" +
-                            "is suggested to be directly tied to those memories. I considered removing those memories from myself,\n" +
+                            "nor show signs of discomfort. Peculiar, as the only memories I removed from the chip were\n" +
+                            "the ones of me being human. Perhaps it's just a coincidence, but after numerous repeats of the experiment,\n" +
+                            "the Android's pain is suggested to be directly tied to those memories. I considered removing them from myself,\n" +
                             "but something in me is against it. My instincts want me to remember.'");
                         break;
                     case 2:
                         RedeSystem.Instance.DatalogUIElement.DisplayDatalogText("Data Log #933\n" +
-                            "'With the resources from Nabu III, I was able to construct a new cryo-chamber that was essentially a Sleep Mode with a timer.\n" +
+                            "'With the resources from Nabu III, I was able to construct a new cryo-chamber, being essentially a Sleep Mode with a timer.\n" +
                             "I set it to shut me down and power me back on in 3 days, however I have made a terrible discovery.\n" +
                             "I was still fully conscious, even with my body powered off, even with my mind having no energy to realistically function,\n" +
                             "I was still fully aware of my surroundings, in an infinite void of nothingness. I could not move my body." +
@@ -143,7 +143,8 @@ namespace Redemption.Tiles.Furniture.SlayerShip
                         RedeSystem.Instance.DatalogUIElement.DisplayDatalogText("Data Log #2042280\n" +
                             "'I made a rash decision that almost ended in my death. My robotic body had broken and in that moment,\n" +
                             "just for a minute, I had a state of pure lucidity. I could've sworn I had been cured,\n" +
-                            "but it was short-lived and my mind fogged once more. I repaired my body and created a new one, named Prototype Goukisan.'");
+                            "but it was short-lived and my mind fogged once more. I repaired my body and created a new one,\n" +
+                            "named Prototype Goukisan.'");
                         break;
                     case 6:
                         RedeSystem.Instance.DatalogUIElement.DisplayDatalogText("Data Log #2042281\n" +

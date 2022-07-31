@@ -44,7 +44,7 @@ namespace Redemption.Globals.Player
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Spiritwalker && SpiritwalkerCooldown <= 0 && Redemption.RedeSpiritwalkerAbility.Current && Player.active && !Player.dead)
+            if (Spiritwalker && SpiritwalkerCooldown <= 0 && Redemption.RedeSpiritwalkerAbility.Current && Player.active && !Player.dead && !Player.InModBiome<SoullessBiome>())
             {
                 if (SpiritwalkerTimer++ >= 60)
                 {
