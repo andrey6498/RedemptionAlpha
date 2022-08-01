@@ -6,6 +6,7 @@ using Terraria.ObjectData;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Redemption.Items.Lore;
+using Terraria.GameContent.ObjectInteractions;
 
 namespace Redemption.Tiles.Furniture.SlayerShip
 {
@@ -17,6 +18,7 @@ namespace Redemption.Tiles.Furniture.SlayerShip
             Main.tileLavaDeath[Type] = false;
             Main.tileNoAttach[Type] = true;
             Main.tileLighted[Type] = true;
+            TileID.Sets.HasOutlines[Type] = true;
             TileObjectData.newTile.Width = 2;
             TileObjectData.newTile.Height = 2;
             TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16 };
@@ -31,6 +33,7 @@ namespace Redemption.Tiles.Furniture.SlayerShip
             MineResist = 7f;
             AddMapEntry(new Color(0, 242, 170));
         }
+        public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings) => true;
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
             int itemDrop = ModContent.ItemType<WallDatalog>();
