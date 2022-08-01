@@ -16,7 +16,7 @@ namespace Redemption.Biomes
         public override Color? BackgroundColor => base.BackgroundColor;
         public override ModSurfaceBackgroundStyle SurfaceBackgroundStyle => ModContent.Find<ModSurfaceBackgroundStyle>("Redemption/SpaceBgStyle");
         public override SceneEffectPriority Priority => SceneEffectPriority.Environment;
-        public override int Music => MusicID.OtherworldlySpace;
+        public override int Music => MusicLoader.GetMusicSlot(Mod, "Sounds/Music/DusksEdge");
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Upper Atmosphere");
