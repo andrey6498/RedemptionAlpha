@@ -16,6 +16,7 @@ using Terraria.ModLoader;
 using Redemption.BaseExtension;
 using Redemption.Particles;
 using ParticleLibrary;
+using Redemption.Globals.Player;
 
 namespace Redemption.Globals.NPC
 {
@@ -48,6 +49,7 @@ namespace Redemption.Globals.NPC
         public bool smashed;
         public bool lacerated;
         public bool stomachAcid;
+        public bool incisored;
 
         public override void ResetEffects(Terraria.NPC npc)
         {
@@ -69,6 +71,7 @@ namespace Redemption.Globals.NPC
             smashed = false;
             lacerated = false;
             stomachAcid = false;
+            incisored = false;
 
             if (!npc.HasBuff(ModContent.BuffType<InfestedDebuff>()))
             {
@@ -304,6 +307,8 @@ namespace Redemption.Globals.NPC
                 player.GetArmorPenetration(DamageClass.Generic) += 15;
             if (infected)
                 player.GetArmorPenetration(DamageClass.Generic) += 20;
+            if (incisored)
+                player.GetArmorPenetration(DamageClass.Generic) += (player.GetModPlayer<RitualistPlayer>().SpiritLevel + 1) * 5;
         }
         public override void ModifyHitByProjectile(Terraria.NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
@@ -314,6 +319,8 @@ namespace Redemption.Globals.NPC
                 player.GetArmorPenetration(DamageClass.Generic) += 15;
             if (infected)
                 player.GetArmorPenetration(DamageClass.Generic) += 20;
+            if (incisored)
+                player.GetArmorPenetration(DamageClass.Generic) += (player.GetModPlayer<RitualistPlayer>().SpiritLevel + 1) * 5;
         }
         public override bool StrikeNPC(Terraria.NPC npc, ref double damage, int defense, ref float knockback, int hitDirection, ref bool crit)
         {
