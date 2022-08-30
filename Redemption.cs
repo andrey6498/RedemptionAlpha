@@ -128,8 +128,12 @@ namespace Redemption
                     Texture2D EpidotraPlanet_BrighterTex = ModContent.Request<Texture2D>("Redemption/Backgrounds/EpidotraPlanet_Brighter", AssetRequestMode.ImmediateLoad).Value;
                     PremultiplyTexture(ref EpidotraPlanet_BrighterTex);
                 });
-            }
 
+                Filters.Scene["MoR:NebP1"] = new Filter(new ScreenShaderData("FilterMiniTower").UseColor(0.2f, 0f, 0.3f).UseOpacity(0.5f), EffectPriority.VeryHigh);
+                SkyManager.Instance["MoR:NebP1"] = new NebSky();
+                Filters.Scene["MoR:NebP2"] = new Filter(new ScreenShaderData("FilterMiniTower").UseColor(0.2f, 0f, 0.3f).UseOpacity(0.5f), EffectPriority.VeryHigh);
+                SkyManager.Instance["MoR:NebP2"] = new NebSky2();
+            }
             Filters.Scene["MoR:WastelandSky"] = new Filter(new ScreenShaderData("FilterMiniTower").UseColor(0f, 0.2f, 0f).UseOpacity(0.5f), EffectPriority.High);
             Filters.Scene["MoR:SpiritSky"] = new Filter(new ScreenShaderData("FilterMiniTower").UseColor(0.4f, 0.8f, 0.8f), EffectPriority.VeryHigh);
             Filters.Scene["MoR:IslandEffect"] = new Filter(new ScreenShaderData("FilterMiniTower").UseColor(0.4f, 0.4f, 0.4f).UseOpacity(0.5f), EffectPriority.VeryHigh);
@@ -212,6 +216,8 @@ namespace Redemption
                 if (obj is int @int) packet.Write(@int);
                 else
                 if (obj is float single) packet.Write(single);
+                else
+                if (obj is Vector2 vector) { packet.Write(vector.X); packet.Write(vector.Y); }
             }
             return packet;
         }
@@ -243,16 +249,13 @@ namespace Redemption
                     if (Main.netMode == NetmodeID.Server)
                     {
                         int NPCType = bb.ReadInt32();
-                        int npcCenterX = bb.ReadInt32();
-                        int npcCenterY = bb.ReadInt32();
+                        Vector2 npcCenter = bb.ReadVector2();
 
                         if (NPC.AnyNPCs(NPCType))
-                        {
                             return;
-                        }
 
-                        int npcID = NPC.NewNPC(null, npcCenterX, npcCenterY, NPCType);
-                        Main.npc[npcID].Center = new Vector2(npcCenterX, npcCenterY);
+                        int npcID = NPC.NewNPC(null, (int)npcCenter.X, (int)npcCenter.Y, NPCType);
+                        Main.npc[npcID].Center = npcCenter;
                         Main.npc[npcID].netUpdate2 = true;
                     }
                     break;
@@ -260,11 +263,10 @@ namespace Redemption
                     if (Main.netMode == NetmodeID.Server)
                     {
                         int NPCType = bb.ReadInt32();
-                        int npcCenterX = bb.ReadInt32();
-                        int npcCenterY = bb.ReadInt32();
+                        Vector2 npcCenter = bb.ReadVector2();
 
-                        int npcID = NPC.NewNPC(null, npcCenterX, npcCenterY, NPCType);
-                        Main.npc[npcID].Center = new Vector2(npcCenterX, npcCenterY);
+                        int npcID = NPC.NewNPC(null, (int)npcCenter.X, (int)npcCenter.Y, NPCType);
+                        Main.npc[npcID].Center = npcCenter;
                         Main.npc[npcID].netUpdate2 = true;
                     }
                     break;
@@ -566,6 +568,9 @@ namespace Redemption
             Player player = Main.LocalPlayer;
             RitualistPlayer rP = player.GetModPlayer<RitualistPlayer>();
 
+            spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+
             Texture2D timerBar = ModContent.Request<Texture2D>("Redemption/UI/SpiritGauge").Value;
             Texture2D timerBarInner = ModContent.Request<Texture2D>("Redemption/UI/SpiritGauge_Fill").Value;
             float timerMax = rP.SpiritGaugeMax;
@@ -583,6 +588,9 @@ namespace Redemption
             spriteBatch.Draw(timerBarInner2, drawPos2, new Rectangle?(new Rectangle(0, 0, timerProgress2, timerBarInner2.Height)), Color.White, 0f, timerBarInner2.Size() / 2f, 1f, SpriteEffects.None, 0f);
 
             ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.MouseText.Value, (rP.SpiritLevel + 1).ToString(), player.Center + new Vector2(-46, 36) - Main.screenPosition, Color.White, 0, Vector2.Zero, Vector2.One);
+
+            spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.UIScaleMatrix);
         }
         #region Skele Invasion UI
         public static void DrawSkeletonInvasionUI(SpriteBatch spriteBatch)

@@ -41,6 +41,7 @@ using Redemption.NPCs.Bosses.Gigapora;
 using Redemption.NPCs.Bosses.PatientZero;
 using Redemption.Items.Tools.PostML;
 using Redemption.NPCs.Bosses.Erhan;
+using Redemption.NPCs.Bosses.Obliterator;
 
 namespace Redemption.CrossMod
 {
@@ -309,11 +310,10 @@ namespace Redemption.CrossMod
                         ModContent.ItemType<BrokenBlade>(),
                         ModContent.ItemType<OmegaBattery>()
                     },
-                    "Use a [i:" + ModContent.ItemType<OmegaTransmitter>() + "] at night.",
+                    "Use a [i:" + ModContent.ItemType<OmegaTransmitter>() + "] at night after Plantera has been defeated.",
                     null,
                     "Redemption/CrossMod/BossChecklist/OmegaCleaver",
-                    "Redemption/NPCs/Bosses/Cleaver/OmegaCleaver_Head_Boss",
-                    (Func<bool>)(() => RedeBossDowned.downedSeed));
+                    "Redemption/NPCs/Bosses/Cleaver/OmegaCleaver_Head_Boss");
                 #endregion
 
                 #region Omega Gigapora
@@ -329,11 +329,30 @@ namespace Redemption.CrossMod
                     new List<int>
                     {
                     },
-                    "Use a [i:" + ModContent.ItemType<OmegaTransmitter>() + "] at night.",
+                    "Use a [i:" + ModContent.ItemType<OmegaTransmitter>() + "] at night after Golem has been defeated.",
                     null,
                     "Redemption/CrossMod/BossChecklist/OmegaGigapora",
-                    "Redemption/NPCs/Bosses/Gigapora/Gigapora_Head_Boss",
-                    (Func<bool>)(() => RedeBossDowned.downedSeed));
+                    "Redemption/NPCs/Bosses/Gigapora/Gigapora_Head_Boss");
+                #endregion
+
+                #region Omega Obliterator
+                bossChecklist.Call("AddBoss", 14.05f, ModContent.NPCType<OO>(),
+                    mod,
+                    "3rd Omega Prototype",
+                    (Func<bool>)(() => RedeBossDowned.downedVlitch3),
+                    ModContent.ItemType<OmegaTransmitter>(),
+                    new List<int>
+                    {
+                        ModContent.ItemType<OmegaTrophy>(),
+                        ModContent.ItemType<OmegaBox2>()
+                    },
+                    new List<int>
+                    {
+                    },
+                    "Use a [i:" + ModContent.ItemType<OmegaTransmitter>() + "] at night after Moon Lord has been defeated.",
+                    null,
+                    "Redemption/CrossMod/BossChecklist/OmegaObliterator",
+                    "Redemption/NPCs/Bosses/Obliterator/OO_Head_Boss");
                 #endregion
 
                 #region Patient Zero
@@ -364,8 +383,7 @@ namespace Redemption.CrossMod
                     "Use a [i:" + ModContent.ItemType<Keycard>() + "] to access further sections of the laboratory. Beware what awaits beyond.",
                     null,
                     "Redemption/CrossMod/BossChecklist/PatientZero",
-                    "Redemption/NPCs/Bosses/PatientZero/PZ_Head_Boss",
-                    (Func<bool>)(() => RedeBossDowned.downedSeed));
+                    "Redemption/NPCs/Bosses/PatientZero/PZ_Head_Boss");
                 #endregion
 
                 // SlimeKing = 1f;

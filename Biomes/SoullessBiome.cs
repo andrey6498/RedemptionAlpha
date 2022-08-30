@@ -31,8 +31,6 @@ namespace Redemption.Biomes
         public override void OnLeave(Player player)
         {
             Terraria.Graphics.Effects.Filters.Scene["MoonLordShake"].Deactivate();
-            player.ManageSpecialBiomeVisuals("MoR:SoullessSky", false, player.Center);
-            player.ManageSpecialBiomeVisuals("MoR:FogOverlay", false);
         }
         public override void SetStaticDefaults()
         {
