@@ -16,7 +16,7 @@ namespace Redemption.Particles
         }
         public override void AI()
         {
-            scale = (120 - ai[0]) / 120;
+            scale = new Vector2((120 - ai[0]) / 120, (120 - ai[0]) / 120);
             ai[0]++;
             velocity *= 0.96f;
         }
