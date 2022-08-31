@@ -22,6 +22,7 @@ using Terraria.ID;
 using Redemption.Walls;
 using Redemption.Base;
 using Redemption.Items.Accessories.HM;
+using Redemption.Items.Placeable.Furniture.PetrifiedWood;
 
 namespace Redemption.Globals.Player
 {
