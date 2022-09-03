@@ -11,6 +11,7 @@ namespace Redemption.Items.Weapons.PreHM.Melee
         {
             Tooltip.SetDefault("Causes armor penetration");
             ItemID.Sets.SkipsInitialUseSound[Item.type] = true;
+            ItemID.Sets.Spears[Item.type] = true;
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
