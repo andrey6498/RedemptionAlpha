@@ -148,6 +148,7 @@ namespace Redemption
 
         public override void PostSetupContent()
         {
+            WeakReferences.PerformModSupport();
             if (!Main.dedServ)
             {
                 Main.QueueMainThreadAction(() =>
