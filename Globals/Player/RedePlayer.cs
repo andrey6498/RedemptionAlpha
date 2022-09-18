@@ -23,6 +23,10 @@ using Redemption.Walls;
 using Redemption.Base;
 using Redemption.Items.Accessories.HM;
 using Redemption.Items.Placeable.Furniture.PetrifiedWood;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria.ID;
+using Terraria.GameContent;
+using ReLogic.Content;
 
 namespace Redemption.Globals.Player
 {
@@ -36,11 +40,13 @@ namespace Redemption.Globals.Player
         public int hitTarget = -1;
         public int hitTarget2 = -1;
         public bool medKit;
+        public bool galaxyHeart;
         public bool stalkerSilence;
         public float musicVolume;
         public int slayerStarRating;
         public int SpaceBreathTimer = 0;
         public bool contactImmune;
+        public bool slayerCursor;
         public Rectangle meleeHitbox;
 
         public override void ResetEffects()
@@ -50,6 +56,7 @@ namespace Redemption.Globals.Player
             stalkerSilence = false;
             contactImmune = false;
             meleeHitbox = Rectangle.Empty;
+            slayerCursor = false;
         }
         public override void Initialize()
         {
@@ -57,6 +64,7 @@ namespace Redemption.Globals.Player
             foundLab = false;
             omegaGiftGiven = false;
             medKit = false;
+            galaxyHeart = false;
         }
         public override void UpdateDead()
         {
@@ -88,7 +96,41 @@ namespace Redemption.Globals.Player
 
         public override void PostUpdateMiscEffects()
         {
-            Player.statLifeMax2 += medKit ? 50 : 0;
+            Player.statLifeMax2 += (medKit ? 50 : 0) + (galaxyHeart ? 50 : 0);
+
+            if (Main.netMode != NetmodeID.Server && Player.whoAmI == Main.myPlayer)
+            {
+                Asset<Texture2D> emptyTex = ModContent.Request<Texture2D>("Redemption/Empty");
+                Asset<Texture2D> heartMed = ModContent.Request<Texture2D>("Redemption/Textures/HeartMed");
+                Asset<Texture2D> heartGalaxy = ModContent.Request<Texture2D>("Redemption/Textures/HeartGal");
+                Asset<Texture2D> heart2 = ModContent.Request<Texture2D>("Redemption/Textures/Heart2");
+                int totalHealthBoost = (medKit ? 1 : 0) + (galaxyHeart ? 1 : 0);
+                TextureAssets.Heart2 = totalHealthBoost switch
+                {
+                    1 => heartMed,
+                    2 => heartGalaxy,
+                    _ => heart2,
+                };
+
+                Asset<Texture2D> cursor0 = ModContent.Request<Texture2D>("Redemption/Textures/Cursor_0");
+                Asset<Texture2D> cursor1 = ModContent.Request<Texture2D>("Redemption/Textures/Cursor_1");
+                Asset<Texture2D> cursor11 = ModContent.Request<Texture2D>("Redemption/Textures/Cursor_11");
+                Asset<Texture2D> cursor12 = ModContent.Request<Texture2D>("Redemption/Textures/Cursor_12");
+                if (slayerCursor)
+                {
+                    TextureAssets.Cursors[0] = emptyTex;
+                    TextureAssets.Cursors[1] = emptyTex;
+                    TextureAssets.Cursors[11] = emptyTex;
+                    TextureAssets.Cursors[12] = emptyTex;
+                }
+                else
+                {
+                    TextureAssets.Cursors[0] = cursor0;
+                    TextureAssets.Cursors[1] = cursor1;
+                    TextureAssets.Cursors[11] = cursor11;
+                    TextureAssets.Cursors[12] = cursor12;
+                }
+            }
         }
         public override void OnEnterWorld(Terraria.Player player)
         {
@@ -253,6 +295,7 @@ namespace Redemption.Globals.Player
             if (foundLab) saveS.Add("foundLab");
             if (omegaGiftGiven) saveS.Add("omegaGiftGiven");
             if (medKit) saveS.Add("medKit");
+            if (galaxyHeart) saveS.Add("galaxyHeart");
 
             tag["saveS"] = saveS;
         }
@@ -264,6 +307,7 @@ namespace Redemption.Globals.Player
             foundLab = saveS.Contains("foundLab");
             omegaGiftGiven = saveS.Contains("omegaGiftGiven");
             medKit = saveS.Contains("medKit");
+            galaxyHeart = saveS.Contains("galaxyHeart");
         }
     }
 }

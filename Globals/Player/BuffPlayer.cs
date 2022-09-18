@@ -21,6 +21,8 @@ using Redemption.Projectiles.Minions;
 using Redemption.Projectiles.Ranged;
 using Redemption.BaseExtension;
 using Redemption.Items.Accessories.HM;
+using Redemption.Items.Accessories.PreHM;
+using static Terraria.ModLoader.PlayerDrawLayer;
 using Terraria.ModLoader.IO;
 
 namespace Redemption.Globals.Player
@@ -59,6 +61,8 @@ namespace Redemption.Globals.Player
         public bool snipped;
         public bool island;
         public bool trappedSoul;
+        public int trappedSoulTimer;
+        public float trappedSoulBoost;
         public bool brokenBlade;
         public bool shellCap;
         public bool anglerPot;
@@ -171,6 +175,8 @@ namespace Redemption.Globals.Player
             ensnared = false;
             hairLoss = false;
             bileDebuff = false;
+            trappedSoulTimer = 0;
+            trappedSoulBoost = 0;
             lacerated = false;
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
@@ -191,7 +197,7 @@ namespace Redemption.Globals.Player
                     if (!Main.dedServ)
                         SoundEngine.PlaySound(CustomSounds.Gas1, Player.position);
                     Player.AddBuff(ModContent.BuffType<XenomiteCooldown>(), 20 * 60);
-                    Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ModContent.ProjectileType<XenomiteGas_Proj>(), 0, 0, Main.myPlayer);
+                    Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ModContent.ProjectileType<XenomiteGas_Proj>(), 100, 0, Main.myPlayer);
                 }
 
                 if (hardlightBonus != 0 && !Player.HasBuff(ModContent.BuffType<HardlightCooldown>()))
@@ -251,7 +257,18 @@ namespace Redemption.Globals.Player
                     Player.wingTime = Player.wingTimeMax;
             }
         }
-
+        public override void PostUpdateEquips()
+        {
+            if (trappedSoul)
+            {
+                if (trappedSoulTimer++ >= 600)
+                {
+                    trappedSoulBoost = 0;
+                    Projectile.NewProjectile(Player.GetSource_Accessory(new Item(ModContent.ItemType<TrappedSoulBauble>())), Player.Center, Vector2.Zero, ModContent.ProjectileType<SoulShockwave_Proj>(), 0, 0, Main.myPlayer);
+                    trappedSoulTimer = 0;
+                }
+            }
+        }
         public override void PostUpdateBuffs()
         {
             #region Infection
@@ -304,13 +321,6 @@ namespace Redemption.Globals.Player
             }
             #endregion
         }
-
-        public override void HideDrawLayers(PlayerDrawSet drawInfo)
-        {
-            if (hairLoss)
-                PlayerDrawLayers.HairBack.Hide();
-        }
-
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (thornCirclet && item.CountsAsClass(DamageClass.Magic))

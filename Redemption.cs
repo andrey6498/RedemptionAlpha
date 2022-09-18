@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Redemption.Backgrounds.Skies;
 using Redemption.Biomes;
+using Redemption.Base;
+using Redemption.BaseExtension;
 using Redemption.CrossMod;
 using Redemption.Effects.PrimitiveTrails;
 using Redemption.Effects.RenderTargets;
@@ -508,6 +510,31 @@ namespace Redemption
                     InterfaceScaleType.UI);
                 layers.Insert(index, SpiritGaugeUI);
             }
+            EnergyPlayer eP = Main.LocalPlayer.GetModPlayer<EnergyPlayer>();
+            if (eP.statEnergy < eP.energyMax)
+            {
+                int index = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Ruler"));
+                LegacyGameInterfaceLayer EnergyGaugeUI = new("Redemption: Energy Gauge UI",
+                    delegate
+                    {
+                        DrawEnergyGauge(Main.spriteBatch);
+                        return true;
+                    },
+                    InterfaceScaleType.UI);
+                layers.Insert(index, EnergyGaugeUI);
+            }
+            if (Main.LocalPlayer.Redemption().slayerCursor)
+            {
+                int index = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Interface Logic 4"));
+                LegacyGameInterfaceLayer SlayerCursorUI = new("Redemption: Slayer Cursor UI",
+                    delegate
+                    {
+                        DrawSlayerCursor(Main.spriteBatch);
+                        return true;
+                    },
+                    InterfaceScaleType.UI);
+                layers.Insert(index, SlayerCursorUI);
+            }
             if (RedeWorld.SkeletonInvasion)
             {
                 int index = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Inventory"));
@@ -592,6 +619,35 @@ namespace Redemption
 
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.UIScaleMatrix);
+        }
+        public static void DrawEnergyGauge(SpriteBatch spriteBatch)
+        {
+            Player player = Main.LocalPlayer;
+            EnergyPlayer eP = player.GetModPlayer<EnergyPlayer>();
+
+            spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+
+            Texture2D timerBar = ModContent.Request<Texture2D>("Redemption/UI/EnergyGauge").Value;
+            Texture2D timerBarInner = ModContent.Request<Texture2D>("Redemption/UI/EnergyGauge_Fill").Value;
+            float timerMax = eP.energyMax;
+            int timerProgress = (int)(timerBarInner.Height * (eP.statEnergy / timerMax));
+            Vector2 drawPos = player.Center + new Vector2(40, 0) - Main.screenPosition;
+            spriteBatch.Draw(timerBar, drawPos, null, Color.White * 0.75f, 0f, timerBar.Size() / 2f, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(timerBarInner, drawPos, new Rectangle?(new Rectangle(0, 0, timerBarInner.Width, timerProgress)), RedeColor.EnergyPulse * 0.75f, MathHelper.Pi, timerBarInner.Size() / 2f, 1f, SpriteEffects.None, 0f);
+
+            ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.MouseText.Value, ((int)(eP.statEnergy / timerMax * 100)).ToString() + "%", player.Center + new Vector2(30, -36) - Main.screenPosition, Color.White * 0.75f, 0, Vector2.Zero, Vector2.One * 0.75f);
+
+            spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.UIScaleMatrix);
+        }
+        public static void DrawSlayerCursor(SpriteBatch spriteBatch)
+        {
+            Texture2D texture = ModContent.Request<Texture2D>("Redemption/Textures/SlayerCursor").Value;
+            Vector2 drawOrigin = new(texture.Width / 2, texture.Height / 2);
+            float scale = BaseUtility.MultiLerp(Main.LocalPlayer.miscCounter % 100 / 100f, 1f, 0.9f, 1f);
+
+            spriteBatch.Draw(texture, Main.MouseWorld - Main.screenPosition, null, Color.White, 0, drawOrigin, scale, SpriteEffects.None, 0);
         }
         #region Skele Invasion UI
         public static void DrawSkeletonInvasionUI(SpriteBatch spriteBatch)

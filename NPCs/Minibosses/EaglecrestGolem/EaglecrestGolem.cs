@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Redemption.BaseExtension;
 using Redemption.Buffs.Debuffs;
 using Redemption.Buffs.NPCBuffs;
 using Redemption.Globals;
@@ -225,10 +226,7 @@ namespace Redemption.NPCs.Minibosses.EaglecrestGolem
                         summonTimer = 600;
                     }
 
-                    bool jumpDownPlatforms = false;
-                    NPC.JumpDownPlatform(ref jumpDownPlatforms, 20);
-                    if (jumpDownPlatforms) { NPC.noTileCollide = true; }
-                    else { NPC.noTileCollide = false; }
+                    NPC.PlatformFallCheck(ref NPC.Redemption().fallDownPlatform, 28);
                     RedeHelper.HorizontallyMove(NPC, player.Center, moveInterval, moveSpeed, 12, 6, NPC.Center.Y > player.Center.Y);
                     break;
                 case ActionState.Roll:
@@ -262,10 +260,7 @@ namespace Redemption.NPCs.Minibosses.EaglecrestGolem
                             NPC.netUpdate = true;
                         }
 
-                        jumpDownPlatforms = false;
-                        NPC.JumpDownPlatform(ref jumpDownPlatforms, 20);
-                        if (jumpDownPlatforms) { NPC.noTileCollide = true; }
-                        else { NPC.noTileCollide = false; }
+                        NPC.PlatformFallCheck(ref NPC.Redemption().fallDownPlatform, 28);
                         RedeHelper.HorizontallyMove(NPC, player.Center, 0.12f, 10, 20, 14, NPC.Center.Y > player.Center.Y);
                     }
                     break;
@@ -305,7 +300,7 @@ namespace Redemption.NPCs.Minibosses.EaglecrestGolem
                     break;
             }
         }
-
+        public override bool? CanFallThroughPlatforms() => NPC.Redemption().fallDownPlatform;
         public override void FindFrame(int frameHeight)
         {
             for (int k = NPC.oldPos.Length - 1; k > 0; k--)

@@ -89,6 +89,7 @@ namespace Redemption.Globals
         public static int labSafeMessageTimer;
         public static bool[] omegaTransmitReady = new bool[3];
         public static bool apidroidKilled;
+        public static bool deadRingerGiven;
 
         #region Nuke Shenanigans
         public static int nukeTimerInternal = 1800;
@@ -420,6 +421,7 @@ namespace Redemption.Globals
             slayerRep = 0;
             labSafe = false;
             apidroidKilled = false;
+            deadRingerGiven = false;
             if (Terraria.NPC.downedPlantBoss)
                 omegaTransmitReady[0] = true;
             else
@@ -447,6 +449,7 @@ namespace Redemption.Globals
             slayerRep = 0;
             labSafe = false;
             apidroidKilled = false;
+            deadRingerGiven = false;
             omegaTransmitReady[0] = false;
             omegaTransmitReady[1] = false;
             omegaTransmitReady[2] = false;
@@ -462,6 +465,8 @@ namespace Redemption.Globals
                 lists.Add("labSafe");
             if (apidroidKilled)
                 lists.Add("apidroidKilled");
+            if (deadRingerGiven)
+                lists.Add("deadRingerGiven");
 
             tag["lists"] = lists;
             tag["alignment"] = alignment;
@@ -485,6 +490,7 @@ namespace Redemption.Globals
             slayerRep = tag.GetInt("slayerRep");
             labSafe = lists.Contains("labSafe");
             apidroidKilled = lists.Contains("apidroidKilled");
+            deadRingerGiven = lists.Contains("deadRingerGiven");
         }
 
         public override void NetSend(BinaryWriter writer)
@@ -493,6 +499,7 @@ namespace Redemption.Globals
             flags[0] = SkeletonInvasion;
             flags[1] = labSafe;
             flags[2] = apidroidKilled;
+            flags[3] = deadRingerGiven;
             writer.Write(flags);
 
             writer.Write(alignment);
@@ -509,6 +516,7 @@ namespace Redemption.Globals
             SkeletonInvasion = flags[0];
             labSafe = flags[1];
             apidroidKilled = flags[2];
+            deadRingerGiven = flags[3];
 
             alignment = reader.ReadInt32();
             DayNightCount = reader.ReadInt32();
