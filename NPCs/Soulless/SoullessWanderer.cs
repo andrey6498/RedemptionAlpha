@@ -164,10 +164,7 @@ namespace Redemption.NPCs.Soulless
                     }
                     BaseAI.AttemptOpenDoor(NPC, ref doorVars[0], ref doorVars[1], ref doorVars[2], 80, 1, interactDoorStyle: 2);
 
-                    bool jumpDownPlatforms = false;
-                    NPC.JumpDownPlatform(ref jumpDownPlatforms, 20);
-                    if (jumpDownPlatforms) { NPC.noTileCollide = true; }
-                    else { NPC.noTileCollide = false; }
+                    NPC.PlatformFallCheck(ref NPC.Redemption().fallDownPlatform, 20);
                     RedeHelper.HorizontallyMove(NPC, moveTo * 16, 0.4f, 1 * SpeedMultiplier, 12, 12, NPC.Center.Y > player.Center.Y);
                     break;
 
@@ -195,10 +192,7 @@ namespace Redemption.NPCs.Soulless
                             powerUp = true;
                     }
 
-                    jumpDownPlatforms = false;
-                    NPC.JumpDownPlatform(ref jumpDownPlatforms, 20);
-                    if (jumpDownPlatforms) { NPC.noTileCollide = true; }
-                    else { NPC.noTileCollide = false; }
+                    NPC.PlatformFallCheck(ref NPC.Redemption().fallDownPlatform, 20);
                     RedeHelper.HorizontallyMove(NPC, globalNPC.attacker.Center, 0.2f, 2f * SpeedMultiplier, 12, 12, NPC.Center.Y > globalNPC.attacker.Center.Y);
                     break;
 
@@ -232,6 +226,7 @@ namespace Redemption.NPCs.Soulless
 
             }
         }
+        public override bool? CanFallThroughPlatforms() => NPC.Redemption().fallDownPlatform;
         private int AniFrameY;
         public override void FindFrame(int frameHeight)
         {
