@@ -50,6 +50,7 @@ namespace Redemption.Globals.NPC
         public bool lacerated;
         public bool stomachAcid;
         public bool incisored;
+        public bool stoneskin;
 
         public override void ResetEffects(Terraria.NPC npc)
         {
@@ -72,6 +73,7 @@ namespace Redemption.Globals.NPC
             lacerated = false;
             stomachAcid = false;
             incisored = false;
+            stoneskin = false;
 
             if (!npc.HasBuff(ModContent.BuffType<InfestedDebuff>()))
             {
@@ -333,6 +335,8 @@ namespace Redemption.Globals.NPC
             }
             if (rallied)
                 damage *= 0.85;
+            if (stoneskin)
+                damage *= 0.75;
             if (smashed)
                 damage *= 1.15;
             return true;
