@@ -10,6 +10,7 @@ using ParticleLibrary;
 using Redemption.Particles;
 using Terraria.GameInput;
 using Terraria.Audio;
+using Redemption.Biomes;
 
 namespace Redemption.Globals.Player
 {

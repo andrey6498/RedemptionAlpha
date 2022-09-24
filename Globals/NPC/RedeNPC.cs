@@ -179,16 +179,16 @@ namespace Redemption.Globals.NPC
                     knockback = (int)((knockback * 1.1f) + 2);
                 if (NPCLists.Soulless.Contains(npc.type))
                 {
-                    if (ItemTags.Blood.Has(item.type))
+                    if (ItemLists.Blood.Contains(item.type))
                         damage = (int)(damage * 0.75f);
 
-                    if (ItemTags.Celestial.Has(item.type) || ItemTags.Holy.Has(item.type))
+                    if (ItemLists.Celestial.Contains(item.type) || ItemLists.Holy.Contains(item.type))
                         damage = (int)(damage * 1.25f);
 
-                    if ( ItemTags.Psychic.Has(item.type))
+                    if ( ItemLists.Psychic.Contains(item.type))
                         damage = (int)(damage * 1.75f);
 
-                    if (ItemTags.Shadow.Has(item.type))
+                    if (ItemLists.Shadow.Contains(item.type))
                         damage = (int)(damage * 0.75f);
                 }
                 #endregion
@@ -318,16 +318,16 @@ namespace Redemption.Globals.NPC
                     knockback = (int)((knockback * 1.1f) + 2);
                 if (NPCLists.Soulless.Contains(npc.type))
                 {
-                    if (ProjectileTags.Blood.Has(projectile.type))
+                    if (ProjectileLists.Blood.Contains(projectile.type))
                         damage = (int)(damage * 0.75f);
 
-                    if (ProjectileTags.Celestial.Has(projectile.type) || ItemTags.Holy.Has(projectile.type))
+                    if (ProjectileLists.Celestial.Contains(projectile.type) || ItemLists.Holy.Contains(projectile.type))
                         damage = (int)(damage * 1.25f);
 
-                    if (ProjectileTags.Psychic.Has(projectile.type))
+                    if (ProjectileLists.Psychic.Contains(projectile.type))
                         damage = (int)(damage * 1.75f);
 
-                    if (ProjectileTags.Shadow.Has(projectile.type))
+                    if (ProjectileLists.Shadow.Contains(projectile.type))
                         damage = (int)(damage * 0.75f);
                 }
                 #endregion

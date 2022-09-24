@@ -29,7 +29,6 @@ namespace Redemption.Projectiles.Melee
             Projectile.alpha = 40;
             Projectile.penetrate = 12;
             Projectile.timeLeft = 300;
-            Projectile.Redemption().Unparryable = true;
         }
         public override void AI()
         {

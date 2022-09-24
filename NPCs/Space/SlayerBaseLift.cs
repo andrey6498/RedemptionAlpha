@@ -50,8 +50,6 @@ namespace Redemption.NPCs.Space
         public float standTimer;
         public float velY;
         public int activated;
-        private SlotId loop;
-        private float loopVolume;
         public override void AI()
         {
             Rectangle activeRect = new((int)NPC.position.X, (int)NPC.position.Y - 14, 128, 16);
@@ -79,7 +77,6 @@ namespace Redemption.NPCs.Space
             {
                 case 0:
                     standTimer--;
-                    loopVolume = 0;
                     NPC.ai[0] = 0;
                     NPC.ai[1] = 0;
                     break;
@@ -94,13 +91,8 @@ namespace Redemption.NPCs.Space
                     {
                         velY += 0.1f;
                         NPC.velocity.Y += velY / 10;
-                        if (NPC.ai[0] >= 160)
-                        {
-                            loopVolume = 1;
-                        }
                         if (NPC.position.Y >= NPC.ai[2] * 16)
                         {
-                            loopVolume = 0;
                             if (NPC.ai[1]++ == 0)
                             {
                                 //if (!Main.dedServ)
@@ -140,13 +132,8 @@ namespace Redemption.NPCs.Space
                     {
                         velY += 0.1f;
                         NPC.velocity.Y -= velY / 10;
-                        if (NPC.ai[0] >= 160)
-                        {
-                            loopVolume = 1;
-                        }
                         if (NPC.position.Y <= NPC.ai[3] * 16)
                         {
-                            loopVolume = 0;
                             if (NPC.ai[1]++ == 0)
                             {
                                 //if (!Main.dedServ)
@@ -176,7 +163,6 @@ namespace Redemption.NPCs.Space
                     }
                     break;
             }
-            //CustomSounds.UpdateLoopingSound(ref loop, CustomSounds.LiftLoop, loopVolume, 0, NPC.position);
 
             velY = MathHelper.Clamp(velY, -0.04f, 0.04f);
             standTimer = MathHelper.Clamp(standTimer, 0, 60);

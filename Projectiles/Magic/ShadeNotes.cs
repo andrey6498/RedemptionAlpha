@@ -29,7 +29,6 @@ namespace Redemption.Projectiles.Magic
             Projectile.alpha = 20;
             Projectile.penetrate = 1;
             Projectile.timeLeft = 300;
-            Projectile.Redemption().Unparryable = true;
         }
         public override void AI()
         {
@@ -126,7 +125,6 @@ namespace Redemption.Projectiles.Magic
             Projectile.hostile = false;
             Projectile.alpha = 255;
             Projectile.penetrate = -1;
-            Projectile.Redemption().Unparryable = true;
         }
 
         readonly double dist = 30;
@@ -163,7 +161,6 @@ namespace Redemption.Projectiles.Magic
             Projectile.penetrate = 1;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.timeLeft = 180;
-            Projectile.Redemption().Unparryable = true;
         }
         public override void AI()
         {

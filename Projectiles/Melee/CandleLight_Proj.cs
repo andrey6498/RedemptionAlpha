@@ -27,7 +27,6 @@ namespace Redemption.Projectiles.Melee
             Projectile.tileCollide = false;
             Projectile.timeLeft = 180;
             DrawOriginOffsetY = -8;
-            Projectile.Redemption().Unparryable = true;
         }
 
         public override void AI()

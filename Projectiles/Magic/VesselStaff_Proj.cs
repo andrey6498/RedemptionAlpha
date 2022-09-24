@@ -34,7 +34,6 @@ namespace Redemption.Projectiles.Magic
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 600;
             Projectile.extraUpdates = 1;
-            Projectile.Redemption().Unparryable = true;
         }
         public override bool? CanCutTiles() => false;
         public Vector2 MoveVector2;

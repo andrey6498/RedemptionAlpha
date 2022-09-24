@@ -24,7 +24,6 @@ using Redemption.Base;
 using Redemption.Items.Accessories.HM;
 using Redemption.Items.Placeable.Furniture.PetrifiedWood;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria.ID;
 using Terraria.GameContent;
 using ReLogic.Content;
 

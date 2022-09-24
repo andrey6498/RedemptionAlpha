@@ -152,7 +152,6 @@ namespace Redemption.Items.Weapons.PostML.Melee
             Projectile.height = 40;
             Projectile.alpha = 255;
             Projectile.scale = 1;
-            Projectile.Redemption().Unparryable = true;
             Projectile.Redemption().TechnicallyMelee = true;
         }
 

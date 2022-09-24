@@ -27,7 +27,6 @@ namespace Redemption.NPCs.Soulless
             Projectile.tileCollide = false;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 180;
-            Projectile.Redemption().Unparryable = true;
         }
         public float squish;
         public override void AI()
