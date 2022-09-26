@@ -135,6 +135,14 @@ namespace Redemption
                     PremultiplyTexture(ref EpidotraPlanetTex);
                     Texture2D EpidotraPlanet_BrighterTex = ModContent.Request<Texture2D>("Redemption/Backgrounds/EpidotraPlanet_Brighter", AssetRequestMode.ImmediateLoad).Value;
                     PremultiplyTexture(ref EpidotraPlanet_BrighterTex);
+                    Texture2D UkkoCloudsTex = ModContent.Request<Texture2D>("Redemption/Backgrounds/Skies/UkkoClouds", AssetRequestMode.ImmediateLoad).Value;
+                    PremultiplyTexture(ref UkkoCloudsTex);
+                    Texture2D UkkoSkyBeamTex = ModContent.Request<Texture2D>("Redemption/Backgrounds/Skies/UkkoSkyBeam", AssetRequestMode.ImmediateLoad).Value;
+                    PremultiplyTexture(ref UkkoSkyBeamTex);
+                    Texture2D UkkoSkyBoltTex = ModContent.Request<Texture2D>("Redemption/Backgrounds/Skies/UkkoSkyBolt", AssetRequestMode.ImmediateLoad).Value;
+                    PremultiplyTexture(ref UkkoSkyBoltTex);
+                    Texture2D UkkoSkyFlashTex = ModContent.Request<Texture2D>("Redemption/Backgrounds/Skies/UkkoSkyFlash", AssetRequestMode.ImmediateLoad).Value;
+                    PremultiplyTexture(ref UkkoSkyFlashTex);
                 });
 
                 Filters.Scene["MoR:NebP1"] = new Filter(new ScreenShaderData("FilterMiniTower").UseColor(0.2f, 0f, 0.3f).UseOpacity(0.5f), EffectPriority.VeryHigh);
