@@ -27,7 +27,7 @@
       <HintPath>..\ModAssemblies\StructureHelper_v2.0.9.dll</HintPath>
     </Reference>
     <Reference Include="SubworldLibrary">
-      <HintPath>..\Mod Libraries\SubworldLibrary.dll</HintPath>
+      <HintPath>..\ModAssemblies\SubworldLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
