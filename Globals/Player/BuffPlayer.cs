@@ -78,6 +78,8 @@ namespace Redemption.Globals.Player
         public int shieldGeneratorCD;
         public float shieldGeneratorAlpha;
         public bool holyFire;
+        public int stunTimer;
+        public int stunFrame;
 
         public bool pureIronBonus;
         public bool dragonLeadBonus;
@@ -330,6 +332,16 @@ namespace Redemption.Globals.Player
                 Player.ManageSpecialBiomeVisuals("MoR:FogOverlay", shockDebuff);
             }
             #endregion
+
+            if (Player.HasBuff<StunnedDebuff>())
+            {
+                if (stunTimer++ > 4)
+                {
+                    stunTimer = 0;
+                    if (stunFrame++ >= 3)
+                        stunFrame = 0;
+                }
+            }
         }
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
