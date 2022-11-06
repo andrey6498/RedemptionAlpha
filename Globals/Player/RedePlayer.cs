@@ -26,7 +26,6 @@ using Redemption.Items.Placeable.Furniture.PetrifiedWood;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using ReLogic.Content;
-using SteelSeries.GameSense;
 
 namespace Redemption.Globals.Player
 {
