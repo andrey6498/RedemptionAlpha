@@ -21,10 +21,10 @@ namespace Redemption.Tiles.Furniture.Misc
             TileObjectData.newTile.UsesCustomCanPlace = true;
             TileObjectData.newTile.CoordinateWidth = 16;
             TileObjectData.newTile.CoordinatePadding = 2;
+            TileObjectData.newTile.Origin = new Point16(2, 1);
             TileObjectData.newTile.AnchorWall = true;
             TileObjectData.addTile(Type);
             DustType = DustID.WoodFurniture;
-            MineResist = 1f;
 			AddMapEntry(new Color(151, 107, 75));
         }
         public override void KillMultiTile(int i, int j, int frameX, int frameY)

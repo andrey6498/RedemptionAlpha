@@ -35,6 +35,8 @@ using Redemption.Items.Weapons.HM.Melee;
 using Redemption.NPCs.Bosses.ADD;
 using Redemption.Items.Placeable.Furniture.Misc;
 using Redemption.Items.Weapons.PreHM.Melee;
+using Redemption.Items.Armor.Single;
+using Redemption.Buffs;
 
 namespace Redemption.Globals.NPC
 {
@@ -51,6 +53,8 @@ namespace Redemption.Globals.NPC
         {
             if (type == NPCID.SkeletonMerchant)
                 shop.item[nextSlot++].SetDefaults(ModContent.ItemType<CalciteWand>());
+            if (type == NPCID.Dryad)
+                shop.item[nextSlot++].SetDefaults(ModContent.ItemType<DruidHat>());
             if (type == NPCID.Cyborg)
                 shop.item[nextSlot++].SetDefaults(ModContent.ItemType<GlobalDischarge>());
             if (type == NPCID.Clothier)
@@ -64,6 +68,11 @@ namespace Redemption.Globals.NPC
             {
                 shop.item[nextSlot++].SetDefaults(ModContent.ItemType<NoidanSauva>());
                 shop.item[nextSlot++].SetDefaults(ModContent.ItemType<Pommisauva>());
+            }
+            if (type == NPCID.Princess)
+            {
+                shop.item[nextSlot++].SetDefaults(ModContent.ItemType<HamPatPainting>());
+                shop.item[nextSlot++].SetDefaults(ModContent.ItemType<TiedBoiPainting>());
             }
         }
         public override void ResetEffects(Terraria.NPC npc)
@@ -384,7 +393,8 @@ namespace Redemption.Globals.NPC
                 }
                 if (ItemLists.Shadow.Contains(item.type))
                 {
-                    if (Main.rand.NextBool(6) && npc.life <= 0 && npc.lifeMax > 5)
+                    int c = player.HasBuff<EvilJellyBuff>() ? 3 : 6;
+                    if (Main.rand.NextBool(c) && npc.life <= 0 && npc.lifeMax > 5)
                         Item.NewItem(npc.GetSource_Loot(), npc.getRect(), ModContent.ItemType<ShadowFuel>(), noGrabDelay: true);
                 }
                 if (ItemLists.Nature.Contains(item.type) && npc.NPCHasAnyBuff() && !RedeHelper.HasFireDebuff(npc))
@@ -437,7 +447,8 @@ namespace Redemption.Globals.NPC
                 }
                 if (ProjectileLists.Shadow.Contains(projectile.type))
                 {
-                    if (Main.rand.NextBool(6) && npc.life <= 0 && npc.lifeMax > 5)
+                    int c = Main.player[projectile.owner].HasBuff<EvilJellyBuff>() ? 3 : 6;
+                    if (Main.rand.NextBool(c) && npc.life <= 0 && npc.lifeMax > 5)
                         Item.NewItem(npc.GetSource_Loot(), npc.getRect(), ModContent.ItemType<ShadowFuel>(), noGrabDelay: true);
                 }
                 if (ProjectileLists.Nature.Contains(projectile.type) && npc.NPCHasAnyBuff() && !RedeHelper.HasFireDebuff(npc))
