@@ -759,6 +759,7 @@ namespace Redemption.NPCs.Bosses.Gigapora
                         case 1:
                             player.RedemptionScreen().ScreenFocusPosition = NPC.Center;
                             player.RedemptionScreen().lockScreen = true;
+                            player.RedemptionScreen().cutscene = true;
                             if (AITimer++ >= 180)
                             {
                                 NPC.immortal = false;

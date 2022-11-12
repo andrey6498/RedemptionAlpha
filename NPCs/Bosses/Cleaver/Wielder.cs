@@ -642,6 +642,7 @@ namespace Redemption.NPCs.Bosses.Cleaver
                     if (NPC.ai[2] < 260)
                     {
                         player.RedemptionScreen().lockScreen = true;
+                        player.RedemptionScreen().cutscene = true;
                         NPC.LockMoveRadius(player);
                     }
 
