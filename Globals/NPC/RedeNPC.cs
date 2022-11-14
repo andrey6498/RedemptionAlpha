@@ -39,6 +39,7 @@ using Redemption.Items.Armor.Single;
 using Redemption.Buffs;
 using Redemption.Items.Armor.Vanity.Dev;
 using Redemption.Projectiles.Misc;
+using Redemption.Items.Weapons.PreHM.Summon;
 
 namespace Redemption.Globals.NPC
 {
@@ -406,7 +407,7 @@ namespace Redemption.Globals.NPC
                 }
                 if (ItemLists.Nature.Contains(item.type) && npc.NPCHasAnyBuff() && !RedeHelper.HasFireDebuff(npc))
                 {
-                    if (Main.rand.NextBool(8) && npc.CanBeChasedBy())
+                    if (Main.rand.NextBool(6) && npc.CanBeChasedBy())
                         Item.NewItem(npc.GetSource_Loot(), npc.getRect(), ModContent.ItemType<NaturePickup>(), noGrabDelay: true);
                 }
                 if (ItemLists.Celestial.Contains(item.type))
@@ -465,7 +466,7 @@ namespace Redemption.Globals.NPC
                 }
                 if (ProjectileLists.Nature.Contains(projectile.type) && npc.NPCHasAnyBuff() && !RedeHelper.HasFireDebuff(npc))
                 {
-                    if (Main.rand.NextBool(8) && npc.CanBeChasedBy())
+                    if (Main.rand.NextBool(6) && npc.CanBeChasedBy())
                         Item.NewItem(npc.GetSource_Loot(), npc.getRect(), ModContent.ItemType<NaturePickup>(), noGrabDelay: true);
                 }
                 if (ProjectileLists.Celestial.Contains(projectile.type))
@@ -518,6 +519,10 @@ namespace Redemption.Globals.NPC
                 npcLoot.Add(ItemDropRule.Food(ModContent.ItemType<Incisor>(), 100));
             if (npc.type == NPCID.Demon || npc.type == NPCID.VoodooDemon || npc.type == NPCID.FireImp)
                 npcLoot.Add(ItemDropRule.Food(ModContent.ItemType<ForgottenSword>(), 100));
+            if (npc.type == NPCID.GraniteFlyer || npc.type == NPCID.GraniteGolem)
+                npcLoot.Add(ItemDropRule.Food(ModContent.ItemType<GaucheStaff>(), 30));
+            if (npc.type == NPCID.Dandelion)
+                npcLoot.Add(ItemDropRule.Food(ModContent.ItemType<GiantDandelion>(), 10));
             if (npc.type == NPCID.MoonLordCore)
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Keycard>()));
         }
@@ -591,6 +596,7 @@ namespace Redemption.Globals.NPC
                 bool tileCheck = GrassTileArray.Contains(Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY].TileType);
 
                 pool.Clear();
+                pool.Add(NPCID.ToxicSludge, 0.3f);
                 pool.Add(ModContent.NPCType<HazmatZombie>(), 1f);
                 pool.Add(ModContent.NPCType<BobTheBlob>(), 0.05f);
                 pool.Add(ModContent.NPCType<RadioactiveSlime>(), 0.9f);
