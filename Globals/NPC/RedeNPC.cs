@@ -205,16 +205,16 @@ namespace Redemption.Globals.NPC
                 if (NPCLists.Soulless.Contains(npc.type))
                 {
                     if (ItemLists.Blood.Contains(item.type))
-                        damage = (int)(damage * 0.75f);
+                        elementDmg *= 0.75f;
 
                     if (ItemLists.Celestial.Contains(item.type) || ItemLists.Holy.Contains(item.type))
-                        damage = (int)(damage * 1.25f);
+                        elementDmg *= 1.25f;
 
                     if ( ItemLists.Psychic.Contains(item.type))
-                        damage = (int)(damage * 1.75f);
+                        elementDmg *= 1.75f;
 
                     if (ItemLists.Shadow.Contains(item.type))
-                        damage = (int)(damage * 0.75f);
+                        elementDmg *= 0.5f;
                 }
 
                 if (elementDmg >= 1.15f)
@@ -352,16 +352,16 @@ namespace Redemption.Globals.NPC
                 if (NPCLists.Soulless.Contains(npc.type))
                 {
                     if (ProjectileLists.Blood.Contains(projectile.type))
-                        damage = (int)(damage * 0.75f);
+                        elementDmg *= 0.75f;
 
                     if (ProjectileLists.Celestial.Contains(projectile.type) || ItemLists.Holy.Contains(projectile.type))
-                        damage = (int)(damage * 1.25f);
+                        elementDmg *= 1.25f;
 
                     if (ProjectileLists.Psychic.Contains(projectile.type))
-                        damage = (int)(damage * 1.75f);
+                        elementDmg *= 1.75f;
 
                     if (ProjectileLists.Shadow.Contains(projectile.type))
-                        damage = (int)(damage * 0.75f);
+                        elementDmg *= 0.5f;
                 }
                 
                 if (elementDmg >= 1.15f)
