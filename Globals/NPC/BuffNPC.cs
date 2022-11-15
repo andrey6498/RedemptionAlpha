@@ -52,6 +52,8 @@ namespace Redemption.Globals.NPC
         public bool incisored;
         public bool stoneskin;
         public bool brokenArmor;
+        public bool sandDust;
+        public bool badtime;
 
         public override void ResetEffects(Terraria.NPC npc)
         {
@@ -76,6 +78,8 @@ namespace Redemption.Globals.NPC
             incisored = false;
             stoneskin = false;
             brokenArmor = false;
+            sandDust = false;
+            badtime = false;
 
             if (!npc.HasBuff(ModContent.BuffType<InfestedDebuff>()))
             {
@@ -302,6 +306,19 @@ namespace Redemption.Globals.NPC
                 if (damage < (int)(npc.lifeMax * 0.02f))
                     damage = (int)(npc.lifeMax * 0.02f);
             }
+            if (badtime)
+            {
+                if (npc.lifeRegen > 0)
+                    npc.lifeRegen = 0;
+                npc.lifeRegen -= 4000;
+                if (damage < 1)
+                    damage = 1;
+                if (npc.knockBackResist > 0)
+                {
+                    npc.velocity.X *= 0.4f;
+                    npc.velocity.Y *= 0.4f;
+                }
+            }
         }
         public override void ModifyHitByItem(Terraria.NPC npc, Terraria.Player player, Item item, ref int damage, ref float knockback, ref bool crit)
         {
@@ -313,6 +330,8 @@ namespace Redemption.Globals.NPC
                 player.GetArmorPenetration(DamageClass.Generic) += 20;
             if (incisored)
                 player.GetArmorPenetration(DamageClass.Generic) += (player.GetModPlayer<RitualistPlayer>().SpiritLevel + 1) * 5;
+            if (badtime)
+                player.GetArmorPenetration(DamageClass.Generic) += 99;
         }
         public override void ModifyHitByProjectile(Terraria.NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
@@ -325,6 +344,8 @@ namespace Redemption.Globals.NPC
                 player.GetArmorPenetration(DamageClass.Generic) += 20;
             if (incisored)
                 player.GetArmorPenetration(DamageClass.Generic) += (player.GetModPlayer<RitualistPlayer>().SpiritLevel + 1) * 5;
+            if (badtime)
+                player.GetArmorPenetration(DamageClass.Generic) += 99;
         }
         public override bool StrikeNPC(Terraria.NPC npc, ref double damage, int defense, ref float knockback, int hitDirection, ref bool crit)
         {
@@ -343,6 +364,8 @@ namespace Redemption.Globals.NPC
                 damage *= 1.15;
             if (brokenArmor)
                 damage += npc.defense / 2;
+            if (sandDust)
+                damage += npc.defense / 6;
             return true;
         }
         public override void ModifyHitPlayer(Terraria.NPC npc, Terraria.Player target, ref int damage, ref bool crit)
