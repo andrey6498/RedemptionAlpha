@@ -238,7 +238,7 @@ namespace Redemption.Globals.NPC
                     if (ItemLists.Celestial.Contains(item.type) || ItemLists.Holy.Contains(item.type))
                         elementDmg *= 1.25f;
 
-                    if ( ItemLists.Psychic.Contains(item.type))
+                    if (ItemLists.Psychic.Contains(item.type))
                         elementDmg *= 1.75f;
 
                     if (ItemLists.Shadow.Contains(item.type))
@@ -408,15 +408,16 @@ namespace Redemption.Globals.NPC
                 {
                     if (ProjectileLists.Blood.Contains(projectile.type))
                         elementDmg *= 0.75f;
-                        if (ProjectileLists.Celestial.Contains(projectile.type) || ItemLists.Holy.Contains(projectile.type))
-                            elementDmg *= 1.25f;
+                    if (ProjectileLists.Celestial.Contains(projectile.type) || ItemLists.Holy.Contains(projectile.type))
+                        elementDmg *= 1.25f;
 
-                        if (ProjectileLists.Psychic.Contains(projectile.type))
-                            elementDmg *= 1.75f;
+                    if (ProjectileLists.Psychic.Contains(projectile.type))
+                        elementDmg *= 1.75f;
 
-                        if (ProjectileLists.Shadow.Contains(projectile.type))
-                            elementDmg *= 0.5f;
+                    if (ProjectileLists.Shadow.Contains(projectile.type))
+                        elementDmg *= 0.5f;
                 }
+
                 elementDmg = (int)Math.Round(elementDmg * 100);
                 elementDmg /= 100;
                 if (elementDmg >= 1.1f)

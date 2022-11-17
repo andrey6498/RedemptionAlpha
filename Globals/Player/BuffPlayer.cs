@@ -518,12 +518,13 @@ namespace Redemption.Globals.Player
                     if (shadowBinderCharge < 100)
                         shadowBinderCharge += 1;
                 }
-            }if ((sacredCross || gracesGuidance) && ItemLists.Holy.Contains(item.type) && crit)
+            }
+            if ((sacredCross || gracesGuidance) && ItemLists.Holy.Contains(item.type) && crit)
             {
                 SoundEngine.PlaySound(SoundID.Item101, Player.Center);
                 for (int i = 0; i < Main.rand.Next(3, 6); i++)
                     Projectile.NewProjectile(Player.GetSource_ItemUse(item), target.Center, new Vector2(Main.rand.NextFloat(-3, 3), Main.rand.NextFloat(-9, -5)), ModContent.ProjectileType<Lightmass>(), 15, item.knockBack / 4, Main.myPlayer);
-                  }
+            }
         }
         public override void UpdateBadLifeRegen()
         {
