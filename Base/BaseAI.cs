@@ -5265,10 +5265,10 @@ namespace Redemption.Base
             {
                 int parsedDamage = dmgAmt; if (dmgVariation) { parsedDamage = Main.DamageVar(dmgAmt); }
 
-                player.Hurt(PlayerDeathReason.ByPlayer(subPlayer.whoAmI), parsedDamage, hitDirection, true, false, false, 0);
                 PlayerLoader.OnHitPvp(subPlayer, subPlayer.HeldItem, player, parsedDamage, false);
                 bool crit = false;
                 PlayerLoader.ModifyHitPvp(subPlayer, subPlayer.HeldItem, player, ref parsedDamage, ref crit);
+                player.Hurt(PlayerDeathReason.ByPlayer(subPlayer.whoAmI), parsedDamage, hitDirection, true, false, false, 0);
 
                 subPlayer.attackCD = (int)(subPlayer.itemAnimationMax * 0.33f);
             }
@@ -5277,19 +5277,19 @@ namespace Redemption.Base
                 if (p.friendly && !p.hostile)
                 {
                     int parsedDamage = dmgAmt; if (dmgVariation) { parsedDamage = Main.DamageVar(dmgAmt); }
-                    player.Hurt(PlayerDeathReason.ByProjectile(p.owner, p.whoAmI), parsedDamage, hitDirection, true, false, false, 0);
                     p.playerImmune[player.whoAmI] = 40;
                     PlayerLoader.OnHitByProjectile(player, p, parsedDamage, false);
                     bool crit = false;
                     PlayerLoader.ModifyHitByProjectile(player, p, ref parsedDamage, ref crit);
+                    player.Hurt(PlayerDeathReason.ByProjectile(p.owner, p.whoAmI), parsedDamage, hitDirection, true, false, false, 0);
                 }
                 else if (p.hostile)
                 {
                     int parsedDamage = dmgAmt; if (dmgVariation) { parsedDamage = Main.DamageVar(dmgAmt); }
-                    player.Hurt(PlayerDeathReason.ByProjectile(-1, p.whoAmI), parsedDamage, hitDirection, false, false, false, 0);
                     PlayerLoader.OnHitByProjectile(player, p, parsedDamage, false);
                     bool crit = false;
                     PlayerLoader.ModifyHitByProjectile(player, p, ref parsedDamage, ref crit);
+                    player.Hurt(PlayerDeathReason.ByProjectile(-1, p.whoAmI), parsedDamage, hitDirection, false, false, false, 0);
                 }
                 else
                 {
@@ -5303,10 +5303,10 @@ namespace Redemption.Base
             else if (damager is NPC npc)
             {
                 int parsedDamage = dmgAmt; if (dmgVariation) { parsedDamage = Main.DamageVar(dmgAmt); }
-                player.Hurt(PlayerDeathReason.ByNPC(npc.whoAmI), parsedDamage, hitDirection, false, false, false, 0);
                 PlayerLoader.OnHitByNPC(player, npc, parsedDamage, false);
                 bool crit = false;
                 PlayerLoader.ModifyHitByNPC(player, npc, ref parsedDamage, ref crit);
+                player.Hurt(PlayerDeathReason.ByNPC(npc.whoAmI), parsedDamage, hitDirection, false, false, false, 0);
             }
         }
 
@@ -5339,7 +5339,6 @@ namespace Redemption.Base
             if (damager == null || damager is NPC)
             {
                 int parsedDamage = dmgAmt; if (dmgVariation) { parsedDamage = Main.DamageVar(dmgAmt); }
-                npc.StrikeNPC(parsedDamage, knockback, hitDirection, crit);
 
                 if (damager is NPC)
                 {
@@ -5348,6 +5347,7 @@ namespace Redemption.Base
                     npc.Redemption().attacker = damager;
                 }
 
+                npc.StrikeNPC(parsedDamage, knockback, hitDirection, crit);
                 if (Main.netMode == NetmodeID.MultiplayerClient)
                 {
                     NetMessage.SendData(MessageID.DamageNPC, -1, -1, NetworkText.FromLiteral(""), npc.whoAmI, 1, knockback, hitDirection, parsedDamage);
@@ -5358,7 +5358,6 @@ namespace Redemption.Base
                 if (p.owner == Main.myPlayer && NPCLoader.CanBeHitByProjectile(npc, p) != false)
                 {
                     int parsedDamage = dmgAmt; if (dmgVariation) { parsedDamage = Main.DamageVar(dmgAmt); }
-                    npc.StrikeNPC(parsedDamage, knockback, hitDirection, crit);
                     NPCLoader.ModifyHitByProjectile(npc, p, ref parsedDamage, ref knockback, ref crit, ref hitDirection);
                     NPCLoader.OnHitByProjectile(npc, p, parsedDamage, knockback, crit);
                     PlayerLoader.ModifyHitNPCWithProj(p, npc, ref parsedDamage, ref knockback, ref crit, ref hitDirection);
@@ -5379,6 +5378,7 @@ namespace Redemption.Base
                         }
                     }
 
+                    npc.StrikeNPC(parsedDamage, knockback, hitDirection, crit);
                     if (Main.player[p.owner].accDreamCatcher)
                         Main.player[p.owner].addDPS(parsedDamage);
 
@@ -5393,12 +5393,12 @@ namespace Redemption.Base
                 if (player.whoAmI == Main.myPlayer && NPCLoader.CanBeHitByItem(npc, player, item) != false)
                 {
                     int parsedDamage = dmgAmt; if (dmgVariation) { parsedDamage = Main.DamageVar(dmgAmt); }
-                    npc.StrikeNPC(parsedDamage, knockback, hitDirection, crit);
                     NPCLoader.ModifyHitByItem(npc, player, item, ref parsedDamage, ref knockback, ref crit);
                     NPCLoader.OnHitByItem(npc, player, item, parsedDamage, knockback, crit);
                     PlayerLoader.ModifyHitNPC(player, item, npc, ref parsedDamage, ref knockback, ref crit);
                     PlayerLoader.OnHitNPC(player, item, npc, parsedDamage, knockback, crit);
 
+                    npc.StrikeNPC(parsedDamage, knockback, hitDirection, crit);
                     if (player.accDreamCatcher)
                         player.addDPS(parsedDamage);
 
