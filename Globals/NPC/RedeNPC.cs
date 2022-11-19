@@ -110,7 +110,7 @@ namespace Redemption.Globals.NPC
                 if (NPCLists.Plantlike.Contains(npc.type))
                 {
                     if (ItemLists.Fire.Contains(item.type) || ItemLists.Wind.Contains(item.type))
-                        elementDmg *= 1.15f;
+                        elementDmg *= 1.25f;
 
                     if (ItemLists.Nature.Contains(item.type))
                         elementDmg *= 0.75f;
@@ -121,7 +121,7 @@ namespace Redemption.Globals.NPC
                 if (NPCLists.Undead.Contains(npc.type) || NPCLists.Skeleton.Contains(npc.type))
                 {
                     if (ItemLists.Holy.Contains(item.type))
-                        elementDmg *= 1.2f;
+                        elementDmg *= 1.25f;
 
                     if (ItemLists.Shadow.Contains(item.type))
                         elementDmg *= 0.8f;
@@ -129,13 +129,13 @@ namespace Redemption.Globals.NPC
                 if (NPCLists.Demon.Contains(npc.type))
                 {
                     if (ItemLists.Holy.Contains(item.type) || ItemLists.Celestial.Contains(item.type))
-                        elementDmg *= 1.25f;
+                        elementDmg *= 1.3f;
 
                     if (ItemLists.Fire.Contains(item.type))
                         elementDmg *= 0.5f;
 
                     if (ItemLists.Water.Contains(item.type) || ItemLists.Ice.Contains(item.type))
-                        elementDmg *= 1.1f;
+                        elementDmg *= 1.15f;
                 }
                 if (NPCLists.Spirit.Contains(npc.type))
                 {
@@ -178,6 +178,17 @@ namespace Redemption.Globals.NPC
                     if (ItemLists.Water.Contains(item.type) || ItemLists.Wind.Contains(item.type) || ItemLists.Poison.Contains(item.type))
                         elementDmg *= 1.1f;
                 }
+                if (NPCLists.Wet.Contains(npc.type))
+                {
+                    if (ItemLists.Fire.Contains(item.type))
+                        elementDmg *= 0.75f;
+
+                    if (ItemLists.Ice.Contains(item.type) || ItemLists.Poison.Contains(item.type))
+                        elementDmg *= 1.25f;
+
+                    if (ItemLists.Water.Contains(item.type))
+                        elementDmg *= 0.5f;
+                }
                 if (NPCLists.Infected.Contains(npc.type))
                 {
                     if (ItemLists.Fire.Contains(item.type))
@@ -190,9 +201,9 @@ namespace Redemption.Globals.NPC
                         elementDmg *= 1.25f;
 
                     if (ItemLists.Poison.Contains(item.type))
-                        elementDmg *= 0.1f;
+                        elementDmg *= 0.25f;
                 }
-                if (((npc.wet && !npc.lavaWet) || npc.HasBuff(BuffID.Wet)) && ItemLists.Thunder.Contains(item.type))
+                if (((npc.wet && !npc.lavaWet) || npc.HasBuff(BuffID.Wet) || NPCLists.Wet.Contains(npc.type)) && ItemLists.Thunder.Contains(item.type))
                     elementDmg *= 1.1f;
                 if (!npc.noTileCollide && npc.collideY && ItemLists.Earth.Contains(item.type))
                     elementDmg *= 1.1f;
@@ -205,7 +216,7 @@ namespace Redemption.Globals.NPC
                         elementDmg *= 1.1f;
 
                     if (ItemLists.Water.Contains(item.type))
-                        elementDmg *= 1.25f;
+                        elementDmg *= 1.3f;
                 }
                 if (!NPCLists.Inorganic.Contains(npc.type))
                 {
@@ -284,7 +295,7 @@ namespace Redemption.Globals.NPC
                 if (NPCLists.Plantlike.Contains(npc.type))
                 {
                     if (ProjectileLists.Fire.Contains(projectile.type) || ProjectileLists.Wind.Contains(projectile.type))
-                        elementDmg *= 1.15f;
+                        elementDmg *= 1.25f;
 
                     if (ProjectileLists.Nature.Contains(projectile.type))
                         elementDmg *= 0.75f;
@@ -295,7 +306,7 @@ namespace Redemption.Globals.NPC
                 if (NPCLists.Undead.Contains(npc.type) || NPCLists.Skeleton.Contains(npc.type))
                 {
                     if (ProjectileLists.Holy.Contains(projectile.type))
-                        elementDmg *= 1.2f;
+                        elementDmg *= 1.25f;
 
                     if (ProjectileLists.Shadow.Contains(projectile.type))
                         elementDmg *= 0.8f;
@@ -303,13 +314,13 @@ namespace Redemption.Globals.NPC
                 if (NPCLists.Demon.Contains(npc.type))
                 {
                     if (ProjectileLists.Holy.Contains(projectile.type) || ProjectileLists.Celestial.Contains(projectile.type))
-                        elementDmg *= 1.25f;
+                        elementDmg *= 1.3f;
 
                     if (ProjectileLists.Fire.Contains(projectile.type))
                         elementDmg *= 0.75f;
 
                     if (ProjectileLists.Water.Contains(projectile.type) || ProjectileLists.Ice.Contains(projectile.type))
-                        elementDmg *= 1.1f;
+                        elementDmg *= 1.15f;
                 }
                 if (NPCLists.Spirit.Contains(npc.type))
                 {
@@ -352,6 +363,17 @@ namespace Redemption.Globals.NPC
                     if (ProjectileLists.Water.Contains(projectile.type) || ProjectileLists.Wind.Contains(projectile.type) || ProjectileLists.Poison.Contains(projectile.type))
                         elementDmg *= 1.1f;
                 }
+                if (NPCLists.Wet.Contains(npc.type))
+                {
+                    if (ProjectileLists.Fire.Contains(projectile.type))
+                        elementDmg *= 0.75f;
+
+                    if (ProjectileLists.Ice.Contains(projectile.type) || ProjectileLists.Poison.Contains(projectile.type))
+                        elementDmg *= 1.25f;
+
+                    if (ProjectileLists.Water.Contains(projectile.type))
+                        elementDmg *= 0.5f;
+                }
                 if (NPCLists.Infected.Contains(npc.type))
                 {
                     if (ProjectileLists.Fire.Contains(projectile.type))
@@ -364,9 +386,9 @@ namespace Redemption.Globals.NPC
                         elementDmg *= 1.25f;
 
                     if (ProjectileLists.Poison.Contains(projectile.type))
-                        elementDmg *= 0.1f;
+                        elementDmg *= 0.25f;
                 }
-                if (((npc.wet && !npc.lavaWet) || npc.HasBuff(BuffID.Wet)) && ProjectileLists.Thunder.Contains(projectile.type))
+                if (((npc.wet && !npc.lavaWet) || npc.HasBuff(BuffID.Wet) || NPCLists.Wet.Contains(npc.type)) && ProjectileLists.Thunder.Contains(projectile.type))
                     elementDmg *= 1.1f;
                 if (!npc.noTileCollide && npc.collideY && ProjectileLists.Earth.Contains(projectile.type))
                     elementDmg *= 1.1f;
